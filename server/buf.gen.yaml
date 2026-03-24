@@ -5,7 +5,7 @@ inputs:
   # Local module at provided directory path
   - directory: ./
     paths:
-      - kk_schedule
+      - kk_scheduler
       - vendor/gitee.com/cruvie/kk_go_kit/kk_protobuf/extend_method
 plugins:
   - remote: buf.build/protocolbuffers/go
