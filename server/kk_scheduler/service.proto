@@ -1,0 +1,38 @@
+edition = "2023";
+
+package kk_scheduler;
+
+option go_package = "/kk_scheduler";
+
+import "kk_scheduler/JobList.proto";
+import "kk_scheduler/JobGet.proto";
+import "kk_scheduler/JobEnable.proto";
+import "kk_scheduler/JobDisable.proto";
+import "kk_scheduler/JobSetSpec.proto";
+import "kk_scheduler/JobPut.proto";
+import "kk_scheduler/ServiceList.proto";
+import "kk_scheduler/ServicePut.proto";
+import "kk_scheduler/ServiceGet.proto";
+import "kk_scheduler/ServiceDelete.proto";
+import "kk_scheduler/JobDelete.proto";
+import "kk_scheduler/JobTrigger.proto";
+
+service KKSchedule {
+  // use GClient
+
+  rpc JobList(JobList.Input) returns (JobList.Output);
+  rpc JobGet(JobGet.Input) returns (JobGet.Output);
+  rpc JobSetSpec(JobSetSpec.Input) returns (JobSetSpec.Output);
+  rpc JobEnable(JobEnable.Input) returns (JobEnable.Output);
+  rpc JobDisable(JobDisable.Input) returns (JobDisable.Output);
+  rpc JobPut(JobPut.Input) returns (JobPut.Output);
+  rpc JobDelete(JobDelete.Input) returns (JobDelete.Output);
+  rpc JobTrigger(JobTrigger.Input) returns (JobTrigger.Output);
+
+  // use GClient.Storer
+
+  rpc ServiceList(ServiceList.Input) returns (ServiceList.Output);
+  rpc ServicePut(ServicePut.Input) returns (ServicePut.Output);
+  rpc ServiceGet(ServiceGet.Input) returns (ServiceGet.Output);
+  rpc ServiceDelete(ServiceDelete.Input) returns (ServiceDelete.Output);
+}

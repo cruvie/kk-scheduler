@@ -1,0 +1,21 @@
+edition = "2023";
+package kk_scheduler;
+
+option go_package = "/kk_scheduler";
+
+
+message PBRegisterJob {
+  string Description = 1;
+  // ServiceName + FuncName must be unique
+  string ServiceName = 2;
+  string FuncName = 3;
+}
+
+message PBRegisterService {
+  // Eg 127.0.0.1:8081
+  string Target = 1;
+  // ServiceName must be unique
+  string ServiceName = 2;
+  // Authentication token for the service
+  string AuthToken = 3;
+}

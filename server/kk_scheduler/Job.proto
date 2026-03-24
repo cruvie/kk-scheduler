@@ -1,0 +1,17 @@
+edition = "2023";
+package kk_scheduler;
+
+option go_package = "/kk_scheduler";
+import "google/protobuf/timestamp.proto";
+
+
+message PBJob {
+  int32 EntryID = 1;
+  bool Enabled = 2;
+  google.protobuf.Timestamp Next = 3;
+  google.protobuf.Timestamp Prev = 4;
+  string Spec = 5;
+  string Description = 6;
+  string FuncName = 7;
+  string ServiceName = 8;
+}

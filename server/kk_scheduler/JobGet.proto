@@ -1,0 +1,20 @@
+edition = "2023";
+
+package kk_scheduler;
+
+option go_package = "/kk_scheduler";
+
+import "kk_scheduler/Job.proto";
+
+import "kk_go_kit/common_pb/extend_field.proto";
+
+message JobGet {
+  message Input {
+    string serviceName = 1[(common_pb.field_behavior) = REQUIRED];
+    string funcName = 2[(common_pb.field_behavior) = REQUIRED];
+  }
+
+  message Output {
+    PBJob Job  = 1;
+  }
+}

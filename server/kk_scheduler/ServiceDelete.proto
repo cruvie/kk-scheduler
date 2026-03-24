@@ -1,0 +1,13 @@
+edition = "2023";
+package kk_scheduler;
+
+option go_package = "/kk_scheduler";
+
+message ServiceDelete {
+  message Input {
+    string ServiceName = 1;
+  }
+
+  message Output {
+  }
+}

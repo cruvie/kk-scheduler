@@ -1,0 +1,17 @@
+edition = "2023";
+package kk_scheduler;
+
+option go_package = "/kk_scheduler";
+
+import "kk_scheduler/Base.proto";
+
+message ServiceGet {
+  message Input {
+    // ServiceName, leave empty to get all services
+    string ServiceName = 1;
+  }
+
+  message Output {
+    PBRegisterService Service = 1;
+  }
+}
