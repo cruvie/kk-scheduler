@@ -5,6 +5,6 @@ node_modules
 package-lock.json
 **/.DS_Store
 **/dist
-kk-schedule.iml
+kk-scheduler.iml
 logs/
 **/logs/

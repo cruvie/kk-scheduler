@@ -2,7 +2,7 @@
 
 A job scheduling system based on cron and grpc
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cruvie/kk-schedule)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cruvie/kk-scheduler)
 
 # Screenshot
 
@@ -62,9 +62,9 @@ visit http://localhost:8668
 go get github.com/cruvie/server@latest
 ```
 
-- Run a grpc server that implemented `kk_schedule.UnimplementedKKScheduleTriggerServer`
+- Run a grpc server that implemented `kk_scheduler.UnimplementedKKScheduleTriggerServer`
   see [client_server_test.go](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/schedule_test/client_server_test.go)
-- Put a service and job into kk-schedule and enable job
+- Put a service and job into kk-scheduler and enable job
   see [readme_test.go](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/schedule_test/readme_test.go)
 
 # Contribute
@@ -75,7 +75,7 @@ any test case PR is welcome
 
 ## support move storge engine
 
-kk-schedule use Etcd as default storage engine, but any storage engine
+kk-scheduler use Etcd as default storage engine, but any storage engine
 implement [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/schedule/store.go)
 can be used
 

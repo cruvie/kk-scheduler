@@ -25,7 +25,7 @@ export TAG=0.1.1
 #(
 #docker build \
 #--build-arg GOVERSION=${GOVERSION} \
-#-t kk-schedule-local:${TAG} \
+#-t kk-scheduler-local:${TAG} \
 #-f ./image-build/Dockerfile .
 #)
 
@@ -34,8 +34,8 @@ export TAG=0.1.1
 (
 docker buildx build --platform linux/amd64,linux/arm64  \
             --build-arg GOVERSION=${GOVERSION} \
-            -t cruvie/kk-schedule:${TAG} \
-            -t cruvie/kk-schedule:latest \
+            -t cruvie/kk-scheduler:${TAG} \
+            -t cruvie/kk-scheduler:latest \
             -f ./image-build/Dockerfile . \
             --push
 )

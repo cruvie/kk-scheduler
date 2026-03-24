@@ -7,11 +7,11 @@ FROM golang:${GOVERSION} AS build
 
 ENV GOPROXY=https://goproxy.cn,direct
 
-COPY server /kk-schedule
+COPY server /kk-scheduler
 
-WORKDIR /kk-schedule
+WORKDIR /kk-scheduler
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /kk-schedule/output /kk-schedule/internal/main
+RUN CGO_ENABLED=0 GOOS=linux go build -o /kk-scheduler/output /kk-scheduler/internal/main
 
 ##
 ## Deploy
@@ -20,10 +20,10 @@ FROM alpine:latest
 
 
 
-COPY --from=build /kk-schedule/output /kk-schedule/output
-COPY ui/.output/public /kk-schedule/public
+COPY --from=build /kk-scheduler/output /kk-scheduler/output
+COPY ui/.output/public /kk-scheduler/public
 
-WORKDIR /kk-schedule
+WORKDIR /kk-scheduler
 
 CMD ["./output"]
 

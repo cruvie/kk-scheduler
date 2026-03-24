@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     ssr: false,
     app: {
         head: {
-            title: 'kk-schedule'
+            title: 'kk-scheduler'
         }
     },
     compatibilityDate: '2025-09-05',

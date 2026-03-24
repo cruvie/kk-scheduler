@@ -1,8 +1,8 @@
-name: kk-schedule
+name: kk-scheduler
 services:
-  kk-schedule:
-    image: cruvie/kk-schedule:latest
-    container_name: kk-schedule
+  kk-scheduler:
+    image: cruvie/kk-scheduler:latest
+    container_name: kk-scheduler
     restart: unless-stopped
     environment:
       KK_Schedule: "prod"
@@ -11,7 +11,7 @@ services:
       - "8667:8667"
       - "8668:8668"
     volumes:
-      - ./config.yml:/kk-schedule/config.yml
+      - ./config.yml:/kk-scheduler/config.yml
 
   test-etcd:
     image: quay.io/coreos/etcd:v3.6.4
