@@ -1,4 +1,4 @@
-module github.com/cruvie/kk-scheduler/server
+module github.com/cruvie/kk-scheduler
 
 go 1.26.0
 

@@ -5,7 +5,7 @@ import (
 
 	"gitee.com/cruvie/kk_go_kit/kk_grpc/grpc_api_gen"
 	"gitee.com/cruvie/kk_go_kit/kk_system"
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
 func TestName(t *testing.T) {
@@ -66,7 +66,7 @@ func TestGenImpl(t *testing.T) {
 		grpc_api_gen.GenerateImplInput{
 			ServerName:      "KKSchedule",
 			Methods:         kk_scheduler.KKSchedule_ServiceDesc.Methods,
-			ApiDefPkgPath:   "github.com/cruvie/kk-scheduler/server/internal/api_def",
-			HandlersPkgPath: "github.com/cruvie/kk-scheduler/server/internal/api_handlers",
+			ApiDefPkgPath:   "github.com/cruvie/kk-scheduler/internal/api_def",
+			HandlersPkgPath: "github.com/cruvie/kk-scheduler/internal/api_handlers",
 		})
 }

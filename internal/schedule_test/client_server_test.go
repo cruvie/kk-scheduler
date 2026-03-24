@@ -7,7 +7,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

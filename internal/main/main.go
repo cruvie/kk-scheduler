@@ -7,8 +7,8 @@ import (
 	"gitee.com/cruvie/kk_go_kit/kk_server"
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
 	"gitee.com/cruvie/kk_go_kit/kk_time"
-	"github.com/cruvie/kk-scheduler/server/internal/g_config"
-	"github.com/cruvie/kk-scheduler/server/internal/schedule"
+	"github.com/cruvie/kk-scheduler/internal/g_config"
+	"github.com/cruvie/kk-scheduler/internal/schedule"
 )
 
 var configSlog kk_stage.ConfigLog

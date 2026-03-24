@@ -2,7 +2,7 @@ package api_impl
 
 import (
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"google.golang.org/grpc"
 )
 

@@ -1,7 +1,7 @@
 package schedule
 
 import (
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
 type StoreDriver interface {

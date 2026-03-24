@@ -2,8 +2,8 @@ package job
 
 import (
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-scheduler/server/internal/schedule"
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/internal/schedule"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
 func (x *ApiJobDelete) Service(stage *kk_stage.Stage) error {

@@ -8,3 +8,5 @@ package-lock.json
 kk-scheduler.iml
 logs/
 **/logs/
+vendor
+/kk_go_kit/

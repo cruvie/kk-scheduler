@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
-	"github.com/cruvie/kk-scheduler/server/internal/api_handlers/job"
-	"github.com/cruvie/kk-scheduler/server/internal/api_handlers/service"
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/internal/api_handlers/job"
+	"github.com/cruvie/kk-scheduler/internal/api_handlers/service"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
 func (x *server) JobList(ctx context.Context, input *kk_scheduler.JobList_Input) (*kk_scheduler.JobList_Output, error) {

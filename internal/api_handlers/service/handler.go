@@ -2,7 +2,7 @@ package service
 
 import (
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
 func (x *ApiServiceDelete) Handler(stage *kk_stage.Stage) (*kk_scheduler.ServiceDelete_Output, error) {

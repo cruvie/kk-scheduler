@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/cruvie/kk-scheduler/server/internal/g_config"
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/internal/g_config"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 

@@ -5,7 +5,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"github.com/robfig/cron/v3"
 	"github.com/samber/lo"
 	"google.golang.org/protobuf/types/known/timestamppb"

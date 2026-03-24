@@ -28,4 +28,4 @@ plugins:
     opt: target=ts
     include_imports: true
     include_wkt: true
-    out: ../ui/gen
+    out: ./ui/gen
