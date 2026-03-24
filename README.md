@@ -63,9 +63,9 @@ go get github.com/cruvie/server@latest
 ```
 
 - Run a grpc server that implemented `kk_scheduler.UnimplementedKKScheduleTriggerServer`
-  see [client_server_test.go](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/schedule_test/client_server_test.go)
+  see [client_server_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/client_server_test.go)
 - Put a service and job into kk-scheduler and enable job
-  see [readme_test.go](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/schedule_test/readme_test.go)
+  see [readme_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/readme_test.go)
 
 # Contribute
 
@@ -76,17 +76,17 @@ any test case PR is welcome
 ## support move storge engine
 
 kk-scheduler use Etcd as default storage engine, but any storage engine
-implement [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/schedule/store.go)
+implement [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store.go)
 can be used
 
 Step1 create a `store_xxxx.go`
-like [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/schedule/store_etcd.go)
+like [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store_etcd.go)
 
 Step2 test it
 
 Step3 add config filed
-in [config.go](https://github.com/cruvie/kk-scheduler/blob/main/server/internal/g_config/config.go)
-and [config.yml](https://github.com/cruvie/kk-scheduler/blob/main/server/config.yml)
+in [config.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/g_config/config.go)
+and [config.yml](https://github.com/cruvie/kk-scheduler/blob/main/config.yml)
 
 ## improve readme doc and code comment
 
