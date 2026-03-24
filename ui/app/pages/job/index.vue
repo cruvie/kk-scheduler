@@ -28,13 +28,13 @@
 <script setup lang="ts">
 import {h, ref, onMounted, resolveComponent} from 'vue';
 import {clientKKSchedule} from '~/utils/api/client';
-import {JobList_InputSchema} from '~~/gen/kk_schedule/JobList_pb';
-import type {PBJob} from '~~/gen/kk_schedule/Job_pb';
+import {JobList_InputSchema} from '~~/gen/kk_scheduler/JobList_pb';
+import type {PBJob} from '~~/gen/kk_scheduler/Job_pb';
 import {create} from "@bufbuild/protobuf";
-import {JobEnable_InputSchema} from "~~/gen/kk_schedule/JobEnable_pb";
-import {JobDisable_InputSchema} from "~~/gen/kk_schedule/JobDisable_pb";
-import {JobDelete_InputSchema} from "~~/gen/kk_schedule/JobDelete_pb";
-import {JobTrigger_InputSchema} from "~~/gen/kk_schedule/JobTrigger_pb";
+import {JobEnable_InputSchema} from "~~/gen/kk_scheduler/JobEnable_pb";
+import {JobDisable_InputSchema} from "~~/gen/kk_scheduler/JobDisable_pb";
+import {JobDelete_InputSchema} from "~~/gen/kk_scheduler/JobDelete_pb";
+import {JobTrigger_InputSchema} from "~~/gen/kk_scheduler/JobTrigger_pb";
 import JobForm from '~/components/JobForm.vue';
 import JobSetSpecForm from '~/components/JobSetSpecForm.vue';
 import {useToast} from '#imports';

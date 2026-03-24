@@ -25,9 +25,9 @@
 <script setup lang="ts">
 import {ref, reactive} from 'vue';
 import {clientKKSchedule} from '~/utils/api/client';
-import {JobSetSpec_InputSchema} from '~~/gen/kk_schedule/JobSetSpec_pb';
+import {JobSetSpec_InputSchema} from '~~/gen/kk_scheduler/JobSetSpec_pb';
 import {create} from "@bufbuild/protobuf";
-import type {PBJob} from '~~/gen/kk_schedule/Job_pb';
+import type {PBJob} from '~~/gen/kk_scheduler/Job_pb';
 import { useToast } from '#imports';
 
 const dialogVisible = ref(false);
