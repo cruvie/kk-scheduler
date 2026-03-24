@@ -6,7 +6,7 @@ import (
 
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-schedule/kk-schedule-server/kk_schedule"
+	"github.com/cruvie/kk-schedule/server/kk_schedule"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )

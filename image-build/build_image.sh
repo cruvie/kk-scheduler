@@ -3,12 +3,12 @@ clear
 cd ..
 
 #(
-#echo "building kk-schedule-ui"
-#cd kk-schedule-ui && npm run generate
+#echo "building ui"
+#cd ui && npm run generate
 #)
 #(
-#echo "kk-schedule-server vendor"
-#cd kk-schedule-server && go mod vendor
+#echo "server vendor"
+#cd server && go mod vendor
 #)
 
 #docker pull --platform linux/amd64 golang:1.25.0

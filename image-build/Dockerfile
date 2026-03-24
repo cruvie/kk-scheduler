@@ -7,7 +7,7 @@ FROM golang:${GOVERSION} AS build
 
 ENV GOPROXY=https://goproxy.cn,direct
 
-COPY kk-schedule-server /kk-schedule
+COPY server /kk-schedule
 
 WORKDIR /kk-schedule
 
@@ -21,7 +21,7 @@ FROM alpine:latest
 
 
 COPY --from=build /kk-schedule/output /kk-schedule/output
-COPY kk-schedule-ui/.output/public /kk-schedule/public
+COPY ui/.output/public /kk-schedule/public
 
 WORKDIR /kk-schedule
 
