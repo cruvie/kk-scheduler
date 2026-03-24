@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/cruvie/kk-schedule/server/internal/g_config"
-	"github.com/cruvie/kk-schedule/server/kk_schedule"
+	"github.com/cruvie/kk-scheduler/server/internal/g_config"
+	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
 const (
-	storeServiceKey = "kk-schedule-service"
-	storeJobKey     = "kk-schedule-job"
+	storeServiceKey = "kk-scheduler-service"
+	storeJobKey     = "kk-scheduler-job"
 )
 
 type StoreEtcd struct {
@@ -36,19 +36,19 @@ func NewStoreEtcd() *StoreEtcd {
 	}
 }
 
-func (x *StoreEtcd) getJobKey(entry *kk_schedule.PBJob) string {
+func (x *StoreEtcd) getJobKey(entry *kk_scheduler.PBJob) string {
 	return fmt.Sprintf("%s/%s/%s", storeJobKey, entry.GetServiceName(), entry.GetFuncName())
 }
 
-func (x *StoreEtcd) JobList(serviceName string) ([]*kk_schedule.PBJob, error) {
+func (x *StoreEtcd) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
 	resp, err := x.Client.Get(context.Background(), fmt.Sprintf("%s/%s", storeJobKey, serviceName), clientv3.WithPrefix())
 	if err != nil {
 		return nil, err
 	}
 
-	var jobs []*kk_schedule.PBJob
+	var jobs []*kk_scheduler.PBJob
 	for _, kv := range resp.Kvs {
-		var v kk_schedule.PBJob
+		var v kk_scheduler.PBJob
 		if err := json.Unmarshal(kv.Value, &v); err != nil {
 			return nil, err
 		}
@@ -58,7 +58,7 @@ func (x *StoreEtcd) JobList(serviceName string) ([]*kk_schedule.PBJob, error) {
 	return jobs, nil
 }
 
-func (x *StoreEtcd) JobGet(serviceName, funcName string) (*kk_schedule.PBJob, error) {
+func (x *StoreEtcd) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, error) {
 	key := fmt.Sprintf("%s/%s/%s", storeJobKey, serviceName, funcName)
 	resp, err := x.Client.Get(context.Background(), key)
 	if err != nil {
@@ -66,10 +66,10 @@ func (x *StoreEtcd) JobGet(serviceName, funcName string) (*kk_schedule.PBJob, er
 	}
 
 	if len(resp.Kvs) == 0 {
-		return nil, kk_schedule.ErrJobNotFount
+		return nil, kk_scheduler.ErrJobNotFount
 	}
 
-	var entry kk_schedule.PBJob
+	var entry kk_scheduler.PBJob
 	if err := json.Unmarshal(resp.Kvs[0].Value, &entry); err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (x *StoreEtcd) JobGet(serviceName, funcName string) (*kk_schedule.PBJob, er
 	return &entry, nil
 }
 
-func (x *StoreEtcd) JobPut(entry *kk_schedule.PBJob) error {
+func (x *StoreEtcd) JobPut(entry *kk_scheduler.PBJob) error {
 	key := x.getJobKey(entry)
 	value, err := json.Marshal(entry)
 	if err != nil {
@@ -94,7 +94,7 @@ func (x *StoreEtcd) JobDelete(serviceName, funcName string) error {
 	return err
 }
 
-func (x *StoreEtcd) ServicePut(v *kk_schedule.PBRegisterService) error {
+func (x *StoreEtcd) ServicePut(v *kk_scheduler.PBRegisterService) error {
 	key := fmt.Sprintf("%s/%s", storeServiceKey, v.GetServiceName())
 	value, err := json.Marshal(v)
 	if err != nil {
@@ -105,7 +105,7 @@ func (x *StoreEtcd) ServicePut(v *kk_schedule.PBRegisterService) error {
 	return err
 }
 
-func (x *StoreEtcd) ServiceGet(serviceName string) (*kk_schedule.PBRegisterService, error) {
+func (x *StoreEtcd) ServiceGet(serviceName string) (*kk_scheduler.PBRegisterService, error) {
 	key := fmt.Sprintf("%s/%s", storeServiceKey, serviceName)
 	resp, err := x.Client.Get(context.Background(), key)
 	if err != nil {
@@ -113,24 +113,24 @@ func (x *StoreEtcd) ServiceGet(serviceName string) (*kk_schedule.PBRegisterServi
 	}
 
 	if len(resp.Kvs) == 0 {
-		return nil, kk_schedule.ErrServiceNotFount
+		return nil, kk_scheduler.ErrServiceNotFount
 	}
 
-	var v kk_schedule.PBRegisterService
+	var v kk_scheduler.PBRegisterService
 	err = json.Unmarshal(resp.Kvs[0].Value, &v)
 	return &v, err
 }
 
-func (x *StoreEtcd) ServiceList() ([]*kk_schedule.PBRegisterService, error) {
+func (x *StoreEtcd) ServiceList() ([]*kk_scheduler.PBRegisterService, error) {
 	key := storeServiceKey
 	resp, err := x.Client.Get(context.Background(), key, clientv3.WithPrefix())
 	if err != nil {
 		return nil, err
 	}
 
-	var services []*kk_schedule.PBRegisterService
+	var services []*kk_scheduler.PBRegisterService
 	for _, kv := range resp.Kvs {
-		var v kk_schedule.PBRegisterService
+		var v kk_scheduler.PBRegisterService
 		err := json.Unmarshal(kv.Value, &v)
 		if err != nil {
 			return nil, err
@@ -142,7 +142,7 @@ func (x *StoreEtcd) ServiceList() ([]*kk_schedule.PBRegisterService, error) {
 
 func (x *StoreEtcd) ServiceDelete(serviceName string) error {
 	if serviceName == "" {
-		return kk_schedule.ErrServiceNameEmpty
+		return kk_scheduler.ErrServiceNameEmpty
 	}
 	key := fmt.Sprintf("%s/%s", storeServiceKey, serviceName)
 	_, err := x.Client.Delete(context.Background(), key)

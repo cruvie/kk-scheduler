@@ -4,12 +4,12 @@ import (
 	"context"
 
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
-	"github.com/cruvie/kk-schedule/server/internal/api_handlers/job"
-	"github.com/cruvie/kk-schedule/server/internal/api_handlers/service"
-	"github.com/cruvie/kk-schedule/server/kk_schedule"
+	"github.com/cruvie/kk-scheduler/server/internal/api_handlers/job"
+	"github.com/cruvie/kk-scheduler/server/internal/api_handlers/service"
+	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
 )
 
-func (x *server) JobList(ctx context.Context, input *kk_schedule.JobList_Input) (*kk_schedule.JobList_Output, error) {
+func (x *server) JobList(ctx context.Context, input *kk_scheduler.JobList_Input) (*kk_scheduler.JobList_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -17,7 +17,7 @@ func (x *server) JobList(ctx context.Context, input *kk_schedule.JobList_Input) 
 	)
 }
 
-func (x *server) JobGet(ctx context.Context, input *kk_schedule.JobGet_Input) (*kk_schedule.JobGet_Output, error) {
+func (x *server) JobGet(ctx context.Context, input *kk_scheduler.JobGet_Input) (*kk_scheduler.JobGet_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -25,7 +25,7 @@ func (x *server) JobGet(ctx context.Context, input *kk_schedule.JobGet_Input) (*
 	)
 }
 
-func (x *server) JobSetSpec(ctx context.Context, input *kk_schedule.JobSetSpec_Input) (*kk_schedule.JobSetSpec_Output, error) {
+func (x *server) JobSetSpec(ctx context.Context, input *kk_scheduler.JobSetSpec_Input) (*kk_scheduler.JobSetSpec_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -33,7 +33,7 @@ func (x *server) JobSetSpec(ctx context.Context, input *kk_schedule.JobSetSpec_I
 	)
 }
 
-func (x *server) JobEnable(ctx context.Context, input *kk_schedule.JobEnable_Input) (*kk_schedule.JobEnable_Output, error) {
+func (x *server) JobEnable(ctx context.Context, input *kk_scheduler.JobEnable_Input) (*kk_scheduler.JobEnable_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -41,7 +41,7 @@ func (x *server) JobEnable(ctx context.Context, input *kk_schedule.JobEnable_Inp
 	)
 }
 
-func (x *server) JobDisable(ctx context.Context, input *kk_schedule.JobDisable_Input) (*kk_schedule.JobDisable_Output, error) {
+func (x *server) JobDisable(ctx context.Context, input *kk_scheduler.JobDisable_Input) (*kk_scheduler.JobDisable_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -49,7 +49,7 @@ func (x *server) JobDisable(ctx context.Context, input *kk_schedule.JobDisable_I
 	)
 }
 
-func (x *server) JobPut(ctx context.Context, input *kk_schedule.JobPut_Input) (*kk_schedule.JobPut_Output, error) {
+func (x *server) JobPut(ctx context.Context, input *kk_scheduler.JobPut_Input) (*kk_scheduler.JobPut_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -57,7 +57,7 @@ func (x *server) JobPut(ctx context.Context, input *kk_schedule.JobPut_Input) (*
 	)
 }
 
-func (x *server) JobDelete(ctx context.Context, input *kk_schedule.JobDelete_Input) (*kk_schedule.JobDelete_Output, error) {
+func (x *server) JobDelete(ctx context.Context, input *kk_scheduler.JobDelete_Input) (*kk_scheduler.JobDelete_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -65,7 +65,7 @@ func (x *server) JobDelete(ctx context.Context, input *kk_schedule.JobDelete_Inp
 	)
 }
 
-func (x *server) JobTrigger(ctx context.Context, input *kk_schedule.JobTrigger_Input) (*kk_schedule.JobTrigger_Output, error) {
+func (x *server) JobTrigger(ctx context.Context, input *kk_scheduler.JobTrigger_Input) (*kk_scheduler.JobTrigger_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -73,7 +73,7 @@ func (x *server) JobTrigger(ctx context.Context, input *kk_schedule.JobTrigger_I
 	)
 }
 
-func (x *server) ServiceList(ctx context.Context, input *kk_schedule.ServiceList_Input) (*kk_schedule.ServiceList_Output, error) {
+func (x *server) ServiceList(ctx context.Context, input *kk_scheduler.ServiceList_Input) (*kk_scheduler.ServiceList_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -81,7 +81,7 @@ func (x *server) ServiceList(ctx context.Context, input *kk_schedule.ServiceList
 	)
 }
 
-func (x *server) ServicePut(ctx context.Context, input *kk_schedule.ServicePut_Input) (*kk_schedule.ServicePut_Output, error) {
+func (x *server) ServicePut(ctx context.Context, input *kk_scheduler.ServicePut_Input) (*kk_scheduler.ServicePut_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -89,7 +89,7 @@ func (x *server) ServicePut(ctx context.Context, input *kk_schedule.ServicePut_I
 	)
 }
 
-func (x *server) ServiceGet(ctx context.Context, input *kk_schedule.ServiceGet_Input) (*kk_schedule.ServiceGet_Output, error) {
+func (x *server) ServiceGet(ctx context.Context, input *kk_scheduler.ServiceGet_Input) (*kk_scheduler.ServiceGet_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,
@@ -97,7 +97,7 @@ func (x *server) ServiceGet(ctx context.Context, input *kk_schedule.ServiceGet_I
 	)
 }
 
-func (x *server) ServiceDelete(ctx context.Context, input *kk_schedule.ServiceDelete_Input) (*kk_schedule.ServiceDelete_Output, error) {
+func (x *server) ServiceDelete(ctx context.Context, input *kk_scheduler.ServiceDelete_Input) (*kk_scheduler.ServiceDelete_Output, error) {
 	return kk_grpc.GrpcHandler(
 		ctx,
 		input,

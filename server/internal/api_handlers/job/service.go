@@ -2,8 +2,8 @@ package job
 
 import (
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-schedule/server/internal/schedule"
-	"github.com/cruvie/kk-schedule/server/kk_schedule"
+	"github.com/cruvie/kk-scheduler/server/internal/schedule"
+	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
 )
 
 func (x *ApiJobDelete) Service(stage *kk_stage.Stage) error {
@@ -29,7 +29,7 @@ func (x *ApiJobEnable) Service(stage *kk_stage.Stage) error {
 	return schedule.GClient.JobEnable(x.In.GetServiceName(), x.In.GetFuncName())
 }
 
-func (x *ApiJobGet) Service(stage *kk_stage.Stage) (*kk_schedule.PBJob, error) {
+func (x *ApiJobGet) Service(stage *kk_stage.Stage) (*kk_scheduler.PBJob, error) {
 	span := stage.StartTrace("Service")
 	defer span.End()
 
@@ -37,7 +37,7 @@ func (x *ApiJobGet) Service(stage *kk_stage.Stage) (*kk_schedule.PBJob, error) {
 	return job, err
 }
 
-func (x *ApiJobList) Service(stage *kk_stage.Stage) ([]*kk_schedule.PBJob, error) {
+func (x *ApiJobList) Service(stage *kk_stage.Stage) ([]*kk_scheduler.PBJob, error) {
 	span := stage.StartTrace("Service")
 	defer span.End()
 

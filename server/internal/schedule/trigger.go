@@ -6,12 +6,12 @@ import (
 
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-schedule/server/kk_schedule"
+	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-func triggerClient(service *kk_schedule.PBRegisterService) (conn *grpc.ClientConn, client kk_schedule.KKScheduleTriggerClient, err error) {
+func triggerClient(service *kk_scheduler.PBRegisterService) (conn *grpc.ClientConn, client kk_scheduler.KKScheduleTriggerClient, err error) {
 	var opts []grpc.DialOption
 	if service.GetAuthToken() != "" {
 		opts = append(opts, grpc.WithAuthority(service.GetAuthToken()))
@@ -21,10 +21,10 @@ func triggerClient(service *kk_schedule.PBRegisterService) (conn *grpc.ClientCon
 	if err != nil {
 		return nil, nil, err
 	}
-	return conn, kk_schedule.NewKKScheduleTriggerClient(conn), nil
+	return conn, kk_scheduler.NewKKScheduleTriggerClient(conn), nil
 }
 
-func triggerFunc(service *kk_schedule.PBRegisterService, funcName string) func() {
+func triggerFunc(service *kk_scheduler.PBRegisterService, funcName string) func() {
 	return func() {
 		conn, client, err := triggerClient(service)
 		defer func() {
@@ -37,11 +37,11 @@ func triggerFunc(service *kk_schedule.PBRegisterService, funcName string) func()
 			slog.Error(err.Error())
 			return
 		}
-		stage := kk_stage.NewStage(context.Background(), "kk-schedule")
+		stage := kk_stage.NewStage(context.Background(), "kk-scheduler")
 		ctx, cancelFunc := kk_grpc.NewCallGrpcCtx(stage)
 		defer cancelFunc()
 
-		input := &kk_schedule.Trigger_Input{}
+		input := &kk_scheduler.Trigger_Input{}
 		input.SetFuncName(funcName)
 		_, err = client.Trigger(ctx, input)
 		if err != nil {

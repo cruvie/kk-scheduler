@@ -11,8 +11,8 @@ import (
 	"gitee.com/cruvie/kk_go_kit/kk_grpc/interceptor"
 	"gitee.com/cruvie/kk_go_kit/kk_server"
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-schedule/server/internal/api_impl"
-	"github.com/cruvie/kk-schedule/server/internal/g_config"
+	"github.com/cruvie/kk-scheduler/server/internal/api_impl"
+	"github.com/cruvie/kk-scheduler/server/internal/g_config"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/recovery"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
@@ -27,7 +27,7 @@ func getGrpcServer() *grpc.Server {
 		grpc.StatsHandler(otelgrpc.NewServerHandler()),
 
 		grpc.ChainUnaryInterceptor(
-			interceptor.UnaryStage(kk_grpc.GFileDescHub),
+			interceptor.UnaryInit(kk_grpc.GFileDescHub),
 			unaryLogging(),
 			recovery.UnaryServerInterceptor(recovery.WithRecoveryHandler(panicRecovery)),
 		),

@@ -6,7 +6,7 @@ import (
 
 	"gitee.com/cruvie/kk_go_kit/kk_server"
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-schedule/server/internal/g_config"
+	"github.com/cruvie/kk-scheduler/server/internal/g_config"
 )
 
 func NewWebServer(stage *kk_stage.Stage) *kk_server.KKRunServer {

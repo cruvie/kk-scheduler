@@ -2,42 +2,42 @@ package service
 
 import (
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-schedule/server/kk_schedule"
+	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
 )
 
-func (x *ApiServiceDelete) Handler(stage *kk_stage.Stage) (*kk_schedule.ServiceDelete_Output, error) {
+func (x *ApiServiceDelete) Handler(stage *kk_stage.Stage) (*kk_scheduler.ServiceDelete_Output, error) {
 	err := x.Service(stage)
 	if err != nil {
 		return nil, err
 	}
-	return &kk_schedule.ServiceDelete_Output{}, nil
+	return &kk_scheduler.ServiceDelete_Output{}, nil
 }
 
-func (x *ApiServiceGet) Handler(stage *kk_stage.Stage) (*kk_schedule.ServiceGet_Output, error) {
+func (x *ApiServiceGet) Handler(stage *kk_stage.Stage) (*kk_scheduler.ServiceGet_Output, error) {
 	service, err := x.Service(stage)
 	if err != nil {
 		return nil, err
 	}
 
-	out := &kk_schedule.ServiceGet_Output{}
+	out := &kk_scheduler.ServiceGet_Output{}
 	out.SetService(service)
 	return out, nil
 }
 
-func (x *ApiServiceList) Handler(stage *kk_stage.Stage) (*kk_schedule.ServiceList_Output, error) {
+func (x *ApiServiceList) Handler(stage *kk_stage.Stage) (*kk_scheduler.ServiceList_Output, error) {
 	service, err := x.Service(stage)
 	if err != nil {
 		return nil, err
 	}
-	out := &kk_schedule.ServiceList_Output{}
+	out := &kk_scheduler.ServiceList_Output{}
 	out.SetServiceList(service)
 	return out, nil
 }
 
-func (x *ApiServicePut) Handler(stage *kk_stage.Stage) (*kk_schedule.ServicePut_Output, error) {
+func (x *ApiServicePut) Handler(stage *kk_stage.Stage) (*kk_scheduler.ServicePut_Output, error) {
 	err := x.Service(stage)
 	if err != nil {
 		return nil, err
 	}
-	return &kk_schedule.ServicePut_Output{}, nil
+	return &kk_scheduler.ServicePut_Output{}, nil
 }

@@ -5,7 +5,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/cruvie/kk-schedule/server/kk_schedule"
+	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
 	"github.com/robfig/cron/v3"
 	"github.com/samber/lo"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -52,7 +52,7 @@ func (x *Client) Close() {
 	x.cron.Stop()
 }
 
-func (x *Client) JobPut(jobs ...*kk_schedule.PBRegisterJob) error {
+func (x *Client) JobPut(jobs ...*kk_scheduler.PBRegisterJob) error {
 	for _, job := range jobs {
 		err := job.Check()
 		if err != nil {
@@ -65,7 +65,7 @@ func (x *Client) JobPut(jobs ...*kk_schedule.PBRegisterJob) error {
 			}
 		}
 
-		newEntry := &kk_schedule.PBJob{}
+		newEntry := &kk_scheduler.PBJob{}
 		newEntry.SetEntryID(0)
 		newEntry.SetEnabled(false)
 		newEntry.SetNext(nil)
@@ -76,7 +76,7 @@ func (x *Client) JobPut(jobs ...*kk_schedule.PBRegisterJob) error {
 		newEntry.SetFuncName(job.GetFuncName())
 
 		entry, err := x.storer.JobGet(job.GetServiceName(), job.GetFuncName())
-		if err != nil && !errors.Is(err, kk_schedule.ErrJobNotFount) {
+		if err != nil && !errors.Is(err, kk_scheduler.ErrJobNotFount) {
 			return err
 		}
 
@@ -95,16 +95,16 @@ func (x *Client) JobPut(jobs ...*kk_schedule.PBRegisterJob) error {
 	return nil
 }
 
-func (x *Client) JobList(serviceName string) ([]*kk_schedule.PBJob, error) {
+func (x *Client) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
 	entries := x.cron.Entries()
 	entryList, err := x.storer.JobList(serviceName)
 	if err != nil {
 		return nil, err
 	}
 	var hasSpecEntryList []int32
-	var pbJobs []*kk_schedule.PBJob
+	var pbJobs []*kk_scheduler.PBJob
 	for _, entry := range entries {
-		find, b := lo.Find(entryList, func(item *kk_schedule.PBJob) bool {
+		find, b := lo.Find(entryList, func(item *kk_scheduler.PBJob) bool {
 			return item.GetEntryID() == int32(entry.ID)
 		})
 		if !b {
@@ -112,7 +112,7 @@ func (x *Client) JobList(serviceName string) ([]*kk_schedule.PBJob, error) {
 		} else {
 			hasSpecEntryList = append(hasSpecEntryList, find.GetEntryID())
 		}
-		job := &kk_schedule.PBJob{}
+		job := &kk_scheduler.PBJob{}
 		job.SetEntryID(find.GetEntryID())
 		job.SetEnabled(find.GetEnabled())
 		job.SetNext(find.GetNext())
@@ -124,7 +124,7 @@ func (x *Client) JobList(serviceName string) ([]*kk_schedule.PBJob, error) {
 		pbJobs = append(pbJobs, job)
 	}
 
-	noSpecJobList := lo.Filter(entryList, func(item *kk_schedule.PBJob, index int) bool {
+	noSpecJobList := lo.Filter(entryList, func(item *kk_scheduler.PBJob, index int) bool {
 		_, b := lo.Find(hasSpecEntryList, func(id int32) bool {
 			return id == item.GetEntryID()
 		})
@@ -132,13 +132,13 @@ func (x *Client) JobList(serviceName string) ([]*kk_schedule.PBJob, error) {
 	})
 	pbJobs = append(pbJobs, noSpecJobList...)
 	// sort by serviceName
-	slices.SortFunc(pbJobs, func(a, b *kk_schedule.PBJob) int {
+	slices.SortFunc(pbJobs, func(a, b *kk_scheduler.PBJob) int {
 		return strings.Compare(a.GetServiceName(), b.GetServiceName())
 	})
 	return pbJobs, nil
 }
 
-func (x *Client) JobGet(serviceName, funcName string) (*kk_schedule.PBJob, error) {
+func (x *Client) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, error) {
 	entry, err := x.storer.JobGet(serviceName, funcName)
 	if err != nil {
 		return nil, err
@@ -180,7 +180,7 @@ func (x *Client) JobEnable(serviceName string, funcName string) error {
 		return err
 	}
 	if entry.GetSpec() == "" {
-		return kk_schedule.ErrSpecIsEmpty
+		return kk_scheduler.ErrSpecIsEmpty
 	}
 	err = x.JobDisable(serviceName, funcName)
 	if err != nil {
@@ -238,15 +238,15 @@ func (x *Client) JobTrigger(serviceName, funcName string) error {
 	return nil
 }
 
-func (x *Client) ServiceList() ([]*kk_schedule.PBRegisterService, error) {
+func (x *Client) ServiceList() ([]*kk_scheduler.PBRegisterService, error) {
 	return x.storer.ServiceList()
 }
 
-func (x *Client) ServicePut(service *kk_schedule.PBRegisterService) error {
+func (x *Client) ServicePut(service *kk_scheduler.PBRegisterService) error {
 	return x.storer.ServicePut(service)
 }
 
-func (x *Client) ServiceGet(serviceName string) (*kk_schedule.PBRegisterService, error) {
+func (x *Client) ServiceGet(serviceName string) (*kk_scheduler.PBRegisterService, error) {
 	return x.storer.ServiceGet(serviceName)
 }
 
@@ -257,7 +257,7 @@ func (x *Client) ServiceDelete(serviceName string) error {
 		return err
 	}
 	if len(jobList) > 0 {
-		return kk_schedule.ErrServiceHasJob
+		return kk_scheduler.ErrServiceHasJob
 	}
 	return x.storer.ServiceDelete(serviceName)
 }

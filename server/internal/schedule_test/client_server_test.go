@@ -7,7 +7,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/cruvie/kk-schedule/server/kk_schedule"
+	"github.com/cruvie/kk-scheduler/server/kk_scheduler"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -15,18 +15,18 @@ import (
 )
 
 type server struct {
-	kk_schedule.UnimplementedKKScheduleTriggerServer
+	kk_scheduler.UnimplementedKKScheduleTriggerServer
 }
 
-func (server) Trigger(ctx context.Context, input *kk_schedule.Trigger_Input) (*kk_schedule.Trigger_Output, error) {
+func (server) Trigger(ctx context.Context, input *kk_scheduler.Trigger_Input) (*kk_scheduler.Trigger_Output, error) {
 	slog.Info("Trigger received", "FuncName", input.GetFuncName())
 	switch input.GetFuncName() {
 	case "Func1":
 		go Func1()
 	default:
-		return nil, kk_schedule.ErrJobNotFount
+		return nil, kk_scheduler.ErrJobNotFount
 	}
-	return &kk_schedule.Trigger_Output{}, nil
+	return &kk_scheduler.Trigger_Output{}, nil
 }
 
 func Func1() {
@@ -65,7 +65,7 @@ func TestClientServer(t *testing.T) {
 		),
 	)
 	defer grpcServer.GracefulStop()
-	kk_schedule.RegisterKKScheduleTriggerServer(grpcServer, &server{})
+	kk_scheduler.RegisterKKScheduleTriggerServer(grpcServer, &server{})
 	if err := grpcServer.Serve(listener); err != nil {
 		panic(err)
 	}
