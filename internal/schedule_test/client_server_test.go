@@ -10,7 +10,6 @@ import (
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
@@ -35,22 +34,10 @@ func Func1() {
 }
 
 func authorityAuthInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		return nil, status.Error(codes.Unauthenticated, "missing metadata")
+	err := kk_scheduler.CheckAuthority(ctx, testAuthToken)
+	if err != nil {
+		return nil, status.Error(codes.Unauthenticated, err.Error())
 	}
-
-	var authority string
-	if auth := md[":authority"]; len(auth) > 0 {
-		authority = auth[0]
-	} else {
-		return nil, status.Error(codes.Unauthenticated, "missing authority")
-	}
-
-	if authority != testAuthToken {
-		return nil, status.Error(codes.Unauthenticated, "invalid authority")
-	}
-
 	return handler(ctx, req)
 }
 

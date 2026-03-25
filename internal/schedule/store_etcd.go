@@ -2,13 +2,13 @@ package schedule
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"time"
 
 	"github.com/cruvie/kk-scheduler/internal/g_config"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	clientv3 "go.etcd.io/etcd/client/v3"
+	"google.golang.org/protobuf/encoding/protojson"
 )
 
 const (
@@ -49,7 +49,7 @@ func (x *StoreEtcd) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
 	var jobs []*kk_scheduler.PBJob
 	for _, kv := range resp.Kvs {
 		var v kk_scheduler.PBJob
-		if err := json.Unmarshal(kv.Value, &v); err != nil {
+		if err := protojson.Unmarshal(kv.Value, &v); err != nil {
 			return nil, err
 		}
 		jobs = append(jobs, &v)
@@ -70,7 +70,7 @@ func (x *StoreEtcd) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, e
 	}
 
 	var entry kk_scheduler.PBJob
-	if err := json.Unmarshal(resp.Kvs[0].Value, &entry); err != nil {
+	if err := protojson.Unmarshal(resp.Kvs[0].Value, &entry); err != nil {
 		return nil, err
 	}
 
@@ -79,7 +79,7 @@ func (x *StoreEtcd) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, e
 
 func (x *StoreEtcd) JobPut(entry *kk_scheduler.PBJob) error {
 	key := x.getJobKey(entry)
-	value, err := json.Marshal(entry)
+	value, err := protojson.Marshal(entry)
 	if err != nil {
 		return err
 	}
@@ -96,7 +96,7 @@ func (x *StoreEtcd) JobDelete(serviceName, funcName string) error {
 
 func (x *StoreEtcd) ServicePut(v *kk_scheduler.PBRegisterService) error {
 	key := fmt.Sprintf("%s/%s", storeServiceKey, v.GetServiceName())
-	value, err := json.Marshal(v)
+	value, err := protojson.Marshal(v)
 	if err != nil {
 		return err
 	}
@@ -117,7 +117,7 @@ func (x *StoreEtcd) ServiceGet(serviceName string) (*kk_scheduler.PBRegisterServ
 	}
 
 	var v kk_scheduler.PBRegisterService
-	err = json.Unmarshal(resp.Kvs[0].Value, &v)
+	err = protojson.Unmarshal(resp.Kvs[0].Value, &v)
 	return &v, err
 }
 
@@ -131,7 +131,7 @@ func (x *StoreEtcd) ServiceList() ([]*kk_scheduler.PBRegisterService, error) {
 	var services []*kk_scheduler.PBRegisterService
 	for _, kv := range resp.Kvs {
 		var v kk_scheduler.PBRegisterService
-		err := json.Unmarshal(kv.Value, &v)
+		err := protojson.Unmarshal(kv.Value, &v)
 		if err != nil {
 			return nil, err
 		}
