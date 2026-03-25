@@ -8,7 +8,7 @@ cd ..
 #)
 #(
 #echo "server vendor"
-#cd server && go mod vendor
+#go mod vendor
 #)
 
 #docker pull --platform linux/amd64 golang:1.26.0
@@ -31,13 +31,16 @@ export TAG=0.2.0
 
 # docker login
 
+#(
+#docker buildx build --platform linux/amd64,linux/arm64  \
+#            --build-arg GOVERSION=${GOVERSION} \
+#            -t cruvie/kk-scheduler:${TAG} \
+#            -t cruvie/kk-scheduler:latest \
+#            -f ./image-build/Dockerfile . \
+#            --load
+#)
 (
-docker buildx build --platform linux/amd64,linux/arm64  \
-            --build-arg GOVERSION=${GOVERSION} \
-            -t cruvie/kk-scheduler:${TAG} \
-            -t cruvie/kk-scheduler:latest \
-            -f ./image-build/Dockerfile . \
-            --push
+docker push cruvie/kk-scheduler:${TAG}
+docker push cruvie/kk-scheduler:latest
 )
-
 
