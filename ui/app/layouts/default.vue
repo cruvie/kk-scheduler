@@ -23,12 +23,10 @@ const items: NavigationMenuItem[] = [{
         <h1 class="font-bold text-lg">KK Schedule</h1>
       </template>
 
-      <template #default>
-        <UNavigationMenu
-            :items="items"
-            orientation="vertical"
-        />
-      </template>
+      <UNavigationMenu
+          :items="items"
+          orientation="vertical"
+      />
     </UDashboardSidebar>
 
 
@@ -36,6 +34,9 @@ const items: NavigationMenuItem[] = [{
         resizable
         :ui="{ root: 'p-4'}"
     >
+      <div class="lg:hidden mb-4">
+        <UDashboardSidebarToggle/>
+      </div>
       <slot/>
     </UDashboardPanel>
   </UDashboardGroup>

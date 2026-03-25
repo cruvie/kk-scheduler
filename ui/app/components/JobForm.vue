@@ -1,23 +1,25 @@
 <template>
   <UModal v-model:open="dialogVisible" :title="isEdit ? 'Edit Job' : 'Create Job'">
     <template #body>
-      <UForm :state="form" >
+      <UForm :state="form" class="space-y-4">
         <UFormField label="Description" name="Description">
-          <UInput v-model="form.Description" />
+          <UTextarea v-model="form.Description" autoresize :rows="1" class="w-full"></UTextarea>
         </UFormField>
 
         <UFormField label="Function Name" name="FuncName">
-          <UInput v-model="form.FuncName" :disabled="isEdit" />
+          <UTextarea v-model="form.FuncName" :disabled="isEdit" autoresize :rows="1" class="w-full"></UTextarea>
         </UFormField>
 
         <UFormField label="Service Name" name="ServiceName">
-          <UInput v-model="form.ServiceName" />
+          <UTextarea v-model="form.ServiceName" autoresize :rows="1" class="w-full"></UTextarea>
         </UFormField>
       </UForm>
     </template>
     <template #footer>
-      <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
-      <UButton type="submit" @click="handleSave">Confirm</UButton>
+      <div class="flex justify-end gap-2">
+        <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
+        <UButton type="submit" @click="handleSave">Confirm</UButton>
+      </div>
     </template>
   </UModal>
 </template>

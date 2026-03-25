@@ -1,23 +1,25 @@
 <template>
   <UModal v-model:open="dialogVisible" title="Set Job Spec">
     <template #body>
-      <UForm :state="form">
+      <UForm :state="form" class="space-y-4">
         <UFormField label="Service Name" name="ServiceName">
-          <UInput v-model="form.ServiceName" disabled/>
+          <UTextarea v-model="form.ServiceName" disabled autoresize :rows="1" class="w-full"></UTextarea>
         </UFormField>
 
         <UFormField label="Function Name" name="FuncName">
-          <UInput v-model="form.FuncName" disabled/>
+          <UTextarea v-model="form.FuncName" disabled autoresize :rows="1" class="w-full"></UTextarea>
         </UFormField>
 
         <UFormField label="Spec" name="Spec">
-          <UTextarea v-model="form.Spec" :rows="5"/>
+          <UTextarea v-model="form.Spec" :rows="5" autoresize class="w-full"></UTextarea>
         </UFormField>
       </UForm>
     </template>
     <template #footer>
-      <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
-      <UButton type="submit" @click="handleSave">Confirm</UButton>
+      <div class="flex justify-end gap-2">
+        <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
+        <UButton type="submit" @click="handleSave">Confirm</UButton>
+      </div>
     </template>
   </UModal>
 </template>

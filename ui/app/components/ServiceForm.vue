@@ -1,21 +1,23 @@
 <template>
   <UModal v-model:open="dialogVisible" :title="isEdit ? 'Edit Service' : 'Create Service'">
     <template #body>
-      <UForm :state="form" >
+      <UForm :state="form" class="space-y-4">
         <UFormField label="Service Name" name="ServiceName">
-          <UInput v-model="form.ServiceName" :disabled="isEdit"></UInput>
+          <UTextarea v-model="form.ServiceName" :disabled="isEdit" autoresize :rows="1" class="w-full"></UTextarea>
         </UFormField>
         <UFormField label="Target" name="Target">
-          <UInput v-model="form.Target"></UInput>
+          <UTextarea v-model="form.Target" autoresize :rows="1" class="w-full"></UTextarea>
         </UFormField>
         <UFormField label="Auth Token" name="AuthToken">
-          <UInput v-model="form.AuthToken"></UInput>
+          <UTextarea v-model="form.AuthToken" autoresize :rows="3" class="w-full"></UTextarea>
         </UFormField>
       </UForm>
     </template>
     <template #footer>
-      <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
-      <UButton type="submit" @click="submitForm">Confirm</UButton>
+      <div class="flex justify-end gap-2">
+        <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
+        <UButton type="submit" @click="submitForm">Confirm</UButton>
+      </div>
     </template>
   </UModal>
 </template>
