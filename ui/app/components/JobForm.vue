@@ -11,7 +11,7 @@
         </UFormField>
 
         <UFormField label="Service Name" name="ServiceName">
-          <UTextarea v-model="form.ServiceName" autoresize :rows="1" class="w-full"></UTextarea>
+          <USelect v-model="form.ServiceName" :items="serviceOptions" class="w-full" placeholder="Select a service"></USelect>
         </UFormField>
       </UForm>
     </template>
@@ -31,11 +31,13 @@ import { JobPut_InputSchema } from '~~/gen/kk_scheduler/JobPut_pb';
 import {type PBJob} from '~~/gen/kk_scheduler/Job_pb';
 import {create} from "@bufbuild/protobuf";
 import { PBRegisterJobSchema, type PBRegisterJob } from '~~/gen/kk_scheduler/Base_pb';
+import { ServiceList_InputSchema } from '~~/gen/kk_scheduler/ServiceList_pb';
 import { useToast } from '#imports';
 
 const dialogVisible = ref(false);
 const isEdit = ref(false);
 const toast = useToast();
+const serviceOptions = ref<{label: string, value: string}[]>([]);
 
 const form = reactive<PBRegisterJob>(create(PBRegisterJobSchema, {
   Description: '',
@@ -45,8 +47,19 @@ const form = reactive<PBRegisterJob>(create(PBRegisterJobSchema, {
 
 const emit = defineEmits(['jobUpdated']);
 
-const open = (job?: PBJob) => {
+const open = async (job?: PBJob) => {
   dialogVisible.value = true;
+
+  // Fetch service list for dropdown
+  try {
+    const response = await clientKKSchedule.serviceList(create(ServiceList_InputSchema, {}));
+    serviceOptions.value = response.ServiceList.map(service => ({
+      label: service.ServiceName,
+      value: service.ServiceName,
+    }));
+  } catch (error) {
+    toast.add({title: 'Error fetching service list', description: String(error), color: 'error'});
+  }
 
   if (job) {
     isEdit.value = true;

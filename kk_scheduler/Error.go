@@ -12,6 +12,8 @@ var ErrSpecIsEmpty = errors.New("spec is empty")
 
 var ErrServiceNameEmpty = errors.New("serviceName empty")
 
+var ErrServiceAuthTokenEmpty = errors.New("serviceAuthToken empty")
+
 var ErrFuncNameEmpty = errors.New("funcName empty")
 
 var ErrTargetEmpty = errors.New("target empty")
