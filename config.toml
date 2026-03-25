@@ -1,0 +1,8 @@
+GrpcPort = 8666
+HttpPort = 8667
+WebPort = 8668
+
+[StoreEtcd]
+UserName = "root"
+Password = "root"
+Endpoints = ["http://127.0.0.1:2379"]

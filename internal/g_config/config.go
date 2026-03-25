@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"gitee.com/cruvie/kk_go_kit/kk_env"
-	"gopkg.in/yaml.v3"
+	"github.com/BurntSushi/toml"
 )
 
 func init() {
@@ -15,26 +15,26 @@ func init() {
 var Config config
 
 type config struct {
-	HttpPort  int `yaml:"HttpPort"`
-	GrpcPort  int `yaml:"GrpcPort"`
-	WebPort   int `yaml:"WebPort"`
+	HttpPort  int
+	GrpcPort  int
+	WebPort   int
 	StoreEtcd struct {
-		UserName  string   `yaml:"UserName"`
-		Password  string   `yaml:"Password"`
-		Endpoints []string `yaml:"Endpoints"`
-	} `yaml:"StoreEtcd"`
+		UserName  string
+		Password  string
+		Endpoints []string
+	}
 }
 
 func InitConfig() {
-	data, err := os.ReadFile("config.yml")
+	data, err := os.ReadFile("config.toml")
 	if err != nil {
-		slog.Error("unable to read config.yaml", "err", err)
+		slog.Error("unable to read config.toml", "err", err)
 		panic(err)
 	}
 
-	err = yaml.Unmarshal(data, &Config)
+	_, err = toml.Decode(string(data), &Config)
 	if err != nil {
-		slog.Error("unable to unmarshal config.yaml", "err", err)
+		slog.Error("unable to decode config.toml", "err", err)
 		panic(err)
 	}
 }
