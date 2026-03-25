@@ -11,14 +11,14 @@ cd ..
 #cd server && go mod vendor
 #)
 
-#docker pull --platform linux/amd64 golang:1.25.0
-#docker pull --platform linux/arm64 golang:1.25.0
+#docker pull --platform linux/amd64 golang:1.26.0
+#docker pull --platform linux/arm64 golang:1.26.0
 #docker pull --platform linux/amd64 alpine:latest
 #docker pull --platform linux/arm64 alpine:latest
 
-export GOVERSION=1.25.0
+export GOVERSION=1.26.0
 
-export TAG=0.1.1
+export TAG=0.2.0
 
 
 # local build test
