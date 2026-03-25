@@ -1,6 +1,6 @@
 # kk-scheduler
 
-A job scheduling system based on cron and grpc
+A job scheduling system based on cron and gRPC
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cruvie/kk-scheduler)
 
@@ -56,38 +56,38 @@ visit http://localhost:8668
 
 # Usage
 
-- install
+- Install
 
 ```shell
-go get github.com/cruvie/server@latest
+go get github.com/cruvie/kk-scheduler@latest
 ```
 
-- Run a grpc server that implemented `kk_scheduler.UnimplementedKKScheduleTriggerServer`
+- Run a gRPC server that implements `kk_scheduler.UnimplementedKKScheduleTriggerServer`
   see [client_server_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/client_server_test.go)
-- Put a service and job into kk-scheduler and enable job
+- Put a service and job into kk-scheduler and enable the job
   see [readme_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/readme_test.go)
 
 # Contribute
 
-## provide more test case
+## Provide more test cases
 
-any test case PR is welcome
+Any test case PR is welcome
 
-## support move storge engine
+## Support more storage engines
 
-kk-scheduler use Etcd as default storage engine, but any storage engine
-implement [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store.go)
+kk-scheduler uses Etcd as default storage engine, but any storage engine
+that implements [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store.go)
 can be used
 
 Step1 create a `store_xxxx.go`
-like [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store_etcd.go)
+like [store_etcd.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store_etcd.go)
 
 Step2 test it
 
-Step3 add config filed
+Step3 add config field
 in [config.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/g_config/config.go)
 and [config.toml](https://github.com/cruvie/kk-scheduler/blob/main/config.toml)
 
-## improve readme doc and code comment
+## Improve readme doc and code comments
 
-## Web UI improve
+## Web UI improvements
