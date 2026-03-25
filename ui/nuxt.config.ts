@@ -17,4 +17,16 @@ export default defineNuxtConfig({
     ui: {
         fonts: false,
     },
+    vite: {
+        optimizeDeps: {
+            include: [
+                '@vue/devtools-core',
+                '@vue/devtools-kit',
+                '@bufbuild/protobuf',
+                '@bufbuild/protobuf/codegenv2',
+                '@connectrpc/connect',
+                '@connectrpc/connect-web',
+            ]
+        }
+    }
 })
