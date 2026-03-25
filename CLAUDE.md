@@ -74,16 +74,16 @@ Handlers implement `CheckInput()`, `Service()`, and `Handler()` methods. The `kk
 
 ## Configuration
 
-`config.yml` at project root:
-```yaml
-GrpcPort: 8666
-HttpPort: 8667
-WebPort: 8668
-StoreEtcd:
-  UserName: root
-  Password: root
-  Endpoints:
-    - http://127.0.0.1:2379
+`config.toml` at project root:
+```toml
+GrpcPort = 8666
+HttpPort = 8667
+WebPort = 8668
+
+[StoreEtcd]
+UserName = "root"
+Password = "root"
+Endpoints = ["http://127.0.0.1:2379"]
 ```
 
 Environment: Set `KK_Schedule` env var for environment mode (handled by `kk_go_kit`).

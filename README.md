@@ -86,7 +86,7 @@ Step2 test it
 
 Step3 add config filed
 in [config.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/g_config/config.go)
-and [config.yml](https://github.com/cruvie/kk-scheduler/blob/main/config.yml)
+and [config.toml](https://github.com/cruvie/kk-scheduler/blob/main/config.toml)
 
 ## improve readme doc and code comment
 

@@ -7,7 +7,7 @@ FROM golang:${GOVERSION} AS build
 
 ENV GOPROXY=https://goproxy.cn,direct
 
-COPY server /kk-scheduler
+COPY . /kk-scheduler
 
 WORKDIR /kk-scheduler
 

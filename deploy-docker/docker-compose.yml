@@ -6,15 +6,18 @@ services:
     restart: unless-stopped
     environment:
       KK_Schedule: "prod"
+    depends_on:
+      - test-etcd
     ports:
       - "8666:8666"
       - "8667:8667"
       - "8668:8668"
     volumes:
-      - ./config.yml:/kk-scheduler/config.yml
+      - ./config.toml:/kk-scheduler/config.toml
+      - ./logs:/kk-scheduler/logs
 
   test-etcd:
-    image: quay.io/coreos/etcd:v3.6.4
+    image: quay.io/coreos/etcd:v3.6.9
     container_name: test-etcd
     command:
       [

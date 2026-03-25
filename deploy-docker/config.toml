@@ -1,0 +1,8 @@
+GrpcPort = 8666
+HttpPort = 8667
+WebPort = 8668
+
+[StoreEtcd]
+UserName = "root"
+Password = "root"
+Endpoints = ["http://host.docker.internal:2379"]
