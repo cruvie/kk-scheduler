@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: common_pb/extend_field.proto
+// source: kk_scheduler/extend_field.proto
 
-package common_pb
+package kk_scheduler
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -59,52 +59,52 @@ func (x FieldBehavior) String() string {
 }
 
 func (FieldBehavior) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_pb_extend_field_proto_enumTypes[0].Descriptor()
+	return file_kk_scheduler_extend_field_proto_enumTypes[0].Descriptor()
 }
 
 func (FieldBehavior) Type() protoreflect.EnumType {
-	return &file_common_pb_extend_field_proto_enumTypes[0]
+	return &file_kk_scheduler_extend_field_proto_enumTypes[0]
 }
 
 func (x FieldBehavior) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-var file_common_pb_extend_field_proto_extTypes = []protoimpl.ExtensionInfo{
+var file_kk_scheduler_extend_field_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: ([]FieldBehavior)(nil),
 		Field:         60001,
 		Name:          "kk_scheduler.field_behavior",
 		Tag:           "varint,60001,rep,packed,name=field_behavior,enum=kk_scheduler.FieldBehavior",
-		Filename:      "common_pb/extend_field.proto",
+		Filename:      "kk_scheduler/extend_field.proto",
 	},
 }
 
 // Extension fields to descriptorpb.FieldOptions.
 var (
 	// repeated kk_scheduler.FieldBehavior field_behavior = 60001;
-	E_FieldBehavior = &file_common_pb_extend_field_proto_extTypes[0]
+	E_FieldBehavior = &file_kk_scheduler_extend_field_proto_extTypes[0]
 )
 
-var File_common_pb_extend_field_proto protoreflect.FileDescriptor
+var File_kk_scheduler_extend_field_proto protoreflect.FileDescriptor
 
-const file_common_pb_extend_field_proto_rawDesc = "" +
+const file_kk_scheduler_extend_field_proto_rawDesc = "" +
 	"\n" +
-	"\x1ccommon_pb/extend_field.proto\x12\fkk_scheduler\x1a google/protobuf/descriptor.proto*Z\n" +
+	"\x1fkk_scheduler/extend_field.proto\x12\fkk_scheduler\x1a google/protobuf/descriptor.proto*Z\n" +
 	"\rFieldBehavior\x12\x1e\n" +
 	"\x1aFIELD_BEHAVIOR_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bREQUIRED\x10\x01\x12\t\n" +
 	"\x05UUID7\x10\x02\x12\x10\n" +
 	"\fIPV4_OR_IPV6\x10\x03:c\n" +
-	"\x0efield_behavior\x12\x1d.google.protobuf.FieldOptions\x18\xe1\xd4\x03 \x03(\x0e2\x1b.kk_scheduler.FieldBehaviorR\rfieldBehaviorB*Z(github.com/cruvie/kk-scheduler/common_pbb\beditionsp\xe8\a"
+	"\x0efield_behavior\x12\x1d.google.protobuf.FieldOptions\x18\xe1\xd4\x03 \x03(\x0e2\x1b.kk_scheduler.FieldBehaviorR\rfieldBehaviorB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
-var file_common_pb_extend_field_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_common_pb_extend_field_proto_goTypes = []any{
+var file_kk_scheduler_extend_field_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_kk_scheduler_extend_field_proto_goTypes = []any{
 	(FieldBehavior)(0),                // 0: kk_scheduler.FieldBehavior
 	(*descriptorpb.FieldOptions)(nil), // 1: google.protobuf.FieldOptions
 }
-var file_common_pb_extend_field_proto_depIdxs = []int32{
+var file_kk_scheduler_extend_field_proto_depIdxs = []int32{
 	1, // 0: kk_scheduler.field_behavior:extendee -> google.protobuf.FieldOptions
 	0, // 1: kk_scheduler.field_behavior:type_name -> kk_scheduler.FieldBehavior
 	2, // [2:2] is the sub-list for method output_type
@@ -114,27 +114,27 @@ var file_common_pb_extend_field_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_common_pb_extend_field_proto_init() }
-func file_common_pb_extend_field_proto_init() {
-	if File_common_pb_extend_field_proto != nil {
+func init() { file_kk_scheduler_extend_field_proto_init() }
+func file_kk_scheduler_extend_field_proto_init() {
+	if File_kk_scheduler_extend_field_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_pb_extend_field_proto_rawDesc), len(file_common_pb_extend_field_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_kk_scheduler_extend_field_proto_rawDesc), len(file_kk_scheduler_extend_field_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   0,
 			NumExtensions: 1,
 			NumServices:   0,
 		},
-		GoTypes:           file_common_pb_extend_field_proto_goTypes,
-		DependencyIndexes: file_common_pb_extend_field_proto_depIdxs,
-		EnumInfos:         file_common_pb_extend_field_proto_enumTypes,
-		ExtensionInfos:    file_common_pb_extend_field_proto_extTypes,
+		GoTypes:           file_kk_scheduler_extend_field_proto_goTypes,
+		DependencyIndexes: file_kk_scheduler_extend_field_proto_depIdxs,
+		EnumInfos:         file_kk_scheduler_extend_field_proto_enumTypes,
+		ExtensionInfos:    file_kk_scheduler_extend_field_proto_extTypes,
 	}.Build()
-	File_common_pb_extend_field_proto = out.File
-	file_common_pb_extend_field_proto_goTypes = nil
-	file_common_pb_extend_field_proto_depIdxs = nil
+	File_kk_scheduler_extend_field_proto = out.File
+	file_kk_scheduler_extend_field_proto_goTypes = nil
+	file_kk_scheduler_extend_field_proto_depIdxs = nil
 }

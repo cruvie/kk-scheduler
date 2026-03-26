@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"gitee.com/cruvie/kk_go_kit/kk_jwt"
-	"github.com/cruvie/kk-scheduler/common_pb"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	middleware "github.com/grpc-ecosystem/go-grpc-middleware/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -100,7 +100,7 @@ func UnaryAuth(cfg *AuthConfig) grpc.UnaryServerInterceptor {
 			return nil, err
 		}
 		switch interceptorAuth {
-		case common_pb.InterceptorAuth_InternalOnly:
+		case kk_scheduler.InterceptorAuth_InternalOnly:
 			{
 				if cfg.InternalOnlyChecker == nil {
 					return nil, status.Error(codes.Internal, "kk_grpc InternalOnlyChecker not configured")
@@ -111,7 +111,7 @@ func UnaryAuth(cfg *AuthConfig) grpc.UnaryServerInterceptor {
 				}
 				return handler(newCtx, req)
 			}
-		case common_pb.InterceptorAuth_JWT:
+		case kk_scheduler.InterceptorAuth_JWT:
 			{
 				if cfg.JWTChecker == nil {
 					return nil, status.Error(codes.Internal, "kk_grpc JWTChecker not configured")
@@ -137,7 +137,7 @@ func StreamAuth(cfg *AuthConfig) grpc.StreamServerInterceptor {
 		}
 
 		switch interceptorAuth {
-		case common_pb.InterceptorAuth_InternalOnly:
+		case kk_scheduler.InterceptorAuth_InternalOnly:
 			{
 				if cfg.InternalOnlyChecker == nil {
 					return status.Error(codes.Internal, "kk_grpc InternalOnlyChecker not configured")
@@ -150,7 +150,7 @@ func StreamAuth(cfg *AuthConfig) grpc.StreamServerInterceptor {
 				wrapped.WrappedContext = newCtx
 				return handler(srv, wrapped)
 			}
-		case common_pb.InterceptorAuth_JWT:
+		case kk_scheduler.InterceptorAuth_JWT:
 			{
 				if cfg.JWTChecker == nil {
 					return status.Error(codes.Internal, "kk_grpc JWTChecker not configured")

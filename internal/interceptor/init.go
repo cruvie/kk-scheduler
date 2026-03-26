@@ -6,8 +6,8 @@ import (
 
 	"gitee.com/cruvie/kk_go_kit/kk_ctx"
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
-	"github.com/cruvie/kk-scheduler/common_go"
-	"github.com/cruvie/kk-scheduler/common_pb"
+	"github.com/cruvie/kk-scheduler/internal/common_go"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	middleware "github.com/grpc-ecosystem/go-grpc-middleware/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -73,10 +73,10 @@ const (
 	realIPKey          contextKey = "realIPKey"
 )
 
-func getInterceptorAuth(ctx context.Context) (common_pb.InterceptorAuth, error) {
-	interceptorAuth, ok := kk_ctx.Value[common_pb.InterceptorAuth](ctx, interceptorAuthKey)
+func getInterceptorAuth(ctx context.Context) (kk_scheduler.InterceptorAuth, error) {
+	interceptorAuth, ok := kk_ctx.Value[kk_scheduler.InterceptorAuth](ctx, interceptorAuthKey)
 	if !ok {
-		return common_pb.InterceptorAuth_UNSPECIFIED, status.Error(codes.NotFound, "kk_grpc interceptorAuth type not found")
+		return kk_scheduler.InterceptorAuth_UNSPECIFIED, status.Error(codes.NotFound, "kk_grpc interceptorAuth type not found")
 	}
 	return interceptorAuth, nil
 }

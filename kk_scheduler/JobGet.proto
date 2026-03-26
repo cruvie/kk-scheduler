@@ -6,7 +6,7 @@ option go_package = "/kk_scheduler";
 
 import "kk_scheduler/Job.proto";
 
-import "common_pb/extend_field.proto";
+import "kk_scheduler/extend_field.proto";
 
 message JobGet {
   message Input {

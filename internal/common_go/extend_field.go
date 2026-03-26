@@ -6,7 +6,7 @@ import (
 	"slices"
 
 	"gitee.com/cruvie/kk_go_kit/kk_id"
-	"github.com/cruvie/kk-scheduler/common_pb"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
@@ -24,7 +24,7 @@ func CheckFields(msg proto.Message) (err error) {
 		field := fields.Get(i)
 		behaviors := fieldBehaviors(field)
 		{
-			if slices.Contains(behaviors, common_pb.FieldBehavior_REQUIRED) {
+			if slices.Contains(behaviors, kk_scheduler.FieldBehavior_REQUIRED) {
 				// 检查字段是否设置
 				if !reflectMsg.Has(field) {
 					requiredFieldNames = append(requiredFieldNames, field.Name())
@@ -32,7 +32,7 @@ func CheckFields(msg proto.Message) (err error) {
 			}
 			if reflectMsg.Has(field) {
 				// 设置了值
-				if slices.Contains(behaviors, common_pb.FieldBehavior_UUID7) {
+				if slices.Contains(behaviors, kk_scheduler.FieldBehavior_UUID7) {
 					uuidFieldNames = checkUUID7(reflectMsg, field)
 				}
 			}
@@ -65,7 +65,7 @@ func checkUUID7(reflectMsg protoreflect.Message, field protoreflect.FieldDescrip
 	return fieldNames
 }
 
-func fieldBehaviors(field protoreflect.FieldDescriptor) []common_pb.FieldBehavior {
+func fieldBehaviors(field protoreflect.FieldDescriptor) []kk_scheduler.FieldBehavior {
 	// 获取字段选项
 	opts := field.Options()
 	if opts == nil {
@@ -73,10 +73,10 @@ func fieldBehaviors(field protoreflect.FieldDescriptor) []common_pb.FieldBehavio
 	}
 
 	// 从字段选项中获取 field_behavior 扩展
-	v := proto.GetExtension(opts, common_pb.E_FieldBehavior)
+	v := proto.GetExtension(opts, kk_scheduler.E_FieldBehavior)
 
 	// 检查是否能转换为 FieldBehavior 切片
-	if behaviors, ok := v.([]common_pb.FieldBehavior); ok {
+	if behaviors, ok := v.([]kk_scheduler.FieldBehavior); ok {
 		return behaviors
 	}
 	return nil

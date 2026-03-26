@@ -3,7 +3,7 @@ edition = "2023";
 package kk_scheduler;
 
 option go_package = "/kk_scheduler";
-import "common_pb/extend_field.proto";
+import "kk_scheduler/extend_field.proto";
 
 
 message JobEnable {

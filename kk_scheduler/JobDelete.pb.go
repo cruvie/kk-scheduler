@@ -7,7 +7,6 @@
 package kk_scheduler
 
 import (
-	_ "github.com/cruvie/kk-scheduler/common_pb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -222,7 +221,7 @@ var File_kk_scheduler_JobDelete_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_JobDelete_proto_rawDesc = "" +
 	"\n" +
-	"\x1ckk_scheduler/JobDelete.proto\x12\fkk_scheduler\x1a\x16kk_scheduler/Job.proto\x1a\x1ccommon_pb/extend_field.proto\"j\n" +
+	"\x1ckk_scheduler/JobDelete.proto\x12\fkk_scheduler\x1a\x16kk_scheduler/Job.proto\x1a\x1fkk_scheduler/extend_field.proto\"j\n" +
 	"\tJobDelete\x1aS\n" +
 	"\x05Input\x12'\n" +
 	"\vserviceName\x18\x01 \x01(\tB\x05\x8a\xa6\x1d\x01\x01R\vserviceName\x12!\n" +
@@ -249,6 +248,7 @@ func file_kk_scheduler_JobDelete_proto_init() {
 		return
 	}
 	file_kk_scheduler_Job_proto_init()
+	file_kk_scheduler_extend_field_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -1,26 +1,26 @@
 package common_go
 
 import (
-	"github.com/cruvie/kk-scheduler/common_pb"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-func MethodDescGetInterceptorAuth(method protoreflect.MethodDescriptor) common_pb.InterceptorAuth {
+func MethodDescGetInterceptorAuth(method protoreflect.MethodDescriptor) kk_scheduler.InterceptorAuth {
 	options := method.Options()
 	if options == nil {
-		return common_pb.InterceptorAuth_UNSPECIFIED
+		return kk_scheduler.InterceptorAuth_UNSPECIFIED
 	}
 
-	interceptorList := proto.GetExtension(options, common_pb.E_InterceptorAuthList)
+	interceptorList := proto.GetExtension(options, kk_scheduler.E_InterceptorAuthList)
 	if interceptorList == nil {
-		return common_pb.InterceptorAuth_UNSPECIFIED
+		return kk_scheduler.InterceptorAuth_UNSPECIFIED
 	}
 
-	if list, ok := interceptorList.([]common_pb.InterceptorAuth); ok {
+	if list, ok := interceptorList.([]kk_scheduler.InterceptorAuth); ok {
 		switch len(list) {
 		case 0:
-			return common_pb.InterceptorAuth_UNSPECIFIED
+			return kk_scheduler.InterceptorAuth_UNSPECIFIED
 		case 1:
 			return list[0]
 		}
@@ -30,7 +30,7 @@ func MethodDescGetInterceptorAuth(method protoreflect.MethodDescriptor) common_p
 		}
 	}
 
-	return common_pb.InterceptorAuth_UNSPECIFIED
+	return kk_scheduler.InterceptorAuth_UNSPECIFIED
 }
 
 func MethodDescGetApiName(method protoreflect.MethodDescriptor) string {
@@ -39,7 +39,7 @@ func MethodDescGetApiName(method protoreflect.MethodDescriptor) string {
 		return ""
 	}
 
-	serviceName := proto.GetExtension(options, common_pb.E_ApiName)
+	serviceName := proto.GetExtension(options, kk_scheduler.E_ApiName)
 	if serviceName == nil {
 		return ""
 	}

@@ -4,14 +4,14 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_common_pb_extend_field } from "../common_pb/extend_field_pb";
+import { file_kk_scheduler_extend_field } from "./extend_field_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file kk_scheduler/JobEnable.proto.
  */
 export const file_kk_scheduler_JobEnable: GenFile = /*@__PURE__*/
-  fileDesc("Chxra19zY2hlZHVsZXIvSm9iRW5hYmxlLnByb3RvEgxra19zY2hlZHVsZXIiUwoJSm9iRW5hYmxlGjwKBUlucHV0EhoKC3NlcnZpY2VOYW1lGAEgASgJQgWKph0BARIXCghmdW5jTmFtZRgCIAEoCUIFiqYdAQEaCAoGT3V0cHV0Qg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH", [file_common_pb_extend_field]);
+  fileDesc("Chxra19zY2hlZHVsZXIvSm9iRW5hYmxlLnByb3RvEgxra19zY2hlZHVsZXIiUwoJSm9iRW5hYmxlGjwKBUlucHV0EhoKC3NlcnZpY2VOYW1lGAEgASgJQgWKph0BARIXCghmdW5jTmFtZRgCIAEoCUIFiqYdAQEaCAoGT3V0cHV0Qg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH", [file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.JobEnable

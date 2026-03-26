@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: common_pb/extend_method.proto
+// source: kk_scheduler/extend_method.proto
 
-package common_pb
+package kk_scheduler
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -57,25 +57,25 @@ func (x InterceptorAuth) String() string {
 }
 
 func (InterceptorAuth) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_pb_extend_method_proto_enumTypes[0].Descriptor()
+	return file_kk_scheduler_extend_method_proto_enumTypes[0].Descriptor()
 }
 
 func (InterceptorAuth) Type() protoreflect.EnumType {
-	return &file_common_pb_extend_method_proto_enumTypes[0]
+	return &file_kk_scheduler_extend_method_proto_enumTypes[0]
 }
 
 func (x InterceptorAuth) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-var file_common_pb_extend_method_proto_extTypes = []protoimpl.ExtensionInfo{
+var file_kk_scheduler_extend_method_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: ([]InterceptorAuth)(nil),
 		Field:         60001,
 		Name:          "kk_scheduler.interceptor_auth_list",
 		Tag:           "varint,60001,rep,packed,name=interceptor_auth_list,enum=kk_scheduler.InterceptorAuth",
-		Filename:      "common_pb/extend_method.proto",
+		Filename:      "kk_scheduler/extend_method.proto",
 	},
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
@@ -83,36 +83,36 @@ var file_common_pb_extend_method_proto_extTypes = []protoimpl.ExtensionInfo{
 		Field:         60002,
 		Name:          "kk_scheduler.api_name",
 		Tag:           "bytes,60002,opt,name=api_name",
-		Filename:      "common_pb/extend_method.proto",
+		Filename:      "kk_scheduler/extend_method.proto",
 	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
 	// repeated kk_scheduler.InterceptorAuth interceptor_auth_list = 60001;
-	E_InterceptorAuthList = &file_common_pb_extend_method_proto_extTypes[0]
+	E_InterceptorAuthList = &file_kk_scheduler_extend_method_proto_extTypes[0]
 	// optional string api_name = 60002;
-	E_ApiName = &file_common_pb_extend_method_proto_extTypes[1]
+	E_ApiName = &file_kk_scheduler_extend_method_proto_extTypes[1]
 )
 
-var File_common_pb_extend_method_proto protoreflect.FileDescriptor
+var File_kk_scheduler_extend_method_proto protoreflect.FileDescriptor
 
-const file_common_pb_extend_method_proto_rawDesc = "" +
+const file_kk_scheduler_extend_method_proto_rawDesc = "" +
 	"\n" +
-	"\x1dcommon_pb/extend_method.proto\x12\fkk_scheduler\x1a google/protobuf/descriptor.proto*=\n" +
+	" kk_scheduler/extend_method.proto\x12\fkk_scheduler\x1a google/protobuf/descriptor.proto*=\n" +
 	"\x0fInterceptorAuth\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03JWT\x10\x01\x12\x10\n" +
 	"\fInternalOnly\x10\x02:s\n" +
 	"\x15interceptor_auth_list\x12\x1e.google.protobuf.MethodOptions\x18\xe1\xd4\x03 \x03(\x0e2\x1d.kk_scheduler.InterceptorAuthR\x13interceptorAuthList:;\n" +
-	"\bapi_name\x12\x1e.google.protobuf.MethodOptions\x18\xe2\xd4\x03 \x01(\tR\aapiNameB*Z(github.com/cruvie/kk-scheduler/common_pbb\beditionsp\xe8\a"
+	"\bapi_name\x12\x1e.google.protobuf.MethodOptions\x18\xe2\xd4\x03 \x01(\tR\aapiNameB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
-var file_common_pb_extend_method_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_common_pb_extend_method_proto_goTypes = []any{
+var file_kk_scheduler_extend_method_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_kk_scheduler_extend_method_proto_goTypes = []any{
 	(InterceptorAuth)(0),               // 0: kk_scheduler.InterceptorAuth
 	(*descriptorpb.MethodOptions)(nil), // 1: google.protobuf.MethodOptions
 }
-var file_common_pb_extend_method_proto_depIdxs = []int32{
+var file_kk_scheduler_extend_method_proto_depIdxs = []int32{
 	1, // 0: kk_scheduler.interceptor_auth_list:extendee -> google.protobuf.MethodOptions
 	1, // 1: kk_scheduler.api_name:extendee -> google.protobuf.MethodOptions
 	0, // 2: kk_scheduler.interceptor_auth_list:type_name -> kk_scheduler.InterceptorAuth
@@ -123,27 +123,27 @@ var file_common_pb_extend_method_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_common_pb_extend_method_proto_init() }
-func file_common_pb_extend_method_proto_init() {
-	if File_common_pb_extend_method_proto != nil {
+func init() { file_kk_scheduler_extend_method_proto_init() }
+func file_kk_scheduler_extend_method_proto_init() {
+	if File_kk_scheduler_extend_method_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_pb_extend_method_proto_rawDesc), len(file_common_pb_extend_method_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_kk_scheduler_extend_method_proto_rawDesc), len(file_kk_scheduler_extend_method_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   0,
 			NumExtensions: 2,
 			NumServices:   0,
 		},
-		GoTypes:           file_common_pb_extend_method_proto_goTypes,
-		DependencyIndexes: file_common_pb_extend_method_proto_depIdxs,
-		EnumInfos:         file_common_pb_extend_method_proto_enumTypes,
-		ExtensionInfos:    file_common_pb_extend_method_proto_extTypes,
+		GoTypes:           file_kk_scheduler_extend_method_proto_goTypes,
+		DependencyIndexes: file_kk_scheduler_extend_method_proto_depIdxs,
+		EnumInfos:         file_kk_scheduler_extend_method_proto_enumTypes,
+		ExtensionInfos:    file_kk_scheduler_extend_method_proto_extTypes,
 	}.Build()
-	File_common_pb_extend_method_proto = out.File
-	file_common_pb_extend_method_proto_goTypes = nil
-	file_common_pb_extend_method_proto_depIdxs = nil
+	File_kk_scheduler_extend_method_proto = out.File
+	file_kk_scheduler_extend_method_proto_goTypes = nil
+	file_kk_scheduler_extend_method_proto_depIdxs = nil
 }
