@@ -14,6 +14,6 @@ func RegisterServer(grpcServer *grpc.Server) {
 	kk_scheduler.RegisterKKScheduleServer(grpcServer, &server{})
 }
 
-func RegisterFileDesc() {
+func init() {
 	kk_grpc.GFileDescHub.RegisterFileDesc(kk_scheduler.File_kk_scheduler_service_proto)
 }

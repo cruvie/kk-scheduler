@@ -1,0 +1,22 @@
+edition = "2023";
+package common_pb;
+option go_package = "github.com/cruvie/kk-scheduler/common_pb";
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+
+  repeated FieldBehavior field_behavior = 60001;
+}
+
+enum FieldBehavior {
+  // https://github.com/googleapis/googleapis/blob/master/google/api/field_behavior.proto
+
+  FIELD_BEHAVIOR_UNSPECIFIED = 0;
+
+  REQUIRED = 1;
+
+  //https://github.com/googleapis/googleapis/blob/master/google/api/field_info.proto
+  UUID7 = 2;
+  //https://github.com/googleapis/googleapis/blob/master/google/api/field_info.proto
+  IPV4_OR_IPV6 = 3;
+}

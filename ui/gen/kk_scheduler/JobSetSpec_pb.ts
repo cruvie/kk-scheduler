@@ -4,14 +4,14 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_kk_go_kit_common_pb_extend_field } from "../kk_go_kit/common_pb/extend_field_pb";
+import { file_common_pb_extend_field } from "../common_pb/extend_field_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file kk_scheduler/JobSetSpec.proto.
  */
 export const file_kk_scheduler_JobSetSpec: GenFile = /*@__PURE__*/
-  fileDesc("Ch1ra19zY2hlZHVsZXIvSm9iU2V0U3BlYy5wcm90bxIMa2tfc2NoZWR1bGVyImkKCkpvYlNldFNwZWMaUQoFSW5wdXQSGgoLc2VydmljZU5hbWUYASABKAlCBYqmHQEBEhcKCGZ1bmNOYW1lGAIgASgJQgWKph0BARITCgRzcGVjGAMgASgJQgWKph0BARoICgZPdXRwdXRCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_go_kit_common_pb_extend_field]);
+  fileDesc("Ch1ra19zY2hlZHVsZXIvSm9iU2V0U3BlYy5wcm90bxIMa2tfc2NoZWR1bGVyImkKCkpvYlNldFNwZWMaUQoFSW5wdXQSGgoLc2VydmljZU5hbWUYASABKAlCBYqmHQEBEhcKCGZ1bmNOYW1lGAIgASgJQgWKph0BARITCgRzcGVjGAMgASgJQgWKph0BARoICgZPdXRwdXRCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_common_pb_extend_field]);
 
 /**
  * @generated from message kk_scheduler.JobSetSpec

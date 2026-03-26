@@ -11,7 +11,7 @@ import (
 	"github.com/cruvie/kk-scheduler/internal/schedule"
 )
 
-var configSlog kk_stage.ConfigLog
+var configSlog *kk_stage.ConfigLog
 
 func main() {
 	{
@@ -19,7 +19,7 @@ func main() {
 	}
 	stage := kk_stage.NewStage(context.Background(), "kk-scheduler").SetStartTime(kk_time.NowUTCTime())
 	{
-		configSlog = kk_stage.ConfigLog{
+		configSlog = &kk_stage.ConfigLog{
 			StartTime:  stage.StartTime,
 			Lumberjack: kk_stage.DefaultLogConfig(kk_time.NowUTCTime(), "kk-scheduler"),
 			Format:     kk_stage.FormatJSON,

@@ -7,7 +7,7 @@
 package kk_scheduler
 
 import (
-	_ "gitee.com/cruvie/kk_go_kit/lib_go/common_pb"
+	_ "github.com/cruvie/kk-scheduler/common_pb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -255,7 +255,7 @@ var File_kk_scheduler_JobSetSpec_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_JobSetSpec_proto_rawDesc = "" +
 	"\n" +
-	"\x1dkk_scheduler/JobSetSpec.proto\x12\fkk_scheduler\x1a&kk_go_kit/common_pb/extend_field.proto\"\x86\x01\n" +
+	"\x1dkk_scheduler/JobSetSpec.proto\x12\fkk_scheduler\x1a\x1ccommon_pb/extend_field.proto\"\x86\x01\n" +
 	"\n" +
 	"JobSetSpec\x1an\n" +
 	"\x05Input\x12'\n" +

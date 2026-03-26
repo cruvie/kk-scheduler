@@ -17,7 +17,7 @@ tool (
 )
 
 require (
-	gitee.com/cruvie/kk_go_kit v0.1.3-0.20260324094104-3191a743bf15
+	gitee.com/cruvie/kk_go_kit v0.1.3-0.20260326120753-b99c280e2497
 	github.com/BurntSushi/toml v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.3
 	github.com/improbable-eng/grpc-web v0.15.0
@@ -96,6 +96,7 @@ require (
 	github.com/firefart/nonamedreturns v1.0.6 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/fzipp/gocyclo v0.6.0 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.13 // indirect
 	github.com/ghostiam/protogetter v0.3.20 // indirect
 	github.com/go-critic/go-critic v0.14.3 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect

@@ -1,4 +1,4 @@
-package main
+package interceptor
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func panicRecovery(p any) (err error) {
-	kk_stage.Print2Std(fmt.Sprintf("panic: %v\n,stack: %v\n", p, string(debug.Stack())))
+func PanicRecovery(p any) (err error) {
+	kk_stage.Print2Std(fmt.Sprintf("panic: %v\nstack: %v\n", p, string(debug.Stack())), kk_stage.WithRaw())
 	return status.Errorf(codes.Internal, "%s", p)
 }

@@ -8,34 +8,32 @@ import (
 	"net/http"
 
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
-	"gitee.com/cruvie/kk_go_kit/kk_grpc/interceptor"
 	"gitee.com/cruvie/kk_go_kit/kk_server"
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
+	"github.com/cruvie/kk-scheduler/common_go"
 	"github.com/cruvie/kk-scheduler/internal/api_impl"
 	"github.com/cruvie/kk-scheduler/internal/g_config"
+	"github.com/cruvie/kk-scheduler/internal/interceptor"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/recovery"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 )
 
-func getGrpcServer() *grpc.Server {
-	api_impl.RegisterFileDesc()
-
+func getGrpcServer(stage *kk_stage.Stage) *grpc.Server {
 	grpcServer := grpc.NewServer(
 		grpc.StatsHandler(otelgrpc.NewServerHandler()),
 
 		grpc.ChainUnaryInterceptor(
 			interceptor.UnaryInit(kk_grpc.GFileDescHub),
-			unaryLogging(),
-			recovery.UnaryServerInterceptor(recovery.WithRecoveryHandler(panicRecovery)),
+			interceptor.UnaryLogging(configSlog),
+			recovery.UnaryServerInterceptor(recovery.WithRecoveryHandler(interceptor.PanicRecovery)),
 		),
 	)
 	{
-		reflection.Register(grpcServer)
+		kk_grpc.SetCheckFieldsFn(common_go.CheckFields)
+		kk_grpc.RegisterReflectionServer(stage, g_config.Config.GrpcPort, grpcServer)
 		kk_grpc.RegisterKKHealthCheckServer(grpcServer)
-
 		api_impl.RegisterServer(grpcServer)
 	}
 
@@ -47,7 +45,7 @@ func NewGrpcServer(stage *kk_stage.Stage) *kk_server.KKRunServer {
 	if err != nil {
 		panic(err)
 	}
-	grpcServer := getGrpcServer()
+	grpcServer := getGrpcServer(stage)
 
 	run := func() {
 		if err := grpcServer.Serve(listener); err != nil {
@@ -70,7 +68,7 @@ func NewHttpServer(stage *kk_stage.Stage) *kk_server.KKRunServer {
 	if err != nil {
 		panic(err)
 	}
-	grpcServer := getGrpcServer()
+	grpcServer := getGrpcServer(stage)
 	grpcWebServer := grpcweb.WrapServer(grpcServer)
 	httpServer := &http.Server{
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

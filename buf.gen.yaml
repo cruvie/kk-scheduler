@@ -6,7 +6,7 @@ inputs:
   - directory: ./
     paths:
       - kk_scheduler
-      - vendor/gitee.com/cruvie/kk_go_kit/kk_protobuf/extend_method
+      - common_pb
 plugins:
   - remote: buf.build/protocolbuffers/go
     out: .

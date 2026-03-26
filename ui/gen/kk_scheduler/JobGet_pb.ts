@@ -6,14 +6,14 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { PBJob } from "./Job_pb";
 import { file_kk_scheduler_Job } from "./Job_pb";
-import { file_kk_go_kit_common_pb_extend_field } from "../kk_go_kit/common_pb/extend_field_pb";
+import { file_common_pb_extend_field } from "../common_pb/extend_field_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file kk_scheduler/JobGet.proto.
  */
 export const file_kk_scheduler_JobGet: GenFile = /*@__PURE__*/
-  fileDesc("Chlra19zY2hlZHVsZXIvSm9iR2V0LnByb3RvEgxra19zY2hlZHVsZXIicgoGSm9iR2V0GjwKBUlucHV0EhoKC3NlcnZpY2VOYW1lGAEgASgJQgWKph0BARIXCghmdW5jTmFtZRgCIAEoCUIFiqYdAQEaKgoGT3V0cHV0EiAKA0pvYhgBIAEoCzITLmtrX3NjaGVkdWxlci5QQkpvYkIPWg0va2tfc2NoZWR1bGVyYghlZGl0aW9uc3DoBw", [file_kk_scheduler_Job, file_kk_go_kit_common_pb_extend_field]);
+  fileDesc("Chlra19zY2hlZHVsZXIvSm9iR2V0LnByb3RvEgxra19zY2hlZHVsZXIicgoGSm9iR2V0GjwKBUlucHV0EhoKC3NlcnZpY2VOYW1lGAEgASgJQgWKph0BARIXCghmdW5jTmFtZRgCIAEoCUIFiqYdAQEaKgoGT3V0cHV0EiAKA0pvYhgBIAEoCzITLmtrX3NjaGVkdWxlci5QQkpvYkIPWg0va2tfc2NoZWR1bGVyYghlZGl0aW9uc3DoBw", [file_kk_scheduler_Job, file_common_pb_extend_field]);
 
 /**
  * @generated from message kk_scheduler.JobGet

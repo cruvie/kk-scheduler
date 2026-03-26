@@ -6,7 +6,7 @@ option go_package = "/kk_scheduler";
 
 import "kk_scheduler/Job.proto";
 
-import "kk_go_kit/common_pb/extend_field.proto";
+import "common_pb/extend_field.proto";
 
 message JobDelete {
   message Input {
