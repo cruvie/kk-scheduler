@@ -11,7 +11,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file kk_scheduler/JobSetSpec.proto.
  */
 export const file_kk_scheduler_JobSetSpec: GenFile = /*@__PURE__*/
-  fileDesc("Ch1ra19zY2hlZHVsZXIvSm9iU2V0U3BlYy5wcm90bxIMa2tfc2NoZWR1bGVyImkKCkpvYlNldFNwZWMaUQoFSW5wdXQSGgoLc2VydmljZU5hbWUYASABKAlCBYqmHQEBEhcKCGZ1bmNOYW1lGAIgASgJQgWKph0BARITCgRzcGVjGAMgASgJQgWKph0BARoICgZPdXRwdXRCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
+  fileDesc("Ch1ra19zY2hlZHVsZXIvSm9iU2V0U3BlYy5wcm90bxIMa2tfc2NoZWR1bGVyImYKCkpvYlNldFNwZWMaTgoFSW5wdXQSGQoLc2VydmljZU5hbWUYASABKAlCBMo+AQESFgoIZnVuY05hbWUYAiABKAlCBMo+AQESEgoEc3BlYxgDIAEoCUIEyj4BARoICgZPdXRwdXRCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.JobSetSpec

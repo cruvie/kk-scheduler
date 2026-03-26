@@ -246,11 +246,11 @@ var File_kk_scheduler_JobGet_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_JobGet_proto_rawDesc = "" +
 	"\n" +
-	"\x19kk_scheduler/JobGet.proto\x12\fkk_scheduler\x1a\x16kk_scheduler/Job.proto\x1a\x1fkk_scheduler/extend_field.proto\"\x8e\x01\n" +
-	"\x06JobGet\x1aS\n" +
-	"\x05Input\x12'\n" +
-	"\vserviceName\x18\x01 \x01(\tB\x05\x8a\xa6\x1d\x01\x01R\vserviceName\x12!\n" +
-	"\bfuncName\x18\x02 \x01(\tB\x05\x8a\xa6\x1d\x01\x01R\bfuncName\x1a/\n" +
+	"\x19kk_scheduler/JobGet.proto\x12\fkk_scheduler\x1a\x16kk_scheduler/Job.proto\x1a\x1fkk_scheduler/extend_field.proto\"\x8c\x01\n" +
+	"\x06JobGet\x1aQ\n" +
+	"\x05Input\x12&\n" +
+	"\vserviceName\x18\x01 \x01(\tB\x04\xca>\x01\x01R\vserviceName\x12 \n" +
+	"\bfuncName\x18\x02 \x01(\tB\x04\xca>\x01\x01R\bfuncName\x1a/\n" +
 	"\x06Output\x12%\n" +
 	"\x03Job\x18\x01 \x01(\v2\x13.kk_scheduler.PBJobR\x03JobB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 

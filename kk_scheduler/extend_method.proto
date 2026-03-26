@@ -4,9 +4,9 @@ option go_package = "/kk_scheduler";
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.MethodOptions {
-  repeated  InterceptorAuth interceptor_auth_list = 60001;
+  repeated  InterceptorAuth interceptor_auth_list = 1001;
 
-  string api_name = 60002;
+  string api_name = 1002;
 }
 
 // 认证拦截器 最多只能配置一个

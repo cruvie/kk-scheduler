@@ -11,7 +11,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file kk_scheduler/JobEnable.proto.
  */
 export const file_kk_scheduler_JobEnable: GenFile = /*@__PURE__*/
-  fileDesc("Chxra19zY2hlZHVsZXIvSm9iRW5hYmxlLnByb3RvEgxra19zY2hlZHVsZXIiUwoJSm9iRW5hYmxlGjwKBUlucHV0EhoKC3NlcnZpY2VOYW1lGAEgASgJQgWKph0BARIXCghmdW5jTmFtZRgCIAEoCUIFiqYdAQEaCAoGT3V0cHV0Qg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH", [file_kk_scheduler_extend_field]);
+  fileDesc("Chxra19zY2hlZHVsZXIvSm9iRW5hYmxlLnByb3RvEgxra19zY2hlZHVsZXIiUQoJSm9iRW5hYmxlGjoKBUlucHV0EhkKC3NlcnZpY2VOYW1lGAEgASgJQgTKPgEBEhYKCGZ1bmNOYW1lGAIgASgJQgTKPgEBGggKBk91dHB1dEIPWg0va2tfc2NoZWR1bGVyYghlZGl0aW9uc3DoBw", [file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.JobEnable

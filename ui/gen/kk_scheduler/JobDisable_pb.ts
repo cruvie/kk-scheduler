@@ -11,7 +11,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file kk_scheduler/JobDisable.proto.
  */
 export const file_kk_scheduler_JobDisable: GenFile = /*@__PURE__*/
-  fileDesc("Ch1ra19zY2hlZHVsZXIvSm9iRGlzYWJsZS5wcm90bxIMa2tfc2NoZWR1bGVyIlQKCkpvYkRpc2FibGUaPAoFSW5wdXQSGgoLc2VydmljZU5hbWUYASABKAlCBYqmHQEBEhcKCGZ1bmNOYW1lGAIgASgJQgWKph0BARoICgZPdXRwdXRCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
+  fileDesc("Ch1ra19zY2hlZHVsZXIvSm9iRGlzYWJsZS5wcm90bxIMa2tfc2NoZWR1bGVyIlIKCkpvYkRpc2FibGUaOgoFSW5wdXQSGQoLc2VydmljZU5hbWUYASABKAlCBMo+AQESFgoIZnVuY05hbWUYAiABKAlCBMo+AQEaCAoGT3V0cHV0Qg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH", [file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.JobDisable

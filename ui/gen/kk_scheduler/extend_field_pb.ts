@@ -11,7 +11,7 @@ import { file_google_protobuf_descriptor } from "../google/protobuf/descriptor_p
  * Describes the file kk_scheduler/extend_field.proto.
  */
 export const file_kk_scheduler_extend_field: GenFile = /*@__PURE__*/
-  fileDesc("Ch9ra19zY2hlZHVsZXIvZXh0ZW5kX2ZpZWxkLnByb3RvEgxra19zY2hlZHVsZXIqWgoNRmllbGRCZWhhdmlvchIeChpGSUVMRF9CRUhBVklPUl9VTlNQRUNJRklFRBAAEgwKCFJFUVVJUkVEEAESCQoFVVVJRDcQAhIQCgxJUFY0X09SX0lQVjYQAzpjCg5maWVsZF9iZWhhdmlvchIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMY4dQDIAMoDjIbLmtrX3NjaGVkdWxlci5GaWVsZEJlaGF2aW9yUg1maWVsZEJlaGF2aW9yQg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH", [file_google_protobuf_descriptor]);
+  fileDesc("Ch9ra19zY2hlZHVsZXIvZXh0ZW5kX2ZpZWxkLnByb3RvEgxra19zY2hlZHVsZXIqWgoNRmllbGRCZWhhdmlvchIeChpGSUVMRF9CRUhBVklPUl9VTlNQRUNJRklFRBAAEgwKCFJFUVVJUkVEEAESCQoFVVVJRDcQAhIQCgxJUFY0X09SX0lQVjYQAzpiCg5maWVsZF9iZWhhdmlvchIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMY6QcgAygOMhsua2tfc2NoZWR1bGVyLkZpZWxkQmVoYXZpb3JSDWZpZWxkQmVoYXZpb3JCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_google_protobuf_descriptor]);
 
 /**
  * https://github.com/googleapis/googleapis/blob/master/google/api/field_behavior.proto
@@ -51,7 +51,7 @@ export const FieldBehaviorSchema: GenEnum<FieldBehavior> = /*@__PURE__*/
   enumDesc(file_kk_scheduler_extend_field, 0);
 
 /**
- * @generated from extension: repeated kk_scheduler.FieldBehavior field_behavior = 60001;
+ * @generated from extension: repeated kk_scheduler.FieldBehavior field_behavior = 1001;
  */
 export const field_behavior: GenExtension<FieldOptions, FieldBehavior[]> = /*@__PURE__*/
   extDesc(file_kk_scheduler_extend_field, 0);

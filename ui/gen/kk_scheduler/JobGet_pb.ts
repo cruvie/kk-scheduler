@@ -13,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file kk_scheduler/JobGet.proto.
  */
 export const file_kk_scheduler_JobGet: GenFile = /*@__PURE__*/
-  fileDesc("Chlra19zY2hlZHVsZXIvSm9iR2V0LnByb3RvEgxra19zY2hlZHVsZXIicgoGSm9iR2V0GjwKBUlucHV0EhoKC3NlcnZpY2VOYW1lGAEgASgJQgWKph0BARIXCghmdW5jTmFtZRgCIAEoCUIFiqYdAQEaKgoGT3V0cHV0EiAKA0pvYhgBIAEoCzITLmtrX3NjaGVkdWxlci5QQkpvYkIPWg0va2tfc2NoZWR1bGVyYghlZGl0aW9uc3DoBw", [file_kk_scheduler_Job, file_kk_scheduler_extend_field]);
+  fileDesc("Chlra19zY2hlZHVsZXIvSm9iR2V0LnByb3RvEgxra19zY2hlZHVsZXIicAoGSm9iR2V0GjoKBUlucHV0EhkKC3NlcnZpY2VOYW1lGAEgASgJQgTKPgEBEhYKCGZ1bmNOYW1lGAIgASgJQgTKPgEBGioKBk91dHB1dBIgCgNKb2IYASABKAsyEy5ra19zY2hlZHVsZXIuUEJKb2JCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_Job, file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.JobGet

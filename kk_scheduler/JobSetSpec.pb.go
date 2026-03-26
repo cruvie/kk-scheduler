@@ -254,13 +254,13 @@ var File_kk_scheduler_JobSetSpec_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_JobSetSpec_proto_rawDesc = "" +
 	"\n" +
-	"\x1dkk_scheduler/JobSetSpec.proto\x12\fkk_scheduler\x1a\x1fkk_scheduler/extend_field.proto\"\x86\x01\n" +
+	"\x1dkk_scheduler/JobSetSpec.proto\x12\fkk_scheduler\x1a\x1fkk_scheduler/extend_field.proto\"\x83\x01\n" +
 	"\n" +
-	"JobSetSpec\x1an\n" +
-	"\x05Input\x12'\n" +
-	"\vserviceName\x18\x01 \x01(\tB\x05\x8a\xa6\x1d\x01\x01R\vserviceName\x12!\n" +
-	"\bfuncName\x18\x02 \x01(\tB\x05\x8a\xa6\x1d\x01\x01R\bfuncName\x12\x19\n" +
-	"\x04spec\x18\x03 \x01(\tB\x05\x8a\xa6\x1d\x01\x01R\x04spec\x1a\b\n" +
+	"JobSetSpec\x1ak\n" +
+	"\x05Input\x12&\n" +
+	"\vserviceName\x18\x01 \x01(\tB\x04\xca>\x01\x01R\vserviceName\x12 \n" +
+	"\bfuncName\x18\x02 \x01(\tB\x04\xca>\x01\x01R\bfuncName\x12\x18\n" +
+	"\x04spec\x18\x03 \x01(\tB\x04\xca>\x01\x01R\x04spec\x1a\b\n" +
 	"\x06OutputB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
 var file_kk_scheduler_JobSetSpec_proto_msgTypes = make([]protoimpl.MessageInfo, 3)

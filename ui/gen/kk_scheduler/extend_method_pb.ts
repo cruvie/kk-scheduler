@@ -11,7 +11,7 @@ import { file_google_protobuf_descriptor } from "../google/protobuf/descriptor_p
  * Describes the file kk_scheduler/extend_method.proto.
  */
 export const file_kk_scheduler_extend_method: GenFile = /*@__PURE__*/
-  fileDesc("CiBra19zY2hlZHVsZXIvZXh0ZW5kX21ldGhvZC5wcm90bxIMa2tfc2NoZWR1bGVyKj0KD0ludGVyY2VwdG9yQXV0aBIPCgtVTlNQRUNJRklFRBAAEgcKA0pXVBABEhAKDEludGVybmFsT25seRACOnMKFWludGVyY2VwdG9yX2F1dGhfbGlzdBIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGOHUAyADKA4yHS5ra19zY2hlZHVsZXIuSW50ZXJjZXB0b3JBdXRoUhNpbnRlcmNlcHRvckF1dGhMaXN0OjsKCGFwaV9uYW1lEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMY4tQDIAEoCVIHYXBpTmFtZUIPWg0va2tfc2NoZWR1bGVyYghlZGl0aW9uc3DoBw", [file_google_protobuf_descriptor]);
+  fileDesc("CiBra19zY2hlZHVsZXIvZXh0ZW5kX21ldGhvZC5wcm90bxIMa2tfc2NoZWR1bGVyKj0KD0ludGVyY2VwdG9yQXV0aBIPCgtVTlNQRUNJRklFRBAAEgcKA0pXVBABEhAKDEludGVybmFsT25seRACOnIKFWludGVyY2VwdG9yX2F1dGhfbGlzdBIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGOkHIAMoDjIdLmtrX3NjaGVkdWxlci5JbnRlcmNlcHRvckF1dGhSE2ludGVyY2VwdG9yQXV0aExpc3Q6OgoIYXBpX25hbWUSHi5nb29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucxjqByABKAlSB2FwaU5hbWVCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_google_protobuf_descriptor]);
 
 /**
  * 认证拦截器 最多只能配置一个
@@ -46,13 +46,13 @@ export const InterceptorAuthSchema: GenEnum<InterceptorAuth> = /*@__PURE__*/
   enumDesc(file_kk_scheduler_extend_method, 0);
 
 /**
- * @generated from extension: repeated kk_scheduler.InterceptorAuth interceptor_auth_list = 60001;
+ * @generated from extension: repeated kk_scheduler.InterceptorAuth interceptor_auth_list = 1001;
  */
 export const interceptor_auth_list: GenExtension<MethodOptions, InterceptorAuth[]> = /*@__PURE__*/
   extDesc(file_kk_scheduler_extend_method, 0);
 
 /**
- * @generated from extension: string api_name = 60002;
+ * @generated from extension: string api_name = 1002;
  */
 export const api_name: GenExtension<MethodOptions, string> = /*@__PURE__*/
   extDesc(file_kk_scheduler_extend_method, 1);

@@ -72,26 +72,26 @@ var file_kk_scheduler_extend_method_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: ([]InterceptorAuth)(nil),
-		Field:         60001,
+		Field:         1001,
 		Name:          "kk_scheduler.interceptor_auth_list",
-		Tag:           "varint,60001,rep,packed,name=interceptor_auth_list,enum=kk_scheduler.InterceptorAuth",
+		Tag:           "varint,1001,rep,packed,name=interceptor_auth_list,enum=kk_scheduler.InterceptorAuth",
 		Filename:      "kk_scheduler/extend_method.proto",
 	},
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: (*string)(nil),
-		Field:         60002,
+		Field:         1002,
 		Name:          "kk_scheduler.api_name",
-		Tag:           "bytes,60002,opt,name=api_name",
+		Tag:           "bytes,1002,opt,name=api_name",
 		Filename:      "kk_scheduler/extend_method.proto",
 	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
-	// repeated kk_scheduler.InterceptorAuth interceptor_auth_list = 60001;
+	// repeated kk_scheduler.InterceptorAuth interceptor_auth_list = 1001;
 	E_InterceptorAuthList = &file_kk_scheduler_extend_method_proto_extTypes[0]
-	// optional string api_name = 60002;
+	// optional string api_name = 1002;
 	E_ApiName = &file_kk_scheduler_extend_method_proto_extTypes[1]
 )
 
@@ -103,9 +103,9 @@ const file_kk_scheduler_extend_method_proto_rawDesc = "" +
 	"\x0fInterceptorAuth\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03JWT\x10\x01\x12\x10\n" +
-	"\fInternalOnly\x10\x02:s\n" +
-	"\x15interceptor_auth_list\x12\x1e.google.protobuf.MethodOptions\x18\xe1\xd4\x03 \x03(\x0e2\x1d.kk_scheduler.InterceptorAuthR\x13interceptorAuthList:;\n" +
-	"\bapi_name\x12\x1e.google.protobuf.MethodOptions\x18\xe2\xd4\x03 \x01(\tR\aapiNameB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
+	"\fInternalOnly\x10\x02:r\n" +
+	"\x15interceptor_auth_list\x12\x1e.google.protobuf.MethodOptions\x18\xe9\a \x03(\x0e2\x1d.kk_scheduler.InterceptorAuthR\x13interceptorAuthList::\n" +
+	"\bapi_name\x12\x1e.google.protobuf.MethodOptions\x18\xea\a \x01(\tR\aapiNameB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
 var file_kk_scheduler_extend_method_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_kk_scheduler_extend_method_proto_goTypes = []any{

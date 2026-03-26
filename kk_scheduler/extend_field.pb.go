@@ -74,16 +74,16 @@ var file_kk_scheduler_extend_field_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: ([]FieldBehavior)(nil),
-		Field:         60001,
+		Field:         1001,
 		Name:          "kk_scheduler.field_behavior",
-		Tag:           "varint,60001,rep,packed,name=field_behavior,enum=kk_scheduler.FieldBehavior",
+		Tag:           "varint,1001,rep,packed,name=field_behavior,enum=kk_scheduler.FieldBehavior",
 		Filename:      "kk_scheduler/extend_field.proto",
 	},
 }
 
 // Extension fields to descriptorpb.FieldOptions.
 var (
-	// repeated kk_scheduler.FieldBehavior field_behavior = 60001;
+	// repeated kk_scheduler.FieldBehavior field_behavior = 1001;
 	E_FieldBehavior = &file_kk_scheduler_extend_field_proto_extTypes[0]
 )
 
@@ -96,8 +96,8 @@ const file_kk_scheduler_extend_field_proto_rawDesc = "" +
 	"\x1aFIELD_BEHAVIOR_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bREQUIRED\x10\x01\x12\t\n" +
 	"\x05UUID7\x10\x02\x12\x10\n" +
-	"\fIPV4_OR_IPV6\x10\x03:c\n" +
-	"\x0efield_behavior\x12\x1d.google.protobuf.FieldOptions\x18\xe1\xd4\x03 \x03(\x0e2\x1b.kk_scheduler.FieldBehaviorR\rfieldBehaviorB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
+	"\fIPV4_OR_IPV6\x10\x03:b\n" +
+	"\x0efield_behavior\x12\x1d.google.protobuf.FieldOptions\x18\xe9\a \x03(\x0e2\x1b.kk_scheduler.FieldBehaviorR\rfieldBehaviorB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
 var file_kk_scheduler_extend_field_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_kk_scheduler_extend_field_proto_goTypes = []any{

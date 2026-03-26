@@ -5,7 +5,7 @@ import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.FieldOptions {
 
-  repeated FieldBehavior field_behavior = 60001;
+  repeated FieldBehavior field_behavior = 1001;
 }
 
 enum FieldBehavior {
