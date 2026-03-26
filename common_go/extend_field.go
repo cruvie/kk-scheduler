@@ -6,7 +6,6 @@ import (
 	"slices"
 
 	"gitee.com/cruvie/kk_go_kit/kk_id"
-	"gitee.com/cruvie/kk_go_kit/kk_net"
 	"github.com/cruvie/kk-scheduler/common_pb"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
@@ -36,9 +35,6 @@ func CheckFields(msg proto.Message) (err error) {
 				if slices.Contains(behaviors, common_pb.FieldBehavior_UUID7) {
 					uuidFieldNames = checkUUID7(reflectMsg, field)
 				}
-				if slices.Contains(behaviors, common_pb.FieldBehavior_IPV4_OR_IPV6) {
-					ipFieldNames = checkIPV4ORIPV6(reflectMsg, field)
-				}
 			}
 		}
 	}
@@ -63,23 +59,6 @@ func checkUUID7(reflectMsg protoreflect.Message, field protoreflect.FieldDescrip
 		}
 	} else {
 		if !(kk_id.ValidateUUID7(reflectMsg.Get(field).String())) {
-			fieldNames = append(fieldNames, field.Name())
-		}
-	}
-	return fieldNames
-}
-
-func checkIPV4ORIPV6(reflectMsg protoreflect.Message, field protoreflect.FieldDescriptor) (fieldNames []protoreflect.Name) {
-	if field.IsList() {
-		for index := range reflectMsg.Get(field).List().Len() {
-			_, _, err := kk_net.DetectIPVersion(reflectMsg.Get(field).List().Get(index).String())
-			if err != nil {
-				fieldNames = append(fieldNames, field.Name())
-			}
-		}
-	} else {
-		_, _, err := kk_net.DetectIPVersion(reflectMsg.Get(field).String())
-		if err != nil {
 			fieldNames = append(fieldNames, field.Name())
 		}
 	}
