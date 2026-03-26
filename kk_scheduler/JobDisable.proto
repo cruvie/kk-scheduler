@@ -8,8 +8,8 @@ import "common_pb/extend_field.proto";
 
 message JobDisable {
   message Input {
-    string serviceName = 1[(common_pb.field_behavior) = REQUIRED];
-    string funcName = 2[(common_pb.field_behavior) = REQUIRED];
+    string serviceName = 1[(field_behavior) = REQUIRED];
+    string funcName = 2[(field_behavior) = REQUIRED];
   }
 
   message Output {

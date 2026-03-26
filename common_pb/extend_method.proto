@@ -1,5 +1,5 @@
 edition = "2023";
-package common_pb;
+package kk_scheduler;
 option go_package = "github.com/cruvie/kk-scheduler/common_pb";
 import "google/protobuf/descriptor.proto";
 

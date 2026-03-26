@@ -6,9 +6,9 @@ option go_package = "/kk_scheduler";
 import "common_pb/extend_field.proto";
 message JobSetSpec {
   message Input {
-    string serviceName = 1[(common_pb.field_behavior) = REQUIRED];
-    string funcName = 2[(common_pb.field_behavior) = REQUIRED];
-    string spec = 3[(common_pb.field_behavior) = REQUIRED];
+    string serviceName = 1[(field_behavior) = REQUIRED];
+    string funcName = 2[(field_behavior) = REQUIRED];
+    string spec = 3[(field_behavior) = REQUIRED];
   }
 
   message Output {

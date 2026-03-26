@@ -73,15 +73,15 @@ var file_common_pb_extend_method_proto_extTypes = []protoimpl.ExtensionInfo{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: ([]InterceptorAuth)(nil),
 		Field:         60001,
-		Name:          "common_pb.interceptor_auth_list",
-		Tag:           "varint,60001,rep,packed,name=interceptor_auth_list,enum=common_pb.InterceptorAuth",
+		Name:          "kk_scheduler.interceptor_auth_list",
+		Tag:           "varint,60001,rep,packed,name=interceptor_auth_list,enum=kk_scheduler.InterceptorAuth",
 		Filename:      "common_pb/extend_method.proto",
 	},
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: (*string)(nil),
 		Field:         60002,
-		Name:          "common_pb.api_name",
+		Name:          "kk_scheduler.api_name",
 		Tag:           "bytes,60002,opt,name=api_name",
 		Filename:      "common_pb/extend_method.proto",
 	},
@@ -89,7 +89,7 @@ var file_common_pb_extend_method_proto_extTypes = []protoimpl.ExtensionInfo{
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
-	// repeated common_pb.InterceptorAuth interceptor_auth_list = 60001;
+	// repeated kk_scheduler.InterceptorAuth interceptor_auth_list = 60001;
 	E_InterceptorAuthList = &file_common_pb_extend_method_proto_extTypes[0]
 	// optional string api_name = 60002;
 	E_ApiName = &file_common_pb_extend_method_proto_extTypes[1]
@@ -99,23 +99,23 @@ var File_common_pb_extend_method_proto protoreflect.FileDescriptor
 
 const file_common_pb_extend_method_proto_rawDesc = "" +
 	"\n" +
-	"\x1dcommon_pb/extend_method.proto\x12\tcommon_pb\x1a google/protobuf/descriptor.proto*=\n" +
+	"\x1dcommon_pb/extend_method.proto\x12\fkk_scheduler\x1a google/protobuf/descriptor.proto*=\n" +
 	"\x0fInterceptorAuth\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03JWT\x10\x01\x12\x10\n" +
-	"\fInternalOnly\x10\x02:p\n" +
-	"\x15interceptor_auth_list\x12\x1e.google.protobuf.MethodOptions\x18\xe1\xd4\x03 \x03(\x0e2\x1a.common_pb.InterceptorAuthR\x13interceptorAuthList:;\n" +
+	"\fInternalOnly\x10\x02:s\n" +
+	"\x15interceptor_auth_list\x12\x1e.google.protobuf.MethodOptions\x18\xe1\xd4\x03 \x03(\x0e2\x1d.kk_scheduler.InterceptorAuthR\x13interceptorAuthList:;\n" +
 	"\bapi_name\x12\x1e.google.protobuf.MethodOptions\x18\xe2\xd4\x03 \x01(\tR\aapiNameB*Z(github.com/cruvie/kk-scheduler/common_pbb\beditionsp\xe8\a"
 
 var file_common_pb_extend_method_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_common_pb_extend_method_proto_goTypes = []any{
-	(InterceptorAuth)(0),               // 0: common_pb.InterceptorAuth
+	(InterceptorAuth)(0),               // 0: kk_scheduler.InterceptorAuth
 	(*descriptorpb.MethodOptions)(nil), // 1: google.protobuf.MethodOptions
 }
 var file_common_pb_extend_method_proto_depIdxs = []int32{
-	1, // 0: common_pb.interceptor_auth_list:extendee -> google.protobuf.MethodOptions
-	1, // 1: common_pb.api_name:extendee -> google.protobuf.MethodOptions
-	0, // 2: common_pb.interceptor_auth_list:type_name -> common_pb.InterceptorAuth
+	1, // 0: kk_scheduler.interceptor_auth_list:extendee -> google.protobuf.MethodOptions
+	1, // 1: kk_scheduler.api_name:extendee -> google.protobuf.MethodOptions
+	0, // 2: kk_scheduler.interceptor_auth_list:type_name -> kk_scheduler.InterceptorAuth
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	2, // [2:3] is the sub-list for extension type_name
