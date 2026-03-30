@@ -20,10 +20,13 @@ func init() {
 var Config config
 
 type config struct {
-	HttpPort   int
-	GrpcPort   int
-	WebPort    int
-	StorePG    *kk_pg.ConfigPG
+	HttpPort int
+	GrpcPort int
+	WebPort  int
+	Store    struct {
+		Choose string
+		PG     *kk_pg.ConfigPG
+	}
 	configSlog *kk_stage.ConfigLog `toml:"-"`
 }
 
@@ -50,13 +53,25 @@ func InitConfig() *kk_stage.Stage {
 		Config.configSlog.Init()
 	}
 	{
-		Config.StorePG.Init(stage)
-		query.SetDefault(kk_pg.GormClient)
+		switch Config.Store.Choose {
+		case "PG":
+			Config.Store.PG.Init(stage)
+			query.SetDefault(kk_pg.GormClient)
+		default:
+			panic("store choose error")
+		}
 	}
 	return stage
 }
 
 func CloseConfig() {
-	Config.StorePG.Close()
+	{
+		switch Config.Store.Choose {
+		case "PG":
+			Config.Store.PG.Close()
+		default:
+			panic("store choose error")
+		}
+	}
 	Config.configSlog.Close()
 }

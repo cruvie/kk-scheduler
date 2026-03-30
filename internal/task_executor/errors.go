@@ -12,8 +12,6 @@ var (
 	ErrTaskTimeout = errors.New("task timeout")
 	// ErrStepPanic indicates a step panicked
 	ErrStepPanic = errors.New("step panic")
-	// ErrStoreConnection indicates storage connection failure
-	ErrStoreConnection = errors.New("store connection failure")
 )
 
 // PanicError wraps panic information

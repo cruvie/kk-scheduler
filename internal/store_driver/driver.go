@@ -1,6 +1,7 @@
 package store_driver
 
 import (
+	"github.com/cruvie/kk-scheduler/internal/g_config"
 	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
@@ -22,4 +23,13 @@ type StoreDriver interface {
 	TaskUpdateStatus(taskName string, status models.TaskExecutionStatus) error
 	// TaskAppendLog append log to the execution record
 	TaskAppendLog(taskName string, log string) error
+}
+
+func NewStoreDriver() StoreDriver {
+	switch g_config.Config.Store.Choose {
+	case "PG":
+		return NewPostgresStore()
+	default:
+		panic("store choose error")
+	}
 }
