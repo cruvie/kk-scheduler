@@ -16,10 +16,9 @@ import "kk_scheduler/ServiceGet.proto";
 import "kk_scheduler/ServiceDelete.proto";
 import "kk_scheduler/JobDelete.proto";
 import "kk_scheduler/JobTrigger.proto";
+import "kk_scheduler/TaskExecution.proto";
 
 service KKSchedule {
-  // use GClient
-
   rpc JobList(JobList.Input) returns (JobList.Output);
   rpc JobGet(JobGet.Input) returns (JobGet.Output);
   rpc JobSetSpec(JobSetSpec.Input) returns (JobSetSpec.Output);
@@ -29,10 +28,12 @@ service KKSchedule {
   rpc JobDelete(JobDelete.Input) returns (JobDelete.Output);
   rpc JobTrigger(JobTrigger.Input) returns (JobTrigger.Output);
 
-  // use GClient.Storer
-
   rpc ServiceList(ServiceList.Input) returns (ServiceList.Output);
   rpc ServicePut(ServicePut.Input) returns (ServicePut.Output);
   rpc ServiceGet(ServiceGet.Input) returns (ServiceGet.Output);
   rpc ServiceDelete(ServiceDelete.Input) returns (ServiceDelete.Output);
+
+  rpc TaskCreate(TaskCreate.Input) returns (TaskCreate.Output);
+  rpc TaskUpdateStatus(TaskUpdateStatus.Input) returns (TaskUpdateStatus.Output);
+  rpc TaskAppendLog(TaskAppendLog.Input) returns (TaskAppendLog.Output);
 }

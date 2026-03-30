@@ -6,6 +6,7 @@ import (
 	"gitee.com/cruvie/kk_go_kit/kk_grpc"
 	"github.com/cruvie/kk-scheduler/internal/api_handlers/job"
 	"github.com/cruvie/kk-scheduler/internal/api_handlers/service"
+	"github.com/cruvie/kk-scheduler/internal/api_handlers/task_execution"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
@@ -102,5 +103,29 @@ func (x *server) ServiceDelete(ctx context.Context, input *kk_scheduler.ServiceD
 		ctx,
 		input,
 		service.NewApiServiceDelete,
+	)
+}
+
+func (x *server) TaskCreate(ctx context.Context, input *kk_scheduler.TaskCreate_Input) (*kk_scheduler.TaskCreate_Output, error) {
+	return kk_grpc.GrpcHandler(
+		ctx,
+		input,
+		task_execution.NewApiTaskCreate,
+	)
+}
+
+func (x *server) TaskUpdateStatus(ctx context.Context, input *kk_scheduler.TaskUpdateStatus_Input) (*kk_scheduler.TaskUpdateStatus_Output, error) {
+	return kk_grpc.GrpcHandler(
+		ctx,
+		input,
+		task_execution.NewApiTaskUpdateStatus,
+	)
+}
+
+func (x *server) TaskAppendLog(ctx context.Context, input *kk_scheduler.TaskAppendLog_Input) (*kk_scheduler.TaskAppendLog_Output, error) {
+	return kk_grpc.GrpcHandler(
+		ctx,
+		input,
+		task_execution.NewApiTaskAppendLog,
 	)
 }

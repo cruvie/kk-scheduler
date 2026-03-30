@@ -19,18 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	KKSchedule_JobList_FullMethodName       = "/kk_scheduler.KKSchedule/JobList"
-	KKSchedule_JobGet_FullMethodName        = "/kk_scheduler.KKSchedule/JobGet"
-	KKSchedule_JobSetSpec_FullMethodName    = "/kk_scheduler.KKSchedule/JobSetSpec"
-	KKSchedule_JobEnable_FullMethodName     = "/kk_scheduler.KKSchedule/JobEnable"
-	KKSchedule_JobDisable_FullMethodName    = "/kk_scheduler.KKSchedule/JobDisable"
-	KKSchedule_JobPut_FullMethodName        = "/kk_scheduler.KKSchedule/JobPut"
-	KKSchedule_JobDelete_FullMethodName     = "/kk_scheduler.KKSchedule/JobDelete"
-	KKSchedule_JobTrigger_FullMethodName    = "/kk_scheduler.KKSchedule/JobTrigger"
-	KKSchedule_ServiceList_FullMethodName   = "/kk_scheduler.KKSchedule/ServiceList"
-	KKSchedule_ServicePut_FullMethodName    = "/kk_scheduler.KKSchedule/ServicePut"
-	KKSchedule_ServiceGet_FullMethodName    = "/kk_scheduler.KKSchedule/ServiceGet"
-	KKSchedule_ServiceDelete_FullMethodName = "/kk_scheduler.KKSchedule/ServiceDelete"
+	KKSchedule_JobList_FullMethodName          = "/kk_scheduler.KKSchedule/JobList"
+	KKSchedule_JobGet_FullMethodName           = "/kk_scheduler.KKSchedule/JobGet"
+	KKSchedule_JobSetSpec_FullMethodName       = "/kk_scheduler.KKSchedule/JobSetSpec"
+	KKSchedule_JobEnable_FullMethodName        = "/kk_scheduler.KKSchedule/JobEnable"
+	KKSchedule_JobDisable_FullMethodName       = "/kk_scheduler.KKSchedule/JobDisable"
+	KKSchedule_JobPut_FullMethodName           = "/kk_scheduler.KKSchedule/JobPut"
+	KKSchedule_JobDelete_FullMethodName        = "/kk_scheduler.KKSchedule/JobDelete"
+	KKSchedule_JobTrigger_FullMethodName       = "/kk_scheduler.KKSchedule/JobTrigger"
+	KKSchedule_ServiceList_FullMethodName      = "/kk_scheduler.KKSchedule/ServiceList"
+	KKSchedule_ServicePut_FullMethodName       = "/kk_scheduler.KKSchedule/ServicePut"
+	KKSchedule_ServiceGet_FullMethodName       = "/kk_scheduler.KKSchedule/ServiceGet"
+	KKSchedule_ServiceDelete_FullMethodName    = "/kk_scheduler.KKSchedule/ServiceDelete"
+	KKSchedule_TaskCreate_FullMethodName       = "/kk_scheduler.KKSchedule/TaskCreate"
+	KKSchedule_TaskUpdateStatus_FullMethodName = "/kk_scheduler.KKSchedule/TaskUpdateStatus"
+	KKSchedule_TaskAppendLog_FullMethodName    = "/kk_scheduler.KKSchedule/TaskAppendLog"
 )
 
 // KKScheduleClient is the client API for KKSchedule service.
@@ -49,6 +52,9 @@ type KKScheduleClient interface {
 	ServicePut(ctx context.Context, in *ServicePut_Input, opts ...grpc.CallOption) (*ServicePut_Output, error)
 	ServiceGet(ctx context.Context, in *ServiceGet_Input, opts ...grpc.CallOption) (*ServiceGet_Output, error)
 	ServiceDelete(ctx context.Context, in *ServiceDelete_Input, opts ...grpc.CallOption) (*ServiceDelete_Output, error)
+	TaskCreate(ctx context.Context, in *TaskCreate_Input, opts ...grpc.CallOption) (*TaskCreate_Output, error)
+	TaskUpdateStatus(ctx context.Context, in *TaskUpdateStatus_Input, opts ...grpc.CallOption) (*TaskUpdateStatus_Output, error)
+	TaskAppendLog(ctx context.Context, in *TaskAppendLog_Input, opts ...grpc.CallOption) (*TaskAppendLog_Output, error)
 }
 
 type kKScheduleClient struct {
@@ -179,6 +185,36 @@ func (c *kKScheduleClient) ServiceDelete(ctx context.Context, in *ServiceDelete_
 	return out, nil
 }
 
+func (c *kKScheduleClient) TaskCreate(ctx context.Context, in *TaskCreate_Input, opts ...grpc.CallOption) (*TaskCreate_Output, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TaskCreate_Output)
+	err := c.cc.Invoke(ctx, KKSchedule_TaskCreate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kKScheduleClient) TaskUpdateStatus(ctx context.Context, in *TaskUpdateStatus_Input, opts ...grpc.CallOption) (*TaskUpdateStatus_Output, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TaskUpdateStatus_Output)
+	err := c.cc.Invoke(ctx, KKSchedule_TaskUpdateStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kKScheduleClient) TaskAppendLog(ctx context.Context, in *TaskAppendLog_Input, opts ...grpc.CallOption) (*TaskAppendLog_Output, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TaskAppendLog_Output)
+	err := c.cc.Invoke(ctx, KKSchedule_TaskAppendLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // KKScheduleServer is the server API for KKSchedule service.
 // All implementations must embed UnimplementedKKScheduleServer
 // for forward compatibility.
@@ -195,6 +231,9 @@ type KKScheduleServer interface {
 	ServicePut(context.Context, *ServicePut_Input) (*ServicePut_Output, error)
 	ServiceGet(context.Context, *ServiceGet_Input) (*ServiceGet_Output, error)
 	ServiceDelete(context.Context, *ServiceDelete_Input) (*ServiceDelete_Output, error)
+	TaskCreate(context.Context, *TaskCreate_Input) (*TaskCreate_Output, error)
+	TaskUpdateStatus(context.Context, *TaskUpdateStatus_Input) (*TaskUpdateStatus_Output, error)
+	TaskAppendLog(context.Context, *TaskAppendLog_Input) (*TaskAppendLog_Output, error)
 	mustEmbedUnimplementedKKScheduleServer()
 }
 
@@ -240,6 +279,15 @@ func (UnimplementedKKScheduleServer) ServiceGet(context.Context, *ServiceGet_Inp
 }
 func (UnimplementedKKScheduleServer) ServiceDelete(context.Context, *ServiceDelete_Input) (*ServiceDelete_Output, error) {
 	return nil, status.Error(codes.Unimplemented, "method ServiceDelete not implemented")
+}
+func (UnimplementedKKScheduleServer) TaskCreate(context.Context, *TaskCreate_Input) (*TaskCreate_Output, error) {
+	return nil, status.Error(codes.Unimplemented, "method TaskCreate not implemented")
+}
+func (UnimplementedKKScheduleServer) TaskUpdateStatus(context.Context, *TaskUpdateStatus_Input) (*TaskUpdateStatus_Output, error) {
+	return nil, status.Error(codes.Unimplemented, "method TaskUpdateStatus not implemented")
+}
+func (UnimplementedKKScheduleServer) TaskAppendLog(context.Context, *TaskAppendLog_Input) (*TaskAppendLog_Output, error) {
+	return nil, status.Error(codes.Unimplemented, "method TaskAppendLog not implemented")
 }
 func (UnimplementedKKScheduleServer) mustEmbedUnimplementedKKScheduleServer() {}
 func (UnimplementedKKScheduleServer) testEmbeddedByValue()                    {}
@@ -478,6 +526,60 @@ func _KKSchedule_ServiceDelete_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _KKSchedule_TaskCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TaskCreate_Input)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KKScheduleServer).TaskCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KKSchedule_TaskCreate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KKScheduleServer).TaskCreate(ctx, req.(*TaskCreate_Input))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KKSchedule_TaskUpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TaskUpdateStatus_Input)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KKScheduleServer).TaskUpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KKSchedule_TaskUpdateStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KKScheduleServer).TaskUpdateStatus(ctx, req.(*TaskUpdateStatus_Input))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KKSchedule_TaskAppendLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TaskAppendLog_Input)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KKScheduleServer).TaskAppendLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KKSchedule_TaskAppendLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KKScheduleServer).TaskAppendLog(ctx, req.(*TaskAppendLog_Input))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // KKSchedule_ServiceDesc is the grpc.ServiceDesc for KKSchedule service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -532,6 +634,18 @@ var KKSchedule_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ServiceDelete",
 			Handler:    _KKSchedule_ServiceDelete_Handler,
+		},
+		{
+			MethodName: "TaskCreate",
+			Handler:    _KKSchedule_TaskCreate_Handler,
+		},
+		{
+			MethodName: "TaskUpdateStatus",
+			Handler:    _KKSchedule_TaskUpdateStatus_Handler,
+		},
+		{
+			MethodName: "TaskAppendLog",
+			Handler:    _KKSchedule_TaskAppendLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

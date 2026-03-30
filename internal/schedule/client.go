@@ -5,6 +5,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/internal/store_driver"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"github.com/robfig/cron/v3"
@@ -261,4 +262,19 @@ func (x *Client) ServiceDelete(serviceName string) error {
 		return kk_scheduler.ErrServiceHasJob
 	}
 	return x.storer.ServiceDelete(serviceName)
+}
+
+// TaskCreate creates a new task execution record
+func (x *Client) TaskCreate(taskName string, status models.TaskExecutionStatus) error {
+	return x.storer.TaskCreate(taskName, status)
+}
+
+// TaskUpdateStatus updates the task execution status
+func (x *Client) TaskUpdateStatus(taskName string, status models.TaskExecutionStatus) error {
+	return x.storer.TaskUpdateStatus(taskName, status)
+}
+
+// TaskAppendLog appends log to the task execution record
+func (x *Client) TaskAppendLog(taskName string, log string) error {
+	return x.storer.TaskAppendLog(taskName, log)
 }

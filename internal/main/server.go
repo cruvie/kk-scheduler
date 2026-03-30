@@ -35,7 +35,6 @@ func getGrpcServer(stage *kk_stage.Stage) *grpc.Server {
 		kk_grpc.RegisterReflectionServer(stage, g_config.Config.GrpcPort, grpcServer)
 		kk_grpc.RegisterKKHealthCheckServer(grpcServer)
 		api_impl.RegisterServer(grpcServer)
-		api_impl.RegisterTaskExecutionServer(grpcServer)
 	}
 
 	return grpcServer

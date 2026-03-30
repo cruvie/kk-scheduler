@@ -15,10 +15,6 @@ just fmt
 
 # Run linter
 just lint
-
-# Run tests
-just test
-
 # Generate protobuf code (requires buf)
 just proto-gen
 
