@@ -19,7 +19,7 @@ func TestNewTaskStep(t *testing.T) {
 }
 
 func TestAddStep(t *testing.T) {
-	task := NewTaskStep("test", nil, WithStore(NewMockStore()))
+	task := NewTaskStep("test", nil, WithStore(store_driver.NewMockStore()))
 
 	task.AddStep("step1", func(ctl *StepCtl) {})
 	task.AddStep("step2", func(ctl *StepCtl) {})
@@ -32,18 +32,20 @@ func TestAddStep(t *testing.T) {
 }
 
 func TestStepCtlAddLog(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("test", nil, WithStore(mockStore))
-	task.id = "test-1"
+
+	// Create a record first (simulating what Run() does)
+	mockStore.TaskCreate("test", models.TaskExecutionStatusRunning)
 
 	ctl := &StepCtl{
-		addLog: func(msg string) { mockStore.AppendLog(task.id, msg) },
+		addLog: func(msg string) { mockStore.TaskAppendLog(task.name, msg) },
 		stop:   func() {},
 	}
 
 	ctl.AddLog("test message")
 
-	logs := mockStore.GetLogs("test-1")
+	logs := mockStore.GetLogs("test")
 	assert.Len(t, logs, 1)
 	assert.Contains(t, logs[0], "test message")
 }
@@ -68,7 +70,7 @@ func TestStepCtlNilFunctions(t *testing.T) {
 }
 
 func TestRunBasic(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("basic-test", nil, WithStore(mockStore))
 
 	task.AddStep("step1", func(ctl *StepCtl) {
@@ -83,27 +85,27 @@ func TestRunBasic(t *testing.T) {
 
 	// Check execution record
 	assert.Equal(t, 1, mockStore.CreatedCount)
-	record := mockStore.GetRecord("test-1")
+	record := mockStore.GetRecord("basic-test")
 	assert.Equal(t, models.TaskExecutionStatusCompleted, record.Status)
 
 	// Check logs
-	logs := mockStore.GetLogs("test-1")
+	logs := mockStore.GetLogs("basic-test")
 	assert.Len(t, logs, 2)
 }
 
 func TestRunEmptySteps(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("empty-test", nil, WithStore(mockStore))
 
 	err := task.Run()
 	assert.NoError(t, err)
 
-	record := mockStore.GetRecord("test-1")
+	record := mockStore.GetRecord("empty-test")
 	assert.Equal(t, models.TaskExecutionStatusCompleted, record.Status)
 }
 
 func TestRunWithTimeout(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("timeout-test", nil,
 		WithStore(mockStore),
 		WithTimeout(50*time.Millisecond),
@@ -130,7 +132,7 @@ func TestRunWithTimeout(t *testing.T) {
 }
 
 func TestRunPanicRecovery(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("panic-test", nil, WithStore(mockStore))
 
 	task.AddStep("panic-step", func(ctl *StepCtl) {
@@ -142,15 +144,15 @@ func TestRunPanicRecovery(t *testing.T) {
 	// Panic recovery returns no error from Run(), but status is failed
 	assert.NoError(t, err)
 
-	record := mockStore.GetRecord("test-1")
+	record := mockStore.GetRecord("panic-test")
 	assert.Equal(t, models.TaskExecutionStatusFailed, record.Status)
 
-	logs := mockStore.GetLogs("test-1")
+	logs := mockStore.GetLogs("panic-test")
 	assert.True(t, len(logs) >= 1)
 }
 
 func TestRunManualStop(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("stop-test", nil, WithStore(mockStore))
 
 	task.AddStep("step1", func(ctl *StepCtl) {
@@ -165,10 +167,10 @@ func TestRunManualStop(t *testing.T) {
 	err := task.Run()
 	assert.ErrorIs(t, err, ErrTaskCancelled)
 
-	record := mockStore.GetRecord("test-1")
+	record := mockStore.GetRecord("stop-test")
 	assert.Equal(t, models.TaskExecutionStatusCancelled, record.Status)
 
-	logs := mockStore.GetLogs("test-1")
+	logs := mockStore.GetLogs("stop-test")
 	assert.Len(t, logs, 1) // Only step1 log
 }
 
@@ -189,14 +191,14 @@ func TestWithTimeoutOption(t *testing.T) {
 }
 
 func TestWithStoreOption(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("test", nil, WithStore(mockStore))
 
 	assert.Equal(t, mockStore, task.store)
 }
 
 func TestMultipleStepsWithLogs(t *testing.T) {
-	mockStore := NewMockStore()
+	mockStore := store_driver.NewMockStore()
 	task := NewTaskStep("multi-log-test", nil, WithStore(mockStore))
 
 	task.AddStep("initialize", func(ctl *StepCtl) {
@@ -215,7 +217,7 @@ func TestMultipleStepsWithLogs(t *testing.T) {
 	err := task.Run()
 	assert.NoError(t, err)
 
-	logs := mockStore.GetLogs("test-1")
+	logs := mockStore.GetLogs("multi-log-test")
 	assert.Len(t, logs, 4)
 
 	// Check log format contains step info

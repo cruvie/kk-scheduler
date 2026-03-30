@@ -5,7 +5,6 @@ import (
 
 	"github.com/cruvie/kk-scheduler/internal/store_driver"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
-	"gorm.io/gorm"
 )
 
 // TaskOption configures TaskExecutor
@@ -33,12 +32,5 @@ type GRPCClientBuilder func() (kk_scheduler.KKScheduleTriggerClient, error)
 func WithGRPCClient(builder GRPCClientBuilder) TaskOption {
 	return func(t *TaskExecutor) {
 		t.grpcClientBuilder = builder
-	}
-}
-
-// WithDB sets the database connection for default PostgresStore
-func WithDB(db *gorm.DB) TaskOption {
-	return func(t *TaskExecutor) {
-		t.store = store_driver.NewPostgresStore(db)
 	}
 }

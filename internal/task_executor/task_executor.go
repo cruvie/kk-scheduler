@@ -9,7 +9,6 @@ import (
 
 	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/internal/store_driver"
-	"gorm.io/gorm"
 )
 
 // Step represents a single execution step
@@ -25,11 +24,10 @@ type TaskExecutor struct {
 	steps             []*Step
 	timeout           time.Duration
 	grpcClientBuilder GRPCClientBuilder
-	store             StoreDriver
+	store             store_driver.StoreDriver
 	mu                sync.Mutex
 
 	// runtime state
-	id           string
 	ctx          context.Context
 	cancelSignal context.CancelFunc
 	status       models.TaskExecutionStatus
@@ -38,18 +36,13 @@ type TaskExecutor struct {
 }
 
 // NewTaskStep creates a new task executor
-func NewTaskStep(name string, db *gorm.DB, opts ...TaskOption) *TaskExecutor {
+func NewTaskStep(name string, opts ...TaskOption) *TaskExecutor {
 	t := &TaskExecutor{
 		name:   name,
 		status: models.TaskExecutionStatusRunning,
+		store:  store_driver.NewStoreDriver(),
 	}
 
-	// Set default store if db is provided
-	if db != nil {
-		t.store = store_driver.NewPostgresStore(db)
-	}
-
-	// Apply options
 	for _, opt := range opts {
 		opt(t)
 	}
@@ -70,17 +63,10 @@ func (t *TaskExecutor) AddStep(name string, handler func(ctl *StepCtl)) {
 func (t *TaskExecutor) Run() error {
 	t.startTime = time.Now()
 
-	// Ensure store is set
-	if t.store == nil {
-		return fmt.Errorf("store not configured, use WithStore or provide db to NewTaskStep")
-	}
-
 	// Create execution record
-	id, err := t.store.Create(t.name, models.TaskExecutionStatusRunning, t.startTime.Format(time.RFC3339Nano))
-	if err != nil {
+	if err := t.store.TaskCreate(t.name, models.TaskExecutionStatusRunning); err != nil {
 		return fmt.Errorf("failed to create execution record: %w", err)
 	}
-	t.id = id
 
 	// Setup timeout context
 	if t.timeout > 0 {
@@ -93,7 +79,7 @@ func (t *TaskExecutor) Run() error {
 	ctl := &StepCtl{
 		addLog: func(message string) {
 			formatted := fmt.Sprintf("[步骤%d: %s] %s\n", 0, "", message)
-			t.store.AppendLog(t.id, formatted)
+			t.store.TaskAppendLog(t.name, formatted)
 		},
 		stop: func() {
 			t.mu.Lock()
@@ -114,13 +100,19 @@ func (t *TaskExecutor) Run() error {
 		// Update ctl for this step
 		ctl.addLog = func(message string) {
 			formatted := fmt.Sprintf("[步骤%d: %s] %s\n", step.index, step.name, message)
-			t.store.AppendLog(t.id, formatted)
+			t.store.TaskAppendLog(t.name, formatted)
 		}
 
 		// Execute step with panic recovery
 		if err := t.executeStep(step, ctl); err != nil {
 			t.finish(models.TaskExecutionStatusFailed)
 			return err
+		}
+
+		// Check if status was changed by panic recovery
+		if t.status == models.TaskExecutionStatusFailed {
+			t.finish(models.TaskExecutionStatusFailed)
+			return nil
 		}
 	}
 
@@ -177,7 +169,7 @@ func (t *TaskExecutor) executeStep(step *Step, ctl *StepCtl) error {
 		if r := recover(); r != nil {
 			slog.Error("step panicked", "step", step.name, "panic", r)
 			ctl.addLog(fmt.Sprintf("PANIC: %v", r))
-			t.finish(models.TaskExecutionStatusFailed)
+			t.status = models.TaskExecutionStatusFailed
 		}
 	}()
 
@@ -188,8 +180,7 @@ func (t *TaskExecutor) executeStep(step *Step, ctl *StepCtl) error {
 // finish updates the final status and timestamp
 func (t *TaskExecutor) finish(status models.TaskExecutionStatus) {
 	t.status = status
-	finishedAt := time.Now().Format(time.RFC3339Nano)
-	t.store.UpdateStatus(t.id, status, finishedAt)
+	t.store.TaskUpdateStatus(t.name, status)
 }
 
 // statusToError converts status to appropriate error type
