@@ -47,6 +47,3 @@ cache-clean:
 
 proto-gen:
     buf generate
-
-test:
-	go test ./...
