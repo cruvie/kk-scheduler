@@ -5,12 +5,13 @@ import (
 	"log/slog"
 
 	"gitee.com/cruvie/kk_go_kit/kk_server"
+	"github.com/cruvie/kk-scheduler/internal/store_driver"
 	"github.com/robfig/cron/v3"
 )
 
 type Config struct {
-	Opts        []cron.Option `json:"-" yaml:"-"`
-	StoreDriver StoreDriver   `json:"-" yaml:"-"`
+	Opts        []cron.Option            `json:"-" yaml:"-"`
+	StoreDriver store_driver.StoreDriver `json:"-" yaml:"-"`
 }
 
 func (x *Config) check() {
@@ -22,7 +23,7 @@ func (x *Config) check() {
 func NewScheduleServer() *kk_server.KKRunServer {
 	run := func() {
 		cfg := &Config{
-			StoreDriver: NewStoreEtcd(),
+			StoreDriver: store_driver.NewMockStore(),
 		}
 		logger := kKScheduleLog{}
 

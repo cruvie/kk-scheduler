@@ -5,6 +5,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/cruvie/kk-scheduler/internal/store_driver"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"github.com/robfig/cron/v3"
 	"github.com/samber/lo"
@@ -15,7 +16,7 @@ var GClient *Client
 
 type Client struct {
 	cron   *cron.Cron
-	storer StoreDriver
+	storer store_driver.StoreDriver
 }
 
 func InitGClient(cfg *Config) {
