@@ -1,100 +1,231 @@
 package store_driver
 
 import (
+	"errors"
 	"log/slog"
-	"sync"
 	"time"
 
 	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/internal/models/query"
+	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 // PostgresStore implements StoreDriver using PostgreSQL
 type PostgresStore struct {
-	db *gorm.DB
-	q  *query.Query
-	mu sync.Mutex
-	// buffer for logs when connection fails
-	logBuffer map[string][]string
+	q *query.Query
 }
 
 // NewPostgresStore creates a new PostgreSQL store
 func NewPostgresStore(db *gorm.DB) *PostgresStore {
 	q := query.Use(db)
 	return &PostgresStore{
-		db:        db,
-		q:         q,
-		logBuffer: make(map[string][]string),
+		q: q,
 	}
 }
 
-// Create creates a new task execution record
-func (s *PostgresStore) Create(taskName string, status models.TaskExecutionStatus, startedAt string) (id string, err error) {
-	id = uuid.New().String()
+// TaskCreate creates a new task execution record
+func (s *PostgresStore) TaskCreate(taskName string, status models.TaskExecutionStatus) error {
 	execution := &models.TaskExecution{
-		Id:        id,
 		TaskName:  taskName,
 		Status:    status,
-		StartedAt: parseTime(startedAt),
+		StartedAt: time.Now(),
 		Log:       "",
 	}
 
-	if err = s.q.TaskExecution.Create(execution); err != nil {
+	if err := s.q.TaskExecution.Create(execution); err != nil {
 		slog.Error("failed to create task execution", "err", err)
-		return "", ErrStoreConnection
+		return err
 	}
-	return id, nil
+	return nil
 }
 
-// UpdateStatus updates status and finished_at
-func (s *PostgresStore) UpdateStatus(id string, status models.TaskExecutionStatus, finishedAt string) error {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
+// TaskUpdateStatus updates status
+func (s *PostgresStore) TaskUpdateStatus(taskName string, status models.TaskExecutionStatus) error {
 	_, err := s.q.TaskExecution.
-		Where(s.q.TaskExecution.Id.Eq(id)).
+		Where(s.q.TaskExecution.TaskName.Eq(taskName)).
 		Update(s.q.TaskExecution.Status, status)
 	if err != nil {
 		return err
 	}
 
 	_, err = s.q.TaskExecution.
-		Where(s.q.TaskExecution.Id.Eq(id)).
-		Update(s.q.TaskExecution.FinishedAt, parseTime(finishedAt))
+		Where(s.q.TaskExecution.TaskName.Eq(taskName)).
+		Update(s.q.TaskExecution.FinishedAt, time.Now())
 	return err
 }
 
-// AppendLog appends log message to the execution record
-func (s *PostgresStore) AppendLog(id string, message string) error {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	// Try direct append
-	err := s.db.Exec(
-		"UPDATE task_executions SET log = log || ? WHERE id = ?",
-		message, id,
-	).Error
-
-	if err != nil {
-		// Buffer the log for retry
-		s.logBuffer[id] = append(s.logBuffer[id], message)
-		slog.Warn("log write failed, buffering", "id", id, "err", err)
-		return nil // Don't fail the task for log issues
-	}
-
-	// Flush any buffered logs
-	if buffered := s.logBuffer[id]; len(buffered) > 0 {
-		for _, msg := range buffered {
-			s.db.Exec("UPDATE task_executions SET log = log || ? WHERE id = ?", msg, id)
+// TaskAppendLog appends log to the execution record
+func (s *PostgresStore) TaskAppendLog(taskName string, log string) error {
+	err := s.q.Transaction(func(tx *query.Query) error {
+		execution, err := tx.TaskExecution.
+			Where(tx.TaskExecution.TaskName.Eq(taskName)).
+			First()
+		if err != nil {
+			slog.Error("failed to find task execution for log append", "err", err, "taskName", taskName)
+			return err
 		}
-		delete(s.logBuffer, id)
+
+		execution.Log += log
+		_, err = tx.TaskExecution.
+			Where(tx.TaskExecution.TaskName.Eq(taskName)).
+			Update(tx.TaskExecution.Log, execution.Log)
+		if err != nil {
+			slog.Error("failed to append log", "err", err, "taskName", taskName)
+			return err
+		}
+		return nil
+	})
+
+	return err
+}
+
+// JobList returns all jobs for a service
+func (s *PostgresStore) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
+	jobs, err := s.q.Job.
+		Where(s.q.Job.ServiceName.Eq(serviceName)).
+		Find()
+	if err != nil {
+		slog.Error("failed to list jobs", "err", err, "serviceName", serviceName)
+		return nil, err
+	}
+	result := make([]*kk_scheduler.PBJob, len(jobs))
+	for i, job := range jobs {
+		result[i] = job.ToPB()
+	}
+	return result, nil
+}
+
+// JobGet returns a specific job
+func (s *PostgresStore) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, error) {
+	job, err := s.q.Job.
+		Where(s.q.Job.ServiceName.Eq(serviceName)).
+		Where(s.q.Job.FuncName.Eq(funcName)).
+		First()
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		slog.Error("failed to get job", "err", err, "serviceName", serviceName, "funcName", funcName)
+		return nil, err
+	}
+	return job.ToPB(), nil
+}
+
+// JobDelete deletes a job
+func (s *PostgresStore) JobDelete(serviceName, funcName string) error {
+	_, err := s.q.Job.
+		Where(s.q.Job.ServiceName.Eq(serviceName)).
+		Where(s.q.Job.FuncName.Eq(funcName)).
+		Delete()
+	if err != nil {
+		slog.Error("failed to delete job", "err", err, "serviceName", serviceName, "funcName", funcName)
+		return err
 	}
 	return nil
 }
 
-func parseTime(s string) time.Time {
-	t, _ := time.Parse(time.RFC3339Nano, s)
-	return t
+// JobPut creates or updates a job (upsert)
+func (s *PostgresStore) JobPut(entry *kk_scheduler.PBJob) error {
+	// Check if job exists
+	existing, err := s.q.Job.
+		Where(s.q.Job.ServiceName.Eq(entry.GetServiceName())).
+		Where(s.q.Job.FuncName.Eq(entry.GetFuncName())).
+		First()
+
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		// Create new job
+		job := &models.Job{}
+		job.FromPB(entry)
+		job.Id = uuid.New().String()
+		if err = s.q.Job.Create(job); err != nil {
+			slog.Error("failed to create job", "err", err)
+			return err
+		}
+		return nil
+	}
+
+	if err != nil {
+		slog.Error("failed to check existing job", "err", err)
+		return err
+	}
+
+	// Update existing job
+	existing.FromPB(entry)
+	if err = s.q.Job.Save(existing); err != nil {
+		slog.Error("failed to update job", "err", err)
+		return err
+	}
+	return nil
+}
+
+// ServiceList returns all registered services
+func (s *PostgresStore) ServiceList() ([]*kk_scheduler.PBRegisterService, error) {
+	services, err := s.q.Service.Find()
+	if err != nil {
+		slog.Error("failed to list services", "err", err)
+		return nil, err
+	}
+	result := make([]*kk_scheduler.PBRegisterService, len(services))
+	for i, svc := range services {
+		result[i] = svc.ToPB()
+	}
+	return result, nil
+}
+
+// ServiceGet returns a specific service
+func (s *PostgresStore) ServiceGet(serviceName string) (*kk_scheduler.PBRegisterService, error) {
+	service, err := s.q.Service.
+		Where(s.q.Service.ServiceName.Eq(serviceName)).
+		First()
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		slog.Error("failed to get service", "err", err, "serviceName", serviceName)
+		return nil, err
+	}
+	return service.ToPB(), nil
+}
+
+// ServicePut creates or updates a service
+func (s *PostgresStore) ServicePut(service *kk_scheduler.PBRegisterService) error {
+	existing, err := s.q.Service.
+		Where(s.q.Service.ServiceName.Eq(service.GetServiceName())).
+		First()
+
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		svc := &models.Service{}
+		svc.FromPB(service)
+		if err = s.q.Service.Create(svc); err != nil {
+			slog.Error("failed to create service", "err", err)
+			return err
+		}
+		return nil
+	}
+
+	if err != nil {
+		slog.Error("failed to check existing service", "err", err)
+		return err
+	}
+
+	existing.FromPB(service)
+	if err = s.q.Service.Save(existing); err != nil {
+		slog.Error("failed to update service", "err", err)
+		return err
+	}
+	return nil
+}
+
+// ServiceDelete deletes a service
+func (s *PostgresStore) ServiceDelete(serviceName string) error {
+	_, err := s.q.Service.
+		Where(s.q.Service.ServiceName.Eq(serviceName)).
+		Delete()
+	if err != nil {
+		slog.Error("failed to delete service", "err", err, "serviceName", serviceName)
+		return err
+	}
+	return nil
 }

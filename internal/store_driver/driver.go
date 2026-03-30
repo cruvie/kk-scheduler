@@ -16,10 +16,10 @@ type StoreDriver interface {
 	ServiceGet(serviceName string) (*kk_scheduler.PBRegisterService, error)
 	ServiceDelete(serviceName string) error
 
-	// Create creates a new task execution record and returns the ID
-	Create(taskName string, status models.TaskExecutionStatus, startedAt string) (id string, err error)
-	// UpdateStatus updates the status and finished_at time
-	UpdateStatus(id string, status models.TaskExecutionStatus, finishedAt string) error
-	// AppendLog appends log message to the execution record
-	AppendLog(id string, message string) error
+	// TaskCreate creates a new task execution record
+	TaskCreate(taskName string, status models.TaskExecutionStatus) error
+	// TaskUpdateStatus updates the status
+	TaskUpdateStatus(taskName string, status models.TaskExecutionStatus) error
+	// TaskAppendLog append log to the execution record
+	TaskAppendLog(taskName string, log string) error
 }
