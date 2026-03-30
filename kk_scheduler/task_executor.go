@@ -64,20 +64,24 @@ func (t *TaskExecutor) Run() error {
 		}
 	}
 
+	// Create shared StepCtl for all steps
+	var ctl *StepCtl
+	ctl = &StepCtl{
+		addLog: func(message string) {
+			formatted := fmt.Sprintf("[步骤%d: %s] %s", ctl.stepIndex, ctl.stepName, message)
+			logInput := &TaskAppendLog_Input{}
+			logInput.SetId(t.id)
+			logInput.SetLog(formatted)
+			_, err := t.client.TaskAppendLog(ctx, logInput)
+			if err != nil {
+				slog.Warn("failed to append log", "err", err)
+			}
+		},
+	}
+
 	// Execute steps
-	for _, step := range t.steps {
-		ctl := &StepCtl{
-			addLog: func(message string) {
-				formatted := fmt.Sprintf("[步骤%d: %s] %s", step.index, step.name, message)
-				logInput := &TaskAppendLog_Input{}
-				logInput.SetId(t.id)
-				logInput.SetLog(formatted)
-				_, err := t.client.TaskAppendLog(ctx, logInput)
-				if err != nil {
-					slog.Warn("failed to append log", "err", err)
-				}
-			},
-		}
+	for i, step := range t.steps {
+		ctl.addLog(fmt.Sprintf("[Starting step %s]", step.name))
 
 		// Execute step with panic recovery
 		if err := t.executeStep(step, ctl); err != nil {
@@ -101,7 +105,7 @@ func (t *TaskExecutor) executeStep(step *Step, ctl *StepCtl) error {
 	defer func() {
 		if r := recover(); r != nil {
 			slog.Error("step panicked", "step", step.name, "panic", r)
-			ctl.AddLog(fmt.Sprintf("PANIC: %v", r))
+			ctl.Log(fmt.Sprintf("PANIC: %v", r))
 			t.status = TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED
 		}
 	}()

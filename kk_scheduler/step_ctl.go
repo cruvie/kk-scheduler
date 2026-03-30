@@ -5,9 +5,7 @@ type StepCtl struct {
 	addLog func(message string)
 }
 
-// AddLog adds a log message to the execution record
-func (c *StepCtl) AddLog(message string) {
-	if c.addLog != nil {
-		c.addLog(message)
-	}
+// Log adds a log message to the execution record
+func (c *StepCtl) Log(message string) {
+	c.addLog(message)
 }
