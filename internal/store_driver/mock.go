@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
@@ -21,7 +20,7 @@ type MockStore struct {
 type MockRecord struct {
 	Id         string
 	TaskName   string
-	Status     models.TaskExecutionStatus
+	Status     kk_scheduler.TaskExecutionStatus
 	StartedAt  string
 	FinishedAt string
 }
@@ -35,7 +34,7 @@ func NewMockStore() *MockStore {
 	}
 }
 
-func (m *MockStore) TaskCreate(taskName string, status models.TaskExecutionStatus) error {
+func (m *MockStore) TaskCreate(taskName string) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	m.CreatedCount++
@@ -43,13 +42,13 @@ func (m *MockStore) TaskCreate(taskName string, status models.TaskExecutionStatu
 	m.Records[id] = &MockRecord{
 		Id:       id,
 		TaskName: taskName,
-		Status:   status,
+		Status:   kk_scheduler.TaskExecutionStatus_TASK_EXECUTION_STATUS_RUNNING,
 	}
 	m.Logs[id] = []string{}
 	return nil
 }
 
-func (m *MockStore) TaskUpdateStatus(taskName string, status models.TaskExecutionStatus) error {
+func (m *MockStore) TaskUpdateStatus(taskName string, status kk_scheduler.TaskExecutionStatus) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	for _, r := range m.Records {
@@ -133,7 +132,6 @@ func (m *MockStore) JobPut(entry *kk_scheduler.PBJob) error {
 	return nil
 }
 
-// Service methods
 func (m *MockStore) ServiceList() ([]*kk_scheduler.PBRegisterService, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()

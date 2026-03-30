@@ -8,10 +8,20 @@ import (
 	"gitee.com/cruvie/kk_go_kit/kk_id"
 )
 
+type StepCtl struct {
+	addLog   func(message string)
+	hasError bool
+}
+
+// Log adds a log message to the execution record
+func (c *StepCtl) Log(message string) {
+	c.addLog(message)
+}
+
 // Step represents a single execution step
 type Step struct {
 	name    string
-	handler func(ctl *StepCtl)
+	handler func(ctl *StepCtl) error
 }
 
 // TaskExecutor manages task lifecycle and step execution
@@ -36,7 +46,7 @@ func NewTaskExecutor(opts ...TaskExecutorOption) *TaskExecutor {
 }
 
 // AddStep adds a step to the task
-func (t *TaskExecutor) AddStep(name string, handler func(ctl *StepCtl)) {
+func (t *TaskExecutor) AddStep(name string, handler func(ctl *StepCtl) error) {
 	t.steps = append(t.steps, &Step{
 		name:    name,
 		handler: handler,
@@ -44,8 +54,7 @@ func (t *TaskExecutor) AddStep(name string, handler func(ctl *StepCtl)) {
 }
 
 // Run executes all steps sequentially
-func (t *TaskExecutor) Run() error {
-	ctx := context.Background()
+func (t *TaskExecutor) Run(ctx context.Context) error {
 	{
 		if t.client == nil {
 			return fmt.Errorf("scheduler client is not set")
@@ -65,63 +74,41 @@ func (t *TaskExecutor) Run() error {
 	}
 
 	// Create shared StepCtl for all steps
-	var ctl *StepCtl
-	ctl = &StepCtl{
+	ctl := &StepCtl{
 		addLog: func(message string) {
-			formatted := fmt.Sprintf("[步骤%d: %s] %s", ctl.stepIndex, ctl.stepName, message)
-			logInput := &TaskAppendLog_Input{}
-			logInput.SetId(t.id)
-			logInput.SetLog(formatted)
-			_, err := t.client.TaskAppendLog(ctx, logInput)
+			in := &TaskAppendLog_Input{}
+			in.SetId(t.id)
+			in.SetLog(message)
+			_, err := t.client.TaskAppendLog(ctx, in)
 			if err != nil {
-				slog.Warn("failed to append log", "err", err)
+				slog.Error("failed to report log", "err", err)
 			}
 		},
 	}
-
+	ctl.Log("🚀Starting task")
 	// Execute steps
-	for i, step := range t.steps {
-		ctl.addLog(fmt.Sprintf("[Starting step %s]", step.name))
-
-		// Execute step with panic recovery
-		if err := t.executeStep(step, ctl); err != nil {
-			t.finish(ctx, TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED)
-			return err
-		}
-
-		// Check if status was changed by panic recovery
-		if t.status == TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED {
-			t.finish(ctx, TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED)
-			return nil
+	for _, step := range t.steps {
+		ctl.Log(fmt.Sprintf("[🔥Starting step %s]", step.name))
+		err := step.handler(ctl)
+		if err != nil {
+			ctl.Log(fmt.Sprintf("❌%s", err.Error()))
+			ctl.hasError = true
 		}
 	}
 
-	t.finish(ctx, TaskExecutionStatus_TASK_EXECUTION_STATUS_COMPLETED)
-	return nil
-}
-
-// executeStep runs a single step with panic recovery
-func (t *TaskExecutor) executeStep(step *Step, ctl *StepCtl) error {
-	defer func() {
-		if r := recover(); r != nil {
-			slog.Error("step panicked", "step", step.name, "panic", r)
-			ctl.Log(fmt.Sprintf("PANIC: %v", r))
-			t.status = TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED
-		}
-	}()
-
-	step.handler(ctl)
-	return nil
-}
-
-// finish updates the final status
-func (t *TaskExecutor) finish(ctx context.Context, status TaskExecutionStatus) {
-	t.status = status
-	updateInput := &TaskUpdateStatus_Input{}
-	updateInput.SetId(t.id)
-	updateInput.SetStatus(status)
-	_, err := t.client.TaskUpdateStatus(ctx, updateInput)
+	in := &TaskUpdateStatus_Input{}
+	in.SetId(t.id)
+	if ctl.hasError {
+		ctl.Log("[❌😭🤬Task Failed]")
+		in.SetStatus(TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED)
+	} else {
+		ctl.Log("[✅Task Finished]")
+		in.SetStatus(TaskExecutionStatus_TASK_EXECUTION_STATUS_COMPLETED)
+	}
+	_, err := t.client.TaskUpdateStatus(ctx, in)
 	if err != nil {
-		slog.Warn("failed to update status", "err", err)
+		slog.Error("failed to update task status", "err", err)
 	}
+
+	return nil
 }
