@@ -4,28 +4,28 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+
+	"gitee.com/cruvie/kk_go_kit/kk_id"
 )
 
 // Step represents a single execution step
 type Step struct {
 	name    string
-	index   int
 	handler func(ctl *StepCtl)
 }
 
 // TaskExecutor manages task lifecycle and step execution
 type TaskExecutor struct {
-	name   string
+	id     string
+	jobId  string
 	steps  []*Step
 	client KKScheduleClient
-	status TaskExecutionStatus
 }
 
 // NewTaskExecutor creates a new task executor
-func NewTaskExecutor(name string, opts ...TaskExecutorOption) *TaskExecutor {
+func NewTaskExecutor(opts ...TaskExecutorOption) *TaskExecutor {
 	t := &TaskExecutor{
-		name:   name,
-		status: TaskExecutionStatus_TASK_EXECUTION_STATUS_RUNNING,
+		id: kk_id.GenUUID7(),
 	}
 
 	for _, opt := range opts {
@@ -39,7 +39,6 @@ func NewTaskExecutor(name string, opts ...TaskExecutorOption) *TaskExecutor {
 func (t *TaskExecutor) AddStep(name string, handler func(ctl *StepCtl)) {
 	t.steps = append(t.steps, &Step{
 		name:    name,
-		index:   len(t.steps),
 		handler: handler,
 	})
 }
@@ -47,13 +46,22 @@ func (t *TaskExecutor) AddStep(name string, handler func(ctl *StepCtl)) {
 // Run executes all steps sequentially
 func (t *TaskExecutor) Run() error {
 	ctx := context.Background()
-
-	// Create execution record
-	input := &TaskCreate_Input{}
-	input.SetTaskName(t.name)
-	_, err := t.client.TaskCreate(ctx, input)
-	if err != nil {
-		return fmt.Errorf("failed to create execution record: %w", err)
+	{
+		if t.client == nil {
+			return fmt.Errorf("scheduler client is not set")
+		}
+		if t.jobId == "" {
+			return fmt.Errorf("job id is not set")
+		}
+	}
+	{
+		// Create execution record
+		input := &TaskCreate_Input{}
+		input.SetJobId(t.jobId)
+		_, err := t.client.TaskCreate(ctx, input)
+		if err != nil {
+			return fmt.Errorf("failed to create execution record: %w", err)
+		}
 	}
 
 	// Execute steps
@@ -62,7 +70,7 @@ func (t *TaskExecutor) Run() error {
 			addLog: func(message string) {
 				formatted := fmt.Sprintf("[步骤%d: %s] %s", step.index, step.name, message)
 				logInput := &TaskAppendLog_Input{}
-				logInput.SetTaskName(t.name)
+				logInput.SetId(t.id)
 				logInput.SetLog(formatted)
 				_, err := t.client.TaskAppendLog(ctx, logInput)
 				if err != nil {
@@ -106,7 +114,7 @@ func (t *TaskExecutor) executeStep(step *Step, ctl *StepCtl) error {
 func (t *TaskExecutor) finish(ctx context.Context, status TaskExecutionStatus) {
 	t.status = status
 	updateInput := &TaskUpdateStatus_Input{}
-	updateInput.SetTaskName(t.name)
+	updateInput.SetId(t.id)
 	updateInput.SetStatus(status)
 	_, err := t.client.TaskUpdateStatus(ctx, updateInput)
 	if err != nil {

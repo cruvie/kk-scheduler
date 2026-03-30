@@ -2,7 +2,6 @@ package store_driver
 
 import (
 	"github.com/cruvie/kk-scheduler/internal/g_config"
-	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
@@ -18,11 +17,11 @@ type StoreDriver interface {
 	ServiceDelete(serviceName string) error
 
 	// TaskCreate creates a new task execution record
-	TaskCreate(taskName string, status models.TaskExecutionStatus) error
+	TaskCreate(jobId string) error
 	// TaskUpdateStatus updates the status
-	TaskUpdateStatus(taskName string, status models.TaskExecutionStatus) error
+	TaskUpdateStatus(id string, status kk_scheduler.TaskExecutionStatus) error
 	// TaskAppendLog append log to the execution record
-	TaskAppendLog(taskName string, log string) error
+	TaskAppendLog(id string, log string) error
 }
 
 func NewStoreDriver() StoreDriver {

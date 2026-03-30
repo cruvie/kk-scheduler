@@ -3,8 +3,9 @@ package store_driver
 import (
 	"errors"
 	"log/slog"
-	"time"
 
+	"gitee.com/cruvie/kk_go_kit/kk_id"
+	"gitee.com/cruvie/kk_go_kit/kk_time"
 	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/internal/models/query"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
@@ -21,12 +22,14 @@ func NewPostgresStore() *PostgresStore {
 }
 
 // TaskCreate creates a new task execution record
-func (s *PostgresStore) TaskCreate(taskName string, status models.TaskExecutionStatus) error {
+func (s *PostgresStore) TaskCreate(jobId string) error {
 	execution := &models.TaskExecution{
-		TaskName:  taskName,
-		Status:    status,
-		StartedAt: time.Now(),
-		Log:       "",
+		Id:         kk_id.GenUUID7(),
+		JobId:      jobId,
+		Status:     kk_scheduler.TaskExecutionStatus_TASK_EXECUTION_STATUS_RUNNING,
+		StartedAt:  kk_time.NowUTCTime(),
+		FinishedAt: kk_time.DefaultTime,
+		Log:        "",
 	}
 
 	if err := query.TaskExecution.Create(execution); err != nil {
@@ -37,37 +40,41 @@ func (s *PostgresStore) TaskCreate(taskName string, status models.TaskExecutionS
 }
 
 // TaskUpdateStatus updates status
-func (s *PostgresStore) TaskUpdateStatus(taskName string, status models.TaskExecutionStatus) error {
+func (s *PostgresStore) TaskUpdateStatus(id string, status kk_scheduler.TaskExecutionStatus) error {
+	if status == kk_scheduler.TaskExecutionStatus_TASK_EXECUTION_STATUS_COMPLETED {
+		_, err := query.TaskExecution.
+			Where(query.TaskExecution.Id.Eq(id)).
+			UpdateSimple(
+				query.TaskExecution.Status.Value(int32(status)),
+				query.TaskExecution.FinishedAt.Value(kk_time.NowUTCTime()),
+			)
+		if err != nil {
+			return err
+		}
+	}
 	_, err := query.TaskExecution.
-		Where(query.TaskExecution.TaskName.Eq(taskName)).
-		Update(query.TaskExecution.Status, status)
+		Where(query.TaskExecution.Id.Eq(id)).
+		UpdateSimple(query.TaskExecution.Status.Value(int32(status)))
 	if err != nil {
 		return err
 	}
-
-	_, err = query.TaskExecution.
-		Where(query.TaskExecution.TaskName.Eq(taskName)).
-		Update(query.TaskExecution.FinishedAt, time.Now())
 	return err
 }
 
 // TaskAppendLog appends log to the execution record
-func (s *PostgresStore) TaskAppendLog(taskName string, log string) error {
+func (s *PostgresStore) TaskAppendLog(id string, log string) error {
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		execution, err := tx.TaskExecution.
-			Where(tx.TaskExecution.TaskName.Eq(taskName)).
-			First()
+			Where(tx.TaskExecution.Id.Eq(id)).
+			Take()
 		if err != nil {
-			slog.Error("failed to find task execution for log append", "err", err, "taskName", taskName)
 			return err
 		}
 
-		execution.Log += log
 		_, err = tx.TaskExecution.
-			Where(tx.TaskExecution.TaskName.Eq(taskName)).
-			Update(tx.TaskExecution.Log, execution.Log)
+			Where(tx.TaskExecution.Id.Eq(id)).
+			UpdateSimple(tx.TaskExecution.Log.Value(execution.Log + log))
 		if err != nil {
-			slog.Error("failed to append log", "err", err, "taskName", taskName)
 			return err
 		}
 		return nil

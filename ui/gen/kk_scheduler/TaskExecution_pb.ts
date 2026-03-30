@@ -11,7 +11,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file kk_scheduler/TaskExecution.proto.
  */
 export const file_kk_scheduler_TaskExecution: GenFile = /*@__PURE__*/
-  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIjgKClRhc2tDcmVhdGUaIAoFSW5wdXQSFwoJdGFza19uYW1lGAEgASgJQgTKPgEBGggKBk91dHB1dCJ3ChBUYXNrVXBkYXRlU3RhdHVzGlkKBUlucHV0EhcKCXRhc2tfbmFtZRgBIAEoCUIEyj4BARI3CgZzdGF0dXMYAiABKA4yIS5ra19zY2hlZHVsZXIuVGFza0V4ZWN1dGlvblN0YXR1c0IEyj4BARoICgZPdXRwdXQiTgoNVGFza0FwcGVuZExvZxozCgVJbnB1dBIXCgl0YXNrX25hbWUYASABKAlCBMo+AQESEQoDbG9nGAIgASgJQgTKPgEBGggKBk91dHB1dCqmAQoTVGFza0V4ZWN1dGlvblN0YXR1cxIlCiFUQVNLX0VYRUNVVElPTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIhCh1UQVNLX0VYRUNVVElPTl9TVEFUVVNfUlVOTklORxABEiMKH1RBU0tfRVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQAhIgChxUQVNLX0VYRUNVVElPTl9TVEFUVVNfRkFJTEVEEANCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
+  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIjUKClRhc2tDcmVhdGUaHQoFSW5wdXQSFAoFam9iSWQYASABKAlCBco+AgECGggKBk91dHB1dCJxChBUYXNrVXBkYXRlU3RhdHVzGlMKBUlucHV0EhEKAmlkGAEgASgJQgXKPgIBAhI3CgZzdGF0dXMYAiABKA4yIS5ra19zY2hlZHVsZXIuVGFza0V4ZWN1dGlvblN0YXR1c0IEyj4BARoICgZPdXRwdXQiSAoNVGFza0FwcGVuZExvZxotCgVJbnB1dBIRCgJpZBgBIAEoCUIFyj4CAQISEQoDbG9nGAIgASgJQgTKPgEBGggKBk91dHB1dCqmAQoTVGFza0V4ZWN1dGlvblN0YXR1cxIlCiFUQVNLX0VYRUNVVElPTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIhCh1UQVNLX0VYRUNVVElPTl9TVEFUVVNfUlVOTklORxABEiMKH1RBU0tfRVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQAhIgChxUQVNLX0VYRUNVVElPTl9TVEFUVVNfRkFJTEVEEANCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.TaskCreate
@@ -31,9 +31,9 @@ export const TaskCreateSchema: GenMessage<TaskCreate> = /*@__PURE__*/
  */
 export type TaskCreate_Input = Message<"kk_scheduler.TaskCreate.Input"> & {
   /**
-   * @generated from field: string task_name = 1;
+   * @generated from field: string jobId = 1;
    */
-  taskName: string;
+  jobId: string;
 };
 
 /**
@@ -74,9 +74,9 @@ export const TaskUpdateStatusSchema: GenMessage<TaskUpdateStatus> = /*@__PURE__*
  */
 export type TaskUpdateStatus_Input = Message<"kk_scheduler.TaskUpdateStatus.Input"> & {
   /**
-   * @generated from field: string task_name = 1;
+   * @generated from field: string id = 1;
    */
-  taskName: string;
+  id: string;
 
   /**
    * @generated from field: kk_scheduler.TaskExecutionStatus status = 2;
@@ -122,9 +122,9 @@ export const TaskAppendLogSchema: GenMessage<TaskAppendLog> = /*@__PURE__*/
  */
 export type TaskAppendLog_Input = Message<"kk_scheduler.TaskAppendLog.Input"> & {
   /**
-   * @generated from field: string task_name = 1;
+   * @generated from field: string id = 1;
    */
-  taskName: string;
+  id: string;
 
   /**
    * @generated from field: string log = 2;

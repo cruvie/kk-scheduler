@@ -28,8 +28,9 @@ func newTaskExecution(db *gorm.DB, opts ...gen.DOOption) taskExecution {
 
 	tableName := _taskExecution.taskExecutionDo.TableName()
 	_taskExecution.ALL = field.NewAsterisk(tableName)
-	_taskExecution.TaskName = field.NewString(tableName, "task_name")
-	_taskExecution.Status = field.NewString(tableName, "status")
+	_taskExecution.Id = field.NewString(tableName, "id")
+	_taskExecution.JobId = field.NewString(tableName, "job_id")
+	_taskExecution.Status = field.NewInt32(tableName, "status")
 	_taskExecution.StartedAt = field.NewTime(tableName, "started_at")
 	_taskExecution.FinishedAt = field.NewTime(tableName, "finished_at")
 	_taskExecution.Log = field.NewString(tableName, "log")
@@ -43,8 +44,9 @@ type taskExecution struct {
 	taskExecutionDo
 
 	ALL        field.Asterisk
-	TaskName   field.String
-	Status     field.String
+	Id         field.String
+	JobId      field.String
+	Status     field.Int32
 	StartedAt  field.Time
 	FinishedAt field.Time
 	Log        field.String
@@ -64,8 +66,9 @@ func (t taskExecution) As(alias string) *taskExecution {
 
 func (t *taskExecution) updateTableName(table string) *taskExecution {
 	t.ALL = field.NewAsterisk(table)
-	t.TaskName = field.NewString(table, "task_name")
-	t.Status = field.NewString(table, "status")
+	t.Id = field.NewString(table, "id")
+	t.JobId = field.NewString(table, "job_id")
+	t.Status = field.NewInt32(table, "status")
 	t.StartedAt = field.NewTime(table, "started_at")
 	t.FinishedAt = field.NewTime(table, "finished_at")
 	t.Log = field.NewString(table, "log")
@@ -85,8 +88,9 @@ func (t *taskExecution) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (t *taskExecution) fillFieldMap() {
-	t.fieldMap = make(map[string]field.Expr, 5)
-	t.fieldMap["task_name"] = t.TaskName
+	t.fieldMap = make(map[string]field.Expr, 6)
+	t.fieldMap["id"] = t.Id
+	t.fieldMap["job_id"] = t.JobId
 	t.fieldMap["status"] = t.Status
 	t.fieldMap["started_at"] = t.StartedAt
 	t.fieldMap["finished_at"] = t.FinishedAt

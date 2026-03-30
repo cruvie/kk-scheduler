@@ -9,3 +9,9 @@ func WithSchedulerClient(client KKScheduleClient) TaskExecutorOption {
 		t.client = client
 	}
 }
+
+func WithJobId(id string) TaskExecutorOption {
+	return func(t *TaskExecutor) {
+		t.jobId = id
+	}
+}
