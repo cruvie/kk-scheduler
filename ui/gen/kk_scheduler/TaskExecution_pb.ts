@@ -2,15 +2,16 @@
 // @generated from file kk_scheduler/TaskExecution.proto (package kk_scheduler, edition 2023)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import { file_kk_scheduler_extend_field } from "./extend_field_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file kk_scheduler/TaskExecution.proto.
  */
 export const file_kk_scheduler_TaskExecution: GenFile = /*@__PURE__*/
-  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIkIKClRhc2tDcmVhdGUaKgoFSW5wdXQSEQoJdGFza19uYW1lGAEgASgJEg4KBnN0YXR1cxgCIAEoCRoICgZPdXRwdXQiSAoQVGFza1VwZGF0ZVN0YXR1cxoqCgVJbnB1dBIRCgl0YXNrX25hbWUYASABKAkSDgoGc3RhdHVzGAIgASgJGggKBk91dHB1dCJCCg1UYXNrQXBwZW5kTG9nGicKBUlucHV0EhEKCXRhc2tfbmFtZRgBIAEoCRILCgNsb2cYAiABKAkaCAoGT3V0cHV0Qg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH");
+  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIjgKClRhc2tDcmVhdGUaIAoFSW5wdXQSFwoJdGFza19uYW1lGAEgASgJQgTKPgEBGggKBk91dHB1dCJ3ChBUYXNrVXBkYXRlU3RhdHVzGlkKBUlucHV0EhcKCXRhc2tfbmFtZRgBIAEoCUIEyj4BARI3CgZzdGF0dXMYAiABKA4yIS5ra19zY2hlZHVsZXIuVGFza0V4ZWN1dGlvblN0YXR1c0IEyj4BARoICgZPdXRwdXQiTgoNVGFza0FwcGVuZExvZxozCgVJbnB1dBIXCgl0YXNrX25hbWUYASABKAlCBMo+AQESEQoDbG9nGAIgASgJQgTKPgEBGggKBk91dHB1dCqmAQoTVGFza0V4ZWN1dGlvblN0YXR1cxIlCiFUQVNLX0VYRUNVVElPTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIhCh1UQVNLX0VYRUNVVElPTl9TVEFUVVNfUlVOTklORxABEiMKH1RBU0tfRVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQAhIgChxUQVNLX0VYRUNVVElPTl9TVEFUVVNfRkFJTEVEEANCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.TaskCreate
@@ -33,11 +34,6 @@ export type TaskCreate_Input = Message<"kk_scheduler.TaskCreate.Input"> & {
    * @generated from field: string task_name = 1;
    */
   taskName: string;
-
-  /**
-   * @generated from field: string status = 2;
-   */
-  status: string;
 };
 
 /**
@@ -83,9 +79,9 @@ export type TaskUpdateStatus_Input = Message<"kk_scheduler.TaskUpdateStatus.Inpu
   taskName: string;
 
   /**
-   * @generated from field: string status = 2;
+   * @generated from field: kk_scheduler.TaskExecutionStatus status = 2;
    */
-  status: string;
+  status: TaskExecutionStatus;
 };
 
 /**
@@ -155,4 +151,35 @@ export type TaskAppendLog_Output = Message<"kk_scheduler.TaskAppendLog.Output"> 
  */
 export const TaskAppendLog_OutputSchema: GenMessage<TaskAppendLog_Output> = /*@__PURE__*/
   messageDesc(file_kk_scheduler_TaskExecution, 2, 1);
+
+/**
+ * @generated from enum kk_scheduler.TaskExecutionStatus
+ */
+export enum TaskExecutionStatus {
+  /**
+   * @generated from enum value: TASK_EXECUTION_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: TASK_EXECUTION_STATUS_RUNNING = 1;
+   */
+  RUNNING = 1,
+
+  /**
+   * @generated from enum value: TASK_EXECUTION_STATUS_COMPLETED = 2;
+   */
+  COMPLETED = 2,
+
+  /**
+   * @generated from enum value: TASK_EXECUTION_STATUS_FAILED = 3;
+   */
+  FAILED = 3,
+}
+
+/**
+ * Describes the enum kk_scheduler.TaskExecutionStatus.
+ */
+export const TaskExecutionStatusSchema: GenEnum<TaskExecutionStatus> = /*@__PURE__*/
+  enumDesc(file_kk_scheduler_TaskExecution, 0);
 

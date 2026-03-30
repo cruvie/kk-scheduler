@@ -20,6 +20,53 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type TaskExecutionStatus int32
+
+const (
+	TaskExecutionStatus_TASK_EXECUTION_STATUS_UNSPECIFIED TaskExecutionStatus = 0
+	TaskExecutionStatus_TASK_EXECUTION_STATUS_RUNNING     TaskExecutionStatus = 1
+	TaskExecutionStatus_TASK_EXECUTION_STATUS_COMPLETED   TaskExecutionStatus = 2
+	TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED      TaskExecutionStatus = 3
+)
+
+// Enum value maps for TaskExecutionStatus.
+var (
+	TaskExecutionStatus_name = map[int32]string{
+		0: "TASK_EXECUTION_STATUS_UNSPECIFIED",
+		1: "TASK_EXECUTION_STATUS_RUNNING",
+		2: "TASK_EXECUTION_STATUS_COMPLETED",
+		3: "TASK_EXECUTION_STATUS_FAILED",
+	}
+	TaskExecutionStatus_value = map[string]int32{
+		"TASK_EXECUTION_STATUS_UNSPECIFIED": 0,
+		"TASK_EXECUTION_STATUS_RUNNING":     1,
+		"TASK_EXECUTION_STATUS_COMPLETED":   2,
+		"TASK_EXECUTION_STATUS_FAILED":      3,
+	}
+)
+
+func (x TaskExecutionStatus) Enum() *TaskExecutionStatus {
+	p := new(TaskExecutionStatus)
+	*p = x
+	return p
+}
+
+func (x TaskExecutionStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TaskExecutionStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_kk_scheduler_TaskExecution_proto_enumTypes[0].Descriptor()
+}
+
+func (TaskExecutionStatus) Type() protoreflect.EnumType {
+	return &file_kk_scheduler_TaskExecution_proto_enumTypes[0]
+}
+
+func (x TaskExecutionStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 type TaskCreate struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -152,7 +199,6 @@ func (b0 TaskAppendLog_builder) Build() *TaskAppendLog {
 type TaskCreate_Input struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_TaskName    *string                `protobuf:"bytes,1,opt,name=task_name,json=taskName"`
-	xxx_hidden_Status      *string                `protobuf:"bytes,2,opt,name=status"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -194,24 +240,9 @@ func (x *TaskCreate_Input) GetTaskName() string {
 	return ""
 }
 
-func (x *TaskCreate_Input) GetStatus() string {
-	if x != nil {
-		if x.xxx_hidden_Status != nil {
-			return *x.xxx_hidden_Status
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *TaskCreate_Input) SetTaskName(v string) {
 	x.xxx_hidden_TaskName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *TaskCreate_Input) SetStatus(v string) {
-	x.xxx_hidden_Status = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
 func (x *TaskCreate_Input) HasTaskName() bool {
@@ -221,28 +252,15 @@ func (x *TaskCreate_Input) HasTaskName() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *TaskCreate_Input) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
 func (x *TaskCreate_Input) ClearTaskName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_TaskName = nil
-}
-
-func (x *TaskCreate_Input) ClearStatus() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Status = nil
 }
 
 type TaskCreate_Input_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	TaskName *string
-	Status   *string
 }
 
 func (b0 TaskCreate_Input_builder) Build() *TaskCreate_Input {
@@ -250,12 +268,8 @@ func (b0 TaskCreate_Input_builder) Build() *TaskCreate_Input {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.TaskName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
 		x.xxx_hidden_TaskName = b.TaskName
-	}
-	if b.Status != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Status = b.Status
 	}
 	return m0
 }
@@ -306,7 +320,7 @@ func (b0 TaskCreate_Output_builder) Build() *TaskCreate_Output {
 type TaskUpdateStatus_Input struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_TaskName    *string                `protobuf:"bytes,1,opt,name=task_name,json=taskName"`
-	xxx_hidden_Status      *string                `protobuf:"bytes,2,opt,name=status"`
+	xxx_hidden_Status      TaskExecutionStatus    `protobuf:"varint,2,opt,name=status,enum=kk_scheduler.TaskExecutionStatus"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -348,14 +362,13 @@ func (x *TaskUpdateStatus_Input) GetTaskName() string {
 	return ""
 }
 
-func (x *TaskUpdateStatus_Input) GetStatus() string {
+func (x *TaskUpdateStatus_Input) GetStatus() TaskExecutionStatus {
 	if x != nil {
-		if x.xxx_hidden_Status != nil {
-			return *x.xxx_hidden_Status
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
+			return x.xxx_hidden_Status
 		}
-		return ""
 	}
-	return ""
+	return TaskExecutionStatus_TASK_EXECUTION_STATUS_UNSPECIFIED
 }
 
 func (x *TaskUpdateStatus_Input) SetTaskName(v string) {
@@ -363,8 +376,8 @@ func (x *TaskUpdateStatus_Input) SetTaskName(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *TaskUpdateStatus_Input) SetStatus(v string) {
-	x.xxx_hidden_Status = &v
+func (x *TaskUpdateStatus_Input) SetStatus(v TaskExecutionStatus) {
+	x.xxx_hidden_Status = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
@@ -389,14 +402,14 @@ func (x *TaskUpdateStatus_Input) ClearTaskName() {
 
 func (x *TaskUpdateStatus_Input) ClearStatus() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Status = nil
+	x.xxx_hidden_Status = TaskExecutionStatus_TASK_EXECUTION_STATUS_UNSPECIFIED
 }
 
 type TaskUpdateStatus_Input_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	TaskName *string
-	Status   *string
+	Status   *TaskExecutionStatus
 }
 
 func (b0 TaskUpdateStatus_Input_builder) Build() *TaskUpdateStatus_Input {
@@ -409,7 +422,7 @@ func (b0 TaskUpdateStatus_Input_builder) Build() *TaskUpdateStatus_Input {
 	}
 	if b.Status != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Status = b.Status
+		x.xxx_hidden_Status = *b.Status
 	}
 	return m0
 }
@@ -615,42 +628,49 @@ var File_kk_scheduler_TaskExecution_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_TaskExecution_proto_rawDesc = "" +
 	"\n" +
-	" kk_scheduler/TaskExecution.proto\x12\fkk_scheduler\"T\n" +
+	" kk_scheduler/TaskExecution.proto\x12\fkk_scheduler\x1a\x1fkk_scheduler/extend_field.proto\"B\n" +
 	"\n" +
-	"TaskCreate\x1a<\n" +
-	"\x05Input\x12\x1b\n" +
-	"\ttask_name\x18\x01 \x01(\tR\btaskName\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\x1a\b\n" +
-	"\x06Output\"Z\n" +
-	"\x10TaskUpdateStatus\x1a<\n" +
-	"\x05Input\x12\x1b\n" +
-	"\ttask_name\x18\x01 \x01(\tR\btaskName\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\x1a\b\n" +
-	"\x06Output\"Q\n" +
-	"\rTaskAppendLog\x1a6\n" +
-	"\x05Input\x12\x1b\n" +
-	"\ttask_name\x18\x01 \x01(\tR\btaskName\x12\x10\n" +
-	"\x03log\x18\x02 \x01(\tR\x03log\x1a\b\n" +
-	"\x06OutputB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
+	"TaskCreate\x1a*\n" +
+	"\x05Input\x12!\n" +
+	"\ttask_name\x18\x01 \x01(\tB\x04\xca>\x01\x01R\btaskName\x1a\b\n" +
+	"\x06Output\"\x89\x01\n" +
+	"\x10TaskUpdateStatus\x1ak\n" +
+	"\x05Input\x12!\n" +
+	"\ttask_name\x18\x01 \x01(\tB\x04\xca>\x01\x01R\btaskName\x12?\n" +
+	"\x06status\x18\x02 \x01(\x0e2!.kk_scheduler.TaskExecutionStatusB\x04\xca>\x01\x01R\x06status\x1a\b\n" +
+	"\x06Output\"]\n" +
+	"\rTaskAppendLog\x1aB\n" +
+	"\x05Input\x12!\n" +
+	"\ttask_name\x18\x01 \x01(\tB\x04\xca>\x01\x01R\btaskName\x12\x16\n" +
+	"\x03log\x18\x02 \x01(\tB\x04\xca>\x01\x01R\x03log\x1a\b\n" +
+	"\x06Output*\xa6\x01\n" +
+	"\x13TaskExecutionStatus\x12%\n" +
+	"!TASK_EXECUTION_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
+	"\x1dTASK_EXECUTION_STATUS_RUNNING\x10\x01\x12#\n" +
+	"\x1fTASK_EXECUTION_STATUS_COMPLETED\x10\x02\x12 \n" +
+	"\x1cTASK_EXECUTION_STATUS_FAILED\x10\x03B\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
+var file_kk_scheduler_TaskExecution_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_kk_scheduler_TaskExecution_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_kk_scheduler_TaskExecution_proto_goTypes = []any{
-	(*TaskCreate)(nil),              // 0: kk_scheduler.TaskCreate
-	(*TaskUpdateStatus)(nil),        // 1: kk_scheduler.TaskUpdateStatus
-	(*TaskAppendLog)(nil),           // 2: kk_scheduler.TaskAppendLog
-	(*TaskCreate_Input)(nil),        // 3: kk_scheduler.TaskCreate.Input
-	(*TaskCreate_Output)(nil),       // 4: kk_scheduler.TaskCreate.Output
-	(*TaskUpdateStatus_Input)(nil),  // 5: kk_scheduler.TaskUpdateStatus.Input
-	(*TaskUpdateStatus_Output)(nil), // 6: kk_scheduler.TaskUpdateStatus.Output
-	(*TaskAppendLog_Input)(nil),     // 7: kk_scheduler.TaskAppendLog.Input
-	(*TaskAppendLog_Output)(nil),    // 8: kk_scheduler.TaskAppendLog.Output
+	(TaskExecutionStatus)(0),        // 0: kk_scheduler.TaskExecutionStatus
+	(*TaskCreate)(nil),              // 1: kk_scheduler.TaskCreate
+	(*TaskUpdateStatus)(nil),        // 2: kk_scheduler.TaskUpdateStatus
+	(*TaskAppendLog)(nil),           // 3: kk_scheduler.TaskAppendLog
+	(*TaskCreate_Input)(nil),        // 4: kk_scheduler.TaskCreate.Input
+	(*TaskCreate_Output)(nil),       // 5: kk_scheduler.TaskCreate.Output
+	(*TaskUpdateStatus_Input)(nil),  // 6: kk_scheduler.TaskUpdateStatus.Input
+	(*TaskUpdateStatus_Output)(nil), // 7: kk_scheduler.TaskUpdateStatus.Output
+	(*TaskAppendLog_Input)(nil),     // 8: kk_scheduler.TaskAppendLog.Input
+	(*TaskAppendLog_Output)(nil),    // 9: kk_scheduler.TaskAppendLog.Output
 }
 var file_kk_scheduler_TaskExecution_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: kk_scheduler.TaskUpdateStatus.Input.status:type_name -> kk_scheduler.TaskExecutionStatus
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_kk_scheduler_TaskExecution_proto_init() }
@@ -658,18 +678,20 @@ func file_kk_scheduler_TaskExecution_proto_init() {
 	if File_kk_scheduler_TaskExecution_proto != nil {
 		return
 	}
+	file_kk_scheduler_extend_field_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_kk_scheduler_TaskExecution_proto_rawDesc), len(file_kk_scheduler_TaskExecution_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_kk_scheduler_TaskExecution_proto_goTypes,
 		DependencyIndexes: file_kk_scheduler_TaskExecution_proto_depIdxs,
+		EnumInfos:         file_kk_scheduler_TaskExecution_proto_enumTypes,
 		MessageInfos:      file_kk_scheduler_TaskExecution_proto_msgTypes,
 	}.Build()
 	File_kk_scheduler_TaskExecution_proto = out.File

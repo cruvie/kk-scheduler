@@ -17,7 +17,7 @@ type Step struct {
 type TaskExecutor struct {
 	name   string
 	steps  []*Step
-	client KKScheduleTaskExecutionClient
+	client KKScheduleClient
 	status TaskExecutionStatus
 }
 
@@ -25,7 +25,7 @@ type TaskExecutor struct {
 func NewTaskExecutor(name string, opts ...TaskExecutorOption) *TaskExecutor {
 	t := &TaskExecutor{
 		name:   name,
-		status: TaskExecutionStatusRunning,
+		status: TaskExecutionStatus_TASK_EXECUTION_STATUS_RUNNING,
 	}
 
 	for _, opt := range opts {
@@ -51,7 +51,6 @@ func (t *TaskExecutor) Run() error {
 	// Create execution record
 	input := &TaskCreate_Input{}
 	input.SetTaskName(t.name)
-	input.SetStatus(string(t.status))
 	_, err := t.client.TaskCreate(ctx, input)
 	if err != nil {
 		return fmt.Errorf("failed to create execution record: %w", err)
@@ -74,18 +73,18 @@ func (t *TaskExecutor) Run() error {
 
 		// Execute step with panic recovery
 		if err := t.executeStep(step, ctl); err != nil {
-			t.finish(ctx, TaskExecutionStatusFailed)
+			t.finish(ctx, TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED)
 			return err
 		}
 
 		// Check if status was changed by panic recovery
-		if t.status == TaskExecutionStatusFailed {
-			t.finish(ctx, TaskExecutionStatusFailed)
+		if t.status == TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED {
+			t.finish(ctx, TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED)
 			return nil
 		}
 	}
 
-	t.finish(ctx, TaskExecutionStatusCompleted)
+	t.finish(ctx, TaskExecutionStatus_TASK_EXECUTION_STATUS_COMPLETED)
 	return nil
 }
 
@@ -95,7 +94,7 @@ func (t *TaskExecutor) executeStep(step *Step, ctl *StepCtl) error {
 		if r := recover(); r != nil {
 			slog.Error("step panicked", "step", step.name, "panic", r)
 			ctl.AddLog(fmt.Sprintf("PANIC: %v", r))
-			t.status = TaskExecutionStatusFailed
+			t.status = TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED
 		}
 	}()
 
@@ -108,7 +107,7 @@ func (t *TaskExecutor) finish(ctx context.Context, status TaskExecutionStatus) {
 	t.status = status
 	updateInput := &TaskUpdateStatus_Input{}
 	updateInput.SetTaskName(t.name)
-	updateInput.SetStatus(string(status))
+	updateInput.SetStatus(status)
 	_, err := t.client.TaskUpdateStatus(ctx, updateInput)
 	if err != nil {
 		slog.Warn("failed to update status", "err", err)

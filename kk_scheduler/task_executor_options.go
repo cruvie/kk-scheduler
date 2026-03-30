@@ -4,7 +4,7 @@ package kk_scheduler
 type TaskExecutorOption func(*TaskExecutor)
 
 // WithSchedulerClient sets the gRPC client for reporting
-func WithSchedulerClient(client KKScheduleTaskExecutionClient) TaskExecutorOption {
+func WithSchedulerClient(client KKScheduleClient) TaskExecutorOption {
 	return func(t *TaskExecutor) {
 		t.client = client
 	}
