@@ -6,8 +6,7 @@ import (
 
 // TaskExecution 任务执行记录
 type TaskExecution struct {
-	Id         string              `gorm:"primaryKey;column:id;type:uuid"`
-	TaskName   string              `gorm:"column:task_name;type:text;not null"`
+	TaskName   string              `gorm:"primaryKey;column:task_name;type:text;not null"`
 	Status     TaskExecutionStatus `gorm:"column:status;type:text;not null;index"`
 	StartedAt  time.Time           `gorm:"column:started_at;type:timestamp;not null"`
 	FinishedAt time.Time           `gorm:"column:finished_at;type:timestamp;not null"`
