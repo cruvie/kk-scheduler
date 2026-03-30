@@ -27,7 +27,7 @@ type config struct {
 		Choose string
 		PG     *kk_pg.ConfigPG
 	}
-	configSlog *kk_stage.ConfigLog `toml:"-"`
+	ConfigSlog *kk_stage.ConfigLog `toml:"-"`
 }
 
 func InitConfig() *kk_stage.Stage {
@@ -45,12 +45,12 @@ func InitConfig() *kk_stage.Stage {
 
 	stage := kk_stage.NewStage(context.Background(), "kk-scheduler").SetStartTime(kk_time.NowUTCTime())
 	{
-		Config.configSlog = &kk_stage.ConfigLog{
+		Config.ConfigSlog = &kk_stage.ConfigLog{
 			StartTime:  stage.StartTime,
 			Lumberjack: kk_stage.DefaultLogConfig(kk_time.NowUTCTime(), "kk-scheduler"),
 			Format:     kk_stage.FormatJSON,
 		}
-		Config.configSlog.Init()
+		Config.ConfigSlog.Init()
 	}
 	{
 		switch Config.Store.Choose {
@@ -73,5 +73,5 @@ func CloseConfig() {
 			panic("store choose error")
 		}
 	}
-	Config.configSlog.Close()
+	Config.ConfigSlog.Close()
 }

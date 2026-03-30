@@ -13,8 +13,7 @@ import (
 )
 
 // PostgresStore implements StoreDriver using PostgreSQL
-type PostgresStore struct {
-}
+type PostgresStore struct{}
 
 // NewPostgresStore creates a new PostgreSQL store
 func NewPostgresStore() *PostgresStore {
