@@ -17,17 +17,23 @@ import (
 
 var (
 	Q             = new(Query)
+	Job           *job
+	Service       *service
 	TaskExecution *taskExecution
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
+	Job = &Q.Job
+	Service = &Q.Service
 	TaskExecution = &Q.TaskExecution
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:            db,
+		Job:           newJob(db, opts...),
+		Service:       newService(db, opts...),
 		TaskExecution: newTaskExecution(db, opts...),
 	}
 }
@@ -35,6 +41,8 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
+	Job           job
+	Service       service
 	TaskExecution taskExecution
 }
 
@@ -43,6 +51,8 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:            db,
+		Job:           q.Job.clone(db),
+		Service:       q.Service.clone(db),
 		TaskExecution: q.TaskExecution.clone(db),
 	}
 }
@@ -58,16 +68,22 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:            db,
+		Job:           q.Job.replaceDB(db),
+		Service:       q.Service.replaceDB(db),
 		TaskExecution: q.TaskExecution.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
+	Job           IJobDo
+	Service       IServiceDo
 	TaskExecution ITaskExecutionDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
+		Job:           q.Job.WithContext(ctx),
+		Service:       q.Service.WithContext(ctx),
 		TaskExecution: q.TaskExecution.WithContext(ctx),
 	}
 }

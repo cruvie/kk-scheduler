@@ -22,5 +22,7 @@ func TestGen(t *testing.T) {
 	stage := kk_stage.NewStage(context.Background(), "test")
 	kk_pg.GenQuery(stage, g_config.Config.StorePG,
 		models.TaskExecution{},
+		models.Job{},
+		models.Service{},
 	)
 }
