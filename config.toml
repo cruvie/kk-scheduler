@@ -2,7 +2,13 @@ GrpcPort = 8666
 HttpPort = 8667
 WebPort = 8668
 
-[StoreEtcd]
-UserName = "root"
-Password = "root"
-Endpoints = ["http://127.0.0.1:2379"]
+[StorePG]
+[StorePG.DSN]
+Host = "127.0.0.1"
+Port = 5432
+User = "postgres"
+Password = "testpg"
+DBName = "kk_scheduler"
+Schema = ""
+SSLMode = "disable"
+TimeZone = "UTC"
