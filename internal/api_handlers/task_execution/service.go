@@ -16,12 +16,12 @@ func (x *ApiTaskUpdateStatus) Service(stage *kk_stage.Stage) error {
 	span := stage.StartTrace("Service")
 	defer span.End()
 
-	return schedule.GClient.TaskUpdateStatus(x.In.GetTaskName(), status)
+	return schedule.GClient.TaskUpdateStatus(x.In.GetId(), x.In.GetStatus())
 }
 
 func (x *ApiTaskAppendLog) Service(stage *kk_stage.Stage) error {
 	span := stage.StartTrace("Service")
 	defer span.End()
 
-	return schedule.GClient.TaskAppendLog(x.In.GetTaskName(), x.In.GetLog())
+	return schedule.GClient.TaskAppendLog(x.In.GetId(), x.In.GetLog())
 }

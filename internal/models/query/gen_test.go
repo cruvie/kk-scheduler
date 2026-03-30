@@ -12,11 +12,11 @@ import (
 )
 
 func init() {
-	kk_env.SetEnv(kk_env.Env(os.Getenv("SS_Env")))
+	kk_env.SetEnv(kk_env.Env(os.Getenv("KK_Schedule")))
 }
 
 func TestGen(t *testing.T) {
-	kk_env.SetEnv(kk_env.Env(os.Getenv("SS_Env")))
+	kk_env.SetEnv(kk_env.Env(os.Getenv("KK_Schedule")))
 	stage := kk_stage.NewStage(context.Background(), "test")
 	kk_pg.GenQuery(stage, &kk_pg.ConfigPG{DSN: kk_pg.PostgresDSN{
 		Host:     "127.0.0.1",
