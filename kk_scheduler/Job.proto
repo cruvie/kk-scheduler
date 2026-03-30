@@ -3,15 +3,87 @@ package kk_scheduler;
 
 option go_package = "/kk_scheduler";
 import "google/protobuf/timestamp.proto";
+import "kk_scheduler/extend_field.proto";
+import "kk_scheduler/Base.proto";
 
 
-message PBJob {
-  int32 EntryID = 1;
-  bool Enabled = 2;
-  google.protobuf.Timestamp Next = 3;
-  google.protobuf.Timestamp Prev = 4;
-  string Spec = 5;
-  string Description = 6;
-  string FuncName = 7;
-  string ServiceName = 8;
+message JobEnable {
+  message Input {
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+  }
+
+  message Output {
+
+  }
+}
+
+message JobDisable {
+  message Input {
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+  }
+
+  message Output {
+
+  }
+}
+
+message JobDelete {
+  message Input {
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+  }
+
+  message Output {
+
+  }
+}
+
+message JobGet {
+  message Input {
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+  }
+
+  message Output {
+    PBJob Job  = 1;
+  }
+}
+
+message JobList {
+  message Input {
+    string serviceName = 1;
+  }
+
+  message Output {
+    repeated PBJob JobList = 1;
+  }
+}
+
+
+message JobPut {
+  message Input {
+    PBRegisterJob Job = 1;
+  }
+
+  message Output {
+  }
+}
+message JobSetSpec {
+  message Input {
+    string serviceName = 1[(field_behavior) = REQUIRED];
+    string funcName = 2[(field_behavior) = REQUIRED];
+    string spec = 3[(field_behavior) = REQUIRED];
+  }
+
+  message Output {
+  }
+}
+
+
+message JobTrigger {
+  message Input {
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+  }
+
+  message Output {
+
+  }
 }

@@ -9,7 +9,7 @@ package kk_scheduler
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -21,36 +21,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type PBJob struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_EntryID     int32                  `protobuf:"varint,1,opt,name=EntryID"`
-	xxx_hidden_Enabled     bool                   `protobuf:"varint,2,opt,name=Enabled"`
-	xxx_hidden_Next        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=Next"`
-	xxx_hidden_Prev        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=Prev"`
-	xxx_hidden_Spec        *string                `protobuf:"bytes,5,opt,name=Spec"`
-	xxx_hidden_Description *string                `protobuf:"bytes,6,opt,name=Description"`
-	xxx_hidden_FuncName    *string                `protobuf:"bytes,7,opt,name=FuncName"`
-	xxx_hidden_ServiceName *string                `protobuf:"bytes,8,opt,name=ServiceName"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+type JobEnable struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PBJob) Reset() {
-	*x = PBJob{}
+func (x *JobEnable) Reset() {
+	*x = JobEnable{}
 	mi := &file_kk_scheduler_Job_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PBJob) String() string {
+func (x *JobEnable) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PBJob) ProtoMessage() {}
+func (*JobEnable) ProtoMessage() {}
 
-func (x *PBJob) ProtoReflect() protoreflect.Message {
+func (x *JobEnable) ProtoReflect() protoreflect.Message {
 	mi := &file_kk_scheduler_Job_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -62,65 +52,863 @@ func (x *PBJob) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *PBJob) GetEntryID() int32 {
-	if x != nil {
-		return x.xxx_hidden_EntryID
-	}
-	return 0
+type JobEnable_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
 }
 
-func (x *PBJob) GetEnabled() bool {
-	if x != nil {
-		return x.xxx_hidden_Enabled
-	}
-	return false
+func (b0 JobEnable_builder) Build() *JobEnable {
+	m0 := &JobEnable{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
-func (x *PBJob) GetNext() *timestamppb.Timestamp {
+type JobDisable struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobDisable) Reset() {
+	*x = JobDisable{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobDisable) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobDisable) ProtoMessage() {}
+
+func (x *JobDisable) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[1]
 	if x != nil {
-		return x.xxx_hidden_Next
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobDisable_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobDisable_builder) Build() *JobDisable {
+	m0 := &JobDisable{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobDelete struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobDelete) Reset() {
+	*x = JobDelete{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobDelete) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobDelete) ProtoMessage() {}
+
+func (x *JobDelete) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobDelete_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobDelete_builder) Build() *JobDelete {
+	m0 := &JobDelete{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobGet struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobGet) Reset() {
+	*x = JobGet{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobGet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobGet) ProtoMessage() {}
+
+func (x *JobGet) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobGet_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobGet_builder) Build() *JobGet {
+	m0 := &JobGet{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobList struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobList) Reset() {
+	*x = JobList{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobList) ProtoMessage() {}
+
+func (x *JobList) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobList_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobList_builder) Build() *JobList {
+	m0 := &JobList{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobPut struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobPut) Reset() {
+	*x = JobPut{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobPut) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobPut) ProtoMessage() {}
+
+func (x *JobPut) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobPut_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobPut_builder) Build() *JobPut {
+	m0 := &JobPut{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobSetSpec struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobSetSpec) Reset() {
+	*x = JobSetSpec{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobSetSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobSetSpec) ProtoMessage() {}
+
+func (x *JobSetSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobSetSpec_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobSetSpec_builder) Build() *JobSetSpec {
+	m0 := &JobSetSpec{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobTrigger struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobTrigger) Reset() {
+	*x = JobTrigger{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobTrigger) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobTrigger) ProtoMessage() {}
+
+func (x *JobTrigger) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobTrigger_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobTrigger_builder) Build() *JobTrigger {
+	m0 := &JobTrigger{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobEnable_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *JobEnable_Input) Reset() {
+	*x = JobEnable_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobEnable_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobEnable_Input) ProtoMessage() {}
+
+func (x *JobEnable_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobEnable_Input) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobEnable_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *JobEnable_Input) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *JobEnable_Input) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+type JobEnable_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id *string
+}
+
+func (b0 JobEnable_Input_builder) Build() *JobEnable_Input {
+	m0 := &JobEnable_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Id = b.Id
+	}
+	return m0
+}
+
+type JobEnable_Output struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobEnable_Output) Reset() {
+	*x = JobEnable_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobEnable_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobEnable_Output) ProtoMessage() {}
+
+func (x *JobEnable_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobEnable_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobEnable_Output_builder) Build() *JobEnable_Output {
+	m0 := &JobEnable_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobDisable_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *JobDisable_Input) Reset() {
+	*x = JobDisable_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobDisable_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobDisable_Input) ProtoMessage() {}
+
+func (x *JobDisable_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobDisable_Input) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobDisable_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *JobDisable_Input) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *JobDisable_Input) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+type JobDisable_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id *string
+}
+
+func (b0 JobDisable_Input_builder) Build() *JobDisable_Input {
+	m0 := &JobDisable_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Id = b.Id
+	}
+	return m0
+}
+
+type JobDisable_Output struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobDisable_Output) Reset() {
+	*x = JobDisable_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobDisable_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobDisable_Output) ProtoMessage() {}
+
+func (x *JobDisable_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobDisable_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobDisable_Output_builder) Build() *JobDisable_Output {
+	m0 := &JobDisable_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobDelete_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *JobDelete_Input) Reset() {
+	*x = JobDelete_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobDelete_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobDelete_Input) ProtoMessage() {}
+
+func (x *JobDelete_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobDelete_Input) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobDelete_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *JobDelete_Input) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *JobDelete_Input) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+type JobDelete_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id *string
+}
+
+func (b0 JobDelete_Input_builder) Build() *JobDelete_Input {
+	m0 := &JobDelete_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Id = b.Id
+	}
+	return m0
+}
+
+type JobDelete_Output struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobDelete_Output) Reset() {
+	*x = JobDelete_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobDelete_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobDelete_Output) ProtoMessage() {}
+
+func (x *JobDelete_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobDelete_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobDelete_Output_builder) Build() *JobDelete_Output {
+	m0 := &JobDelete_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobGet_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *JobGet_Input) Reset() {
+	*x = JobGet_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobGet_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobGet_Input) ProtoMessage() {}
+
+func (x *JobGet_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobGet_Input) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobGet_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *JobGet_Input) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *JobGet_Input) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+type JobGet_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id *string
+}
+
+func (b0 JobGet_Input_builder) Build() *JobGet_Input {
+	m0 := &JobGet_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Id = b.Id
+	}
+	return m0
+}
+
+type JobGet_Output struct {
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Job *PBJob                 `protobuf:"bytes,1,opt,name=Job"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *JobGet_Output) Reset() {
+	*x = JobGet_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobGet_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobGet_Output) ProtoMessage() {}
+
+func (x *JobGet_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobGet_Output) GetJob() *PBJob {
+	if x != nil {
+		return x.xxx_hidden_Job
 	}
 	return nil
 }
 
-func (x *PBJob) GetPrev() *timestamppb.Timestamp {
-	if x != nil {
-		return x.xxx_hidden_Prev
-	}
-	return nil
+func (x *JobGet_Output) SetJob(v *PBJob) {
+	x.xxx_hidden_Job = v
 }
 
-func (x *PBJob) GetSpec() string {
+func (x *JobGet_Output) HasJob() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Job != nil
+}
+
+func (x *JobGet_Output) ClearJob() {
+	x.xxx_hidden_Job = nil
+}
+
+type JobGet_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Job *PBJob
+}
+
+func (b0 JobGet_Output_builder) Build() *JobGet_Output {
+	m0 := &JobGet_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Job = b.Job
+	return m0
+}
+
+type JobList_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ServiceName *string                `protobuf:"bytes,1,opt,name=serviceName"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *JobList_Input) Reset() {
+	*x = JobList_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobList_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobList_Input) ProtoMessage() {}
+
+func (x *JobList_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[16]
 	if x != nil {
-		if x.xxx_hidden_Spec != nil {
-			return *x.xxx_hidden_Spec
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
 		}
-		return ""
+		return ms
 	}
-	return ""
+	return mi.MessageOf(x)
 }
 
-func (x *PBJob) GetDescription() string {
-	if x != nil {
-		if x.xxx_hidden_Description != nil {
-			return *x.xxx_hidden_Description
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *PBJob) GetFuncName() string {
-	if x != nil {
-		if x.xxx_hidden_FuncName != nil {
-			return *x.xxx_hidden_FuncName
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *PBJob) GetServiceName() string {
+func (x *JobList_Input) GetServiceName() string {
 	if x != nil {
 		if x.xxx_hidden_ServiceName != nil {
 			return *x.xxx_hidden_ServiceName
@@ -130,181 +918,515 @@ func (x *PBJob) GetServiceName() string {
 	return ""
 }
 
-func (x *PBJob) SetEntryID(v int32) {
-	x.xxx_hidden_EntryID = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
-}
-
-func (x *PBJob) SetEnabled(v bool) {
-	x.xxx_hidden_Enabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
-}
-
-func (x *PBJob) SetNext(v *timestamppb.Timestamp) {
-	x.xxx_hidden_Next = v
-}
-
-func (x *PBJob) SetPrev(v *timestamppb.Timestamp) {
-	x.xxx_hidden_Prev = v
-}
-
-func (x *PBJob) SetSpec(v string) {
-	x.xxx_hidden_Spec = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
-}
-
-func (x *PBJob) SetDescription(v string) {
-	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 8)
-}
-
-func (x *PBJob) SetFuncName(v string) {
-	x.xxx_hidden_FuncName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 8)
-}
-
-func (x *PBJob) SetServiceName(v string) {
+func (x *JobList_Input) SetServiceName(v string) {
 	x.xxx_hidden_ServiceName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *PBJob) HasEntryID() bool {
+func (x *JobList_Input) HasServiceName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *PBJob) HasEnabled() bool {
+func (x *JobList_Input) ClearServiceName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_ServiceName = nil
+}
+
+type JobList_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ServiceName *string
+}
+
+func (b0 JobList_Input_builder) Build() *JobList_Input {
+	m0 := &JobList_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.ServiceName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_ServiceName = b.ServiceName
+	}
+	return m0
+}
+
+type JobList_Output struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_JobList *[]*PBJob              `protobuf:"bytes,1,rep,name=JobList"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *JobList_Output) Reset() {
+	*x = JobList_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobList_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobList_Output) ProtoMessage() {}
+
+func (x *JobList_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobList_Output) GetJobList() []*PBJob {
+	if x != nil {
+		if x.xxx_hidden_JobList != nil {
+			return *x.xxx_hidden_JobList
+		}
+	}
+	return nil
+}
+
+func (x *JobList_Output) SetJobList(v []*PBJob) {
+	x.xxx_hidden_JobList = &v
+}
+
+type JobList_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	JobList []*PBJob
+}
+
+func (b0 JobList_Output_builder) Build() *JobList_Output {
+	m0 := &JobList_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_JobList = &b.JobList
+	return m0
+}
+
+type JobPut_Input struct {
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Job *PBRegisterJob         `protobuf:"bytes,1,opt,name=Job"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *JobPut_Input) Reset() {
+	*x = JobPut_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobPut_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobPut_Input) ProtoMessage() {}
+
+func (x *JobPut_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobPut_Input) GetJob() *PBRegisterJob {
+	if x != nil {
+		return x.xxx_hidden_Job
+	}
+	return nil
+}
+
+func (x *JobPut_Input) SetJob(v *PBRegisterJob) {
+	x.xxx_hidden_Job = v
+}
+
+func (x *JobPut_Input) HasJob() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Job != nil
+}
+
+func (x *JobPut_Input) ClearJob() {
+	x.xxx_hidden_Job = nil
+}
+
+type JobPut_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Job *PBRegisterJob
+}
+
+func (b0 JobPut_Input_builder) Build() *JobPut_Input {
+	m0 := &JobPut_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Job = b.Job
+	return m0
+}
+
+type JobPut_Output struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobPut_Output) Reset() {
+	*x = JobPut_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobPut_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobPut_Output) ProtoMessage() {}
+
+func (x *JobPut_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobPut_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobPut_Output_builder) Build() *JobPut_Output {
+	m0 := &JobPut_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobSetSpec_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ServiceName *string                `protobuf:"bytes,1,opt,name=serviceName"`
+	xxx_hidden_FuncName    *string                `protobuf:"bytes,2,opt,name=funcName"`
+	xxx_hidden_Spec        *string                `protobuf:"bytes,3,opt,name=spec"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *JobSetSpec_Input) Reset() {
+	*x = JobSetSpec_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobSetSpec_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobSetSpec_Input) ProtoMessage() {}
+
+func (x *JobSetSpec_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobSetSpec_Input) GetServiceName() string {
+	if x != nil {
+		if x.xxx_hidden_ServiceName != nil {
+			return *x.xxx_hidden_ServiceName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobSetSpec_Input) GetFuncName() string {
+	if x != nil {
+		if x.xxx_hidden_FuncName != nil {
+			return *x.xxx_hidden_FuncName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobSetSpec_Input) GetSpec() string {
+	if x != nil {
+		if x.xxx_hidden_Spec != nil {
+			return *x.xxx_hidden_Spec
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobSetSpec_Input) SetServiceName(v string) {
+	x.xxx_hidden_ServiceName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *JobSetSpec_Input) SetFuncName(v string) {
+	x.xxx_hidden_FuncName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *JobSetSpec_Input) SetSpec(v string) {
+	x.xxx_hidden_Spec = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *JobSetSpec_Input) HasServiceName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *JobSetSpec_Input) HasFuncName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *PBJob) HasNext() bool {
+func (x *JobSetSpec_Input) HasSpec() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_Next != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *PBJob) HasPrev() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Prev != nil
-}
-
-func (x *PBJob) HasSpec() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
-}
-
-func (x *PBJob) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
-}
-
-func (x *PBJob) HasFuncName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
-}
-
-func (x *PBJob) HasServiceName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
-}
-
-func (x *PBJob) ClearEntryID() {
+func (x *JobSetSpec_Input) ClearServiceName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_EntryID = 0
-}
-
-func (x *PBJob) ClearEnabled() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Enabled = false
-}
-
-func (x *PBJob) ClearNext() {
-	x.xxx_hidden_Next = nil
-}
-
-func (x *PBJob) ClearPrev() {
-	x.xxx_hidden_Prev = nil
-}
-
-func (x *PBJob) ClearSpec() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_Spec = nil
-}
-
-func (x *PBJob) ClearDescription() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
-	x.xxx_hidden_Description = nil
-}
-
-func (x *PBJob) ClearFuncName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
-	x.xxx_hidden_FuncName = nil
-}
-
-func (x *PBJob) ClearServiceName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
 	x.xxx_hidden_ServiceName = nil
 }
 
-type PBJob_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	EntryID     *int32
-	Enabled     *bool
-	Next        *timestamppb.Timestamp
-	Prev        *timestamppb.Timestamp
-	Spec        *string
-	Description *string
-	FuncName    *string
-	ServiceName *string
+func (x *JobSetSpec_Input) ClearFuncName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_FuncName = nil
 }
 
-func (b0 PBJob_builder) Build() *PBJob {
-	m0 := &PBJob{}
+func (x *JobSetSpec_Input) ClearSpec() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Spec = nil
+}
+
+type JobSetSpec_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ServiceName *string
+	FuncName    *string
+	Spec        *string
+}
+
+func (b0 JobSetSpec_Input_builder) Build() *JobSetSpec_Input {
+	m0 := &JobSetSpec_Input{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.EntryID != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
-		x.xxx_hidden_EntryID = *b.EntryID
-	}
-	if b.Enabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
-		x.xxx_hidden_Enabled = *b.Enabled
-	}
-	x.xxx_hidden_Next = b.Next
-	x.xxx_hidden_Prev = b.Prev
-	if b.Spec != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
-		x.xxx_hidden_Spec = b.Spec
-	}
-	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 8)
-		x.xxx_hidden_Description = b.Description
-	}
-	if b.FuncName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 8)
-		x.xxx_hidden_FuncName = b.FuncName
-	}
 	if b.ServiceName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ServiceName = b.ServiceName
 	}
+	if b.FuncName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_FuncName = b.FuncName
+	}
+	if b.Spec != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Spec = b.Spec
+	}
+	return m0
+}
+
+type JobSetSpec_Output struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobSetSpec_Output) Reset() {
+	*x = JobSetSpec_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobSetSpec_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobSetSpec_Output) ProtoMessage() {}
+
+func (x *JobSetSpec_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobSetSpec_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobSetSpec_Output_builder) Build() *JobSetSpec_Output {
+	m0 := &JobSetSpec_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type JobTrigger_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *JobTrigger_Input) Reset() {
+	*x = JobTrigger_Input{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobTrigger_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobTrigger_Input) ProtoMessage() {}
+
+func (x *JobTrigger_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *JobTrigger_Input) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *JobTrigger_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *JobTrigger_Input) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *JobTrigger_Input) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+type JobTrigger_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id *string
+}
+
+func (b0 JobTrigger_Input_builder) Build() *JobTrigger_Input {
+	m0 := &JobTrigger_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Id = b.Id
+	}
+	return m0
+}
+
+type JobTrigger_Output struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobTrigger_Output) Reset() {
+	*x = JobTrigger_Output{}
+	mi := &file_kk_scheduler_Job_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobTrigger_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobTrigger_Output) ProtoMessage() {}
+
+func (x *JobTrigger_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Job_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type JobTrigger_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 JobTrigger_Output_builder) Build() *JobTrigger_Output {
+	m0 := &JobTrigger_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
 	return m0
 }
 
@@ -312,30 +1434,85 @@ var File_kk_scheduler_Job_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_Job_proto_rawDesc = "" +
 	"\n" +
-	"\x16kk_scheduler/Job.proto\x12\fkk_scheduler\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8f\x02\n" +
-	"\x05PBJob\x12\x18\n" +
-	"\aEntryID\x18\x01 \x01(\x05R\aEntryID\x12\x18\n" +
-	"\aEnabled\x18\x02 \x01(\bR\aEnabled\x12.\n" +
-	"\x04Next\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04Next\x12.\n" +
-	"\x04Prev\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x04Prev\x12\x12\n" +
-	"\x04Spec\x18\x05 \x01(\tR\x04Spec\x12 \n" +
-	"\vDescription\x18\x06 \x01(\tR\vDescription\x12\x1a\n" +
-	"\bFuncName\x18\a \x01(\tR\bFuncName\x12 \n" +
-	"\vServiceName\x18\b \x01(\tR\vServiceNameB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
+	"\x16kk_scheduler/Job.proto\x12\fkk_scheduler\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1fkk_scheduler/extend_field.proto\x1a\x17kk_scheduler/Base.proto\"5\n" +
+	"\tJobEnable\x1a\x1e\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x1a\b\n" +
+	"\x06Output\"6\n" +
+	"\n" +
+	"JobDisable\x1a\x1e\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x1a\b\n" +
+	"\x06Output\"5\n" +
+	"\tJobDelete\x1a\x1e\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x1a\b\n" +
+	"\x06Output\"Y\n" +
+	"\x06JobGet\x1a\x1e\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x1a/\n" +
+	"\x06Output\x12%\n" +
+	"\x03Job\x18\x01 \x01(\v2\x13.kk_scheduler.PBJobR\x03Job\"m\n" +
+	"\aJobList\x1a)\n" +
+	"\x05Input\x12 \n" +
+	"\vserviceName\x18\x01 \x01(\tR\vserviceName\x1a7\n" +
+	"\x06Output\x12-\n" +
+	"\aJobList\x18\x01 \x03(\v2\x13.kk_scheduler.PBJobR\aJobList\"J\n" +
+	"\x06JobPut\x1a6\n" +
+	"\x05Input\x12-\n" +
+	"\x03Job\x18\x01 \x01(\v2\x1b.kk_scheduler.PBRegisterJobR\x03Job\x1a\b\n" +
+	"\x06Output\"\x83\x01\n" +
+	"\n" +
+	"JobSetSpec\x1ak\n" +
+	"\x05Input\x12&\n" +
+	"\vserviceName\x18\x01 \x01(\tB\x04\xca>\x01\x01R\vserviceName\x12 \n" +
+	"\bfuncName\x18\x02 \x01(\tB\x04\xca>\x01\x01R\bfuncName\x12\x18\n" +
+	"\x04spec\x18\x03 \x01(\tB\x04\xca>\x01\x01R\x04spec\x1a\b\n" +
+	"\x06Output\"6\n" +
+	"\n" +
+	"JobTrigger\x1a\x1e\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x1a\b\n" +
+	"\x06OutputB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
-var file_kk_scheduler_Job_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_kk_scheduler_Job_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_kk_scheduler_Job_proto_goTypes = []any{
-	(*PBJob)(nil),                 // 0: kk_scheduler.PBJob
-	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
+	(*JobEnable)(nil),         // 0: kk_scheduler.JobEnable
+	(*JobDisable)(nil),        // 1: kk_scheduler.JobDisable
+	(*JobDelete)(nil),         // 2: kk_scheduler.JobDelete
+	(*JobGet)(nil),            // 3: kk_scheduler.JobGet
+	(*JobList)(nil),           // 4: kk_scheduler.JobList
+	(*JobPut)(nil),            // 5: kk_scheduler.JobPut
+	(*JobSetSpec)(nil),        // 6: kk_scheduler.JobSetSpec
+	(*JobTrigger)(nil),        // 7: kk_scheduler.JobTrigger
+	(*JobEnable_Input)(nil),   // 8: kk_scheduler.JobEnable.Input
+	(*JobEnable_Output)(nil),  // 9: kk_scheduler.JobEnable.Output
+	(*JobDisable_Input)(nil),  // 10: kk_scheduler.JobDisable.Input
+	(*JobDisable_Output)(nil), // 11: kk_scheduler.JobDisable.Output
+	(*JobDelete_Input)(nil),   // 12: kk_scheduler.JobDelete.Input
+	(*JobDelete_Output)(nil),  // 13: kk_scheduler.JobDelete.Output
+	(*JobGet_Input)(nil),      // 14: kk_scheduler.JobGet.Input
+	(*JobGet_Output)(nil),     // 15: kk_scheduler.JobGet.Output
+	(*JobList_Input)(nil),     // 16: kk_scheduler.JobList.Input
+	(*JobList_Output)(nil),    // 17: kk_scheduler.JobList.Output
+	(*JobPut_Input)(nil),      // 18: kk_scheduler.JobPut.Input
+	(*JobPut_Output)(nil),     // 19: kk_scheduler.JobPut.Output
+	(*JobSetSpec_Input)(nil),  // 20: kk_scheduler.JobSetSpec.Input
+	(*JobSetSpec_Output)(nil), // 21: kk_scheduler.JobSetSpec.Output
+	(*JobTrigger_Input)(nil),  // 22: kk_scheduler.JobTrigger.Input
+	(*JobTrigger_Output)(nil), // 23: kk_scheduler.JobTrigger.Output
+	(*PBJob)(nil),             // 24: kk_scheduler.PBJob
+	(*PBRegisterJob)(nil),     // 25: kk_scheduler.PBRegisterJob
 }
 var file_kk_scheduler_Job_proto_depIdxs = []int32{
-	1, // 0: kk_scheduler.PBJob.Next:type_name -> google.protobuf.Timestamp
-	1, // 1: kk_scheduler.PBJob.Prev:type_name -> google.protobuf.Timestamp
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	24, // 0: kk_scheduler.JobGet.Output.Job:type_name -> kk_scheduler.PBJob
+	24, // 1: kk_scheduler.JobList.Output.JobList:type_name -> kk_scheduler.PBJob
+	25, // 2: kk_scheduler.JobPut.Input.Job:type_name -> kk_scheduler.PBRegisterJob
+	3,  // [3:3] is the sub-list for method output_type
+	3,  // [3:3] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_kk_scheduler_Job_proto_init() }
@@ -343,13 +1520,15 @@ func file_kk_scheduler_Job_proto_init() {
 	if File_kk_scheduler_Job_proto != nil {
 		return
 	}
+	file_kk_scheduler_extend_field_proto_init()
+	file_kk_scheduler_Base_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_kk_scheduler_Job_proto_rawDesc), len(file_kk_scheduler_Job_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

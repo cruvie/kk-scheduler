@@ -9,6 +9,7 @@ package kk_scheduler
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -312,11 +313,331 @@ func (b0 PBRegisterService_builder) Build() *PBRegisterService {
 	return m0
 }
 
+type PBJob struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	xxx_hidden_ServiceName *string                `protobuf:"bytes,2,opt,name=ServiceName"`
+	xxx_hidden_FuncName    *string                `protobuf:"bytes,3,opt,name=FuncName"`
+	xxx_hidden_EntryID     int32                  `protobuf:"varint,4,opt,name=EntryID"`
+	xxx_hidden_Enabled     bool                   `protobuf:"varint,5,opt,name=Enabled"`
+	xxx_hidden_Spec        *string                `protobuf:"bytes,6,opt,name=Spec"`
+	xxx_hidden_Description *string                `protobuf:"bytes,7,opt,name=Description"`
+	xxx_hidden_Next        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=Next"`
+	xxx_hidden_Prev        *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=Prev"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *PBJob) Reset() {
+	*x = PBJob{}
+	mi := &file_kk_scheduler_Base_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PBJob) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PBJob) ProtoMessage() {}
+
+func (x *PBJob) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_Base_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *PBJob) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBJob) GetServiceName() string {
+	if x != nil {
+		if x.xxx_hidden_ServiceName != nil {
+			return *x.xxx_hidden_ServiceName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBJob) GetFuncName() string {
+	if x != nil {
+		if x.xxx_hidden_FuncName != nil {
+			return *x.xxx_hidden_FuncName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBJob) GetEntryID() int32 {
+	if x != nil {
+		return x.xxx_hidden_EntryID
+	}
+	return 0
+}
+
+func (x *PBJob) GetEnabled() bool {
+	if x != nil {
+		return x.xxx_hidden_Enabled
+	}
+	return false
+}
+
+func (x *PBJob) GetSpec() string {
+	if x != nil {
+		if x.xxx_hidden_Spec != nil {
+			return *x.xxx_hidden_Spec
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBJob) GetDescription() string {
+	if x != nil {
+		if x.xxx_hidden_Description != nil {
+			return *x.xxx_hidden_Description
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBJob) GetNext() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_Next
+	}
+	return nil
+}
+
+func (x *PBJob) GetPrev() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_Prev
+	}
+	return nil
+}
+
+func (x *PBJob) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
+}
+
+func (x *PBJob) SetServiceName(v string) {
+	x.xxx_hidden_ServiceName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
+}
+
+func (x *PBJob) SetFuncName(v string) {
+	x.xxx_hidden_FuncName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
+}
+
+func (x *PBJob) SetEntryID(v int32) {
+	x.xxx_hidden_EntryID = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
+}
+
+func (x *PBJob) SetEnabled(v bool) {
+	x.xxx_hidden_Enabled = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 9)
+}
+
+func (x *PBJob) SetSpec(v string) {
+	x.xxx_hidden_Spec = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 9)
+}
+
+func (x *PBJob) SetDescription(v string) {
+	x.xxx_hidden_Description = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 9)
+}
+
+func (x *PBJob) SetNext(v *timestamppb.Timestamp) {
+	x.xxx_hidden_Next = v
+}
+
+func (x *PBJob) SetPrev(v *timestamppb.Timestamp) {
+	x.xxx_hidden_Prev = v
+}
+
+func (x *PBJob) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *PBJob) HasServiceName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *PBJob) HasFuncName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *PBJob) HasEntryID() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *PBJob) HasEnabled() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *PBJob) HasSpec() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *PBJob) HasDescription() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *PBJob) HasNext() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Next != nil
+}
+
+func (x *PBJob) HasPrev() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Prev != nil
+}
+
+func (x *PBJob) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *PBJob) ClearServiceName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ServiceName = nil
+}
+
+func (x *PBJob) ClearFuncName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_FuncName = nil
+}
+
+func (x *PBJob) ClearEntryID() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_EntryID = 0
+}
+
+func (x *PBJob) ClearEnabled() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_Enabled = false
+}
+
+func (x *PBJob) ClearSpec() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_Spec = nil
+}
+
+func (x *PBJob) ClearDescription() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_Description = nil
+}
+
+func (x *PBJob) ClearNext() {
+	x.xxx_hidden_Next = nil
+}
+
+func (x *PBJob) ClearPrev() {
+	x.xxx_hidden_Prev = nil
+}
+
+type PBJob_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id          *string
+	ServiceName *string
+	FuncName    *string
+	EntryID     *int32
+	Enabled     *bool
+	Spec        *string
+	Description *string
+	Next        *timestamppb.Timestamp
+	Prev        *timestamppb.Timestamp
+}
+
+func (b0 PBJob_builder) Build() *PBJob {
+	m0 := &PBJob{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.ServiceName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
+		x.xxx_hidden_ServiceName = b.ServiceName
+	}
+	if b.FuncName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
+		x.xxx_hidden_FuncName = b.FuncName
+	}
+	if b.EntryID != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
+		x.xxx_hidden_EntryID = *b.EntryID
+	}
+	if b.Enabled != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 9)
+		x.xxx_hidden_Enabled = *b.Enabled
+	}
+	if b.Spec != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 9)
+		x.xxx_hidden_Spec = b.Spec
+	}
+	if b.Description != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 9)
+		x.xxx_hidden_Description = b.Description
+	}
+	x.xxx_hidden_Next = b.Next
+	x.xxx_hidden_Prev = b.Prev
+	return m0
+}
+
 var File_kk_scheduler_Base_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_Base_proto_rawDesc = "" +
 	"\n" +
-	"\x17kk_scheduler/Base.proto\x12\fkk_scheduler\"o\n" +
+	"\x17kk_scheduler/Base.proto\x12\fkk_scheduler\x1a\x1fgoogle/protobuf/timestamp.proto\"o\n" +
 	"\rPBRegisterJob\x12 \n" +
 	"\vDescription\x18\x01 \x01(\tR\vDescription\x12 \n" +
 	"\vServiceName\x18\x02 \x01(\tR\vServiceName\x12\x1a\n" +
@@ -324,19 +645,33 @@ const file_kk_scheduler_Base_proto_rawDesc = "" +
 	"\x11PBRegisterService\x12\x16\n" +
 	"\x06Target\x18\x01 \x01(\tR\x06Target\x12 \n" +
 	"\vServiceName\x18\x02 \x01(\tR\vServiceName\x12\x1c\n" +
-	"\tAuthToken\x18\x03 \x01(\tR\tAuthTokenB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
+	"\tAuthToken\x18\x03 \x01(\tR\tAuthToken\"\x9f\x02\n" +
+	"\x05PBJob\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\tR\x02Id\x12 \n" +
+	"\vServiceName\x18\x02 \x01(\tR\vServiceName\x12\x1a\n" +
+	"\bFuncName\x18\x03 \x01(\tR\bFuncName\x12\x18\n" +
+	"\aEntryID\x18\x04 \x01(\x05R\aEntryID\x12\x18\n" +
+	"\aEnabled\x18\x05 \x01(\bR\aEnabled\x12\x12\n" +
+	"\x04Spec\x18\x06 \x01(\tR\x04Spec\x12 \n" +
+	"\vDescription\x18\a \x01(\tR\vDescription\x12.\n" +
+	"\x04Next\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x04Next\x12.\n" +
+	"\x04Prev\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x04PrevB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
-var file_kk_scheduler_Base_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_kk_scheduler_Base_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_kk_scheduler_Base_proto_goTypes = []any{
-	(*PBRegisterJob)(nil),     // 0: kk_scheduler.PBRegisterJob
-	(*PBRegisterService)(nil), // 1: kk_scheduler.PBRegisterService
+	(*PBRegisterJob)(nil),         // 0: kk_scheduler.PBRegisterJob
+	(*PBRegisterService)(nil),     // 1: kk_scheduler.PBRegisterService
+	(*PBJob)(nil),                 // 2: kk_scheduler.PBJob
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_kk_scheduler_Base_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: kk_scheduler.PBJob.Next:type_name -> google.protobuf.Timestamp
+	3, // 1: kk_scheduler.PBJob.Prev:type_name -> google.protobuf.Timestamp
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_kk_scheduler_Base_proto_init() }
@@ -350,7 +685,7 @@ func file_kk_scheduler_Base_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_kk_scheduler_Base_proto_rawDesc), len(file_kk_scheduler_Base_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

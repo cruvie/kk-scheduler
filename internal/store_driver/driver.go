@@ -7,9 +7,10 @@ import (
 
 type StoreDriver interface {
 	JobList(serviceName string) ([]*kk_scheduler.PBJob, error)
-	JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, error)
-	JobDelete(serviceName, funcName string) error
-	JobPut(entry *kk_scheduler.PBJob) error
+	JobGet(jobId string) (*kk_scheduler.PBJob, error)
+	JobGetByServiceFuncName(serviceName, funcName string) (*kk_scheduler.PBJob, error)
+	JobDelete(jobId string) error
+	JobPut(job *kk_scheduler.PBJob) error
 
 	ServiceList() ([]*kk_scheduler.PBRegisterService, error)
 	ServicePut(service *kk_scheduler.PBRegisterService) error

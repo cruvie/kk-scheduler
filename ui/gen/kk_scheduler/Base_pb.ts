@@ -4,13 +4,15 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Timestamp } from "../google/protobuf/timestamp_pb";
+import { file_google_protobuf_timestamp } from "../google/protobuf/timestamp_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file kk_scheduler/Base.proto.
  */
 export const file_kk_scheduler_Base: GenFile = /*@__PURE__*/
-  fileDesc("Chdra19zY2hlZHVsZXIvQmFzZS5wcm90bxIMa2tfc2NoZWR1bGVyIksKDVBCUmVnaXN0ZXJKb2ISEwoLRGVzY3JpcHRpb24YASABKAkSEwoLU2VydmljZU5hbWUYAiABKAkSEAoIRnVuY05hbWUYAyABKAkiSwoRUEJSZWdpc3RlclNlcnZpY2USDgoGVGFyZ2V0GAEgASgJEhMKC1NlcnZpY2VOYW1lGAIgASgJEhEKCUF1dGhUb2tlbhgDIAEoCUIPWg0va2tfc2NoZWR1bGVyYghlZGl0aW9uc3DoBw");
+  fileDesc("Chdra19zY2hlZHVsZXIvQmFzZS5wcm90bxIMa2tfc2NoZWR1bGVyIksKDVBCUmVnaXN0ZXJKb2ISEwoLRGVzY3JpcHRpb24YASABKAkSEwoLU2VydmljZU5hbWUYAiABKAkSEAoIRnVuY05hbWUYAyABKAkiSwoRUEJSZWdpc3RlclNlcnZpY2USDgoGVGFyZ2V0GAEgASgJEhMKC1NlcnZpY2VOYW1lGAIgASgJEhEKCUF1dGhUb2tlbhgDIAEoCSLTAQoFUEJKb2ISCgoCSWQYASABKAkSEwoLU2VydmljZU5hbWUYAiABKAkSEAoIRnVuY05hbWUYAyABKAkSDwoHRW50cnlJRBgEIAEoBRIPCgdFbmFibGVkGAUgASgIEgwKBFNwZWMYBiABKAkSEwoLRGVzY3JpcHRpb24YByABKAkSKAoETmV4dBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKAoEUHJldhgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message kk_scheduler.PBRegisterJob
@@ -73,4 +75,61 @@ export type PBRegisterService = Message<"kk_scheduler.PBRegisterService"> & {
  */
 export const PBRegisterServiceSchema: GenMessage<PBRegisterService> = /*@__PURE__*/
   messageDesc(file_kk_scheduler_Base, 1);
+
+/**
+ * @generated from message kk_scheduler.PBJob
+ */
+export type PBJob = Message<"kk_scheduler.PBJob"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+
+  /**
+   * @generated from field: string ServiceName = 2;
+   */
+  ServiceName: string;
+
+  /**
+   * @generated from field: string FuncName = 3;
+   */
+  FuncName: string;
+
+  /**
+   * @generated from field: int32 EntryID = 4;
+   */
+  EntryID: number;
+
+  /**
+   * @generated from field: bool Enabled = 5;
+   */
+  Enabled: boolean;
+
+  /**
+   * @generated from field: string Spec = 6;
+   */
+  Spec: string;
+
+  /**
+   * @generated from field: string Description = 7;
+   */
+  Description: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp Next = 8;
+   */
+  Next?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp Prev = 9;
+   */
+  Prev?: Timestamp;
+};
+
+/**
+ * Describes the message kk_scheduler.PBJob.
+ * Use `create(PBJobSchema)` to create a new message.
+ */
+export const PBJobSchema: GenMessage<PBJob> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Base, 2);
 

@@ -23,7 +23,7 @@ func (x *Config) check() {
 func NewScheduleServer() *kk_server.KKRunServer {
 	run := func() {
 		cfg := &Config{
-			StoreDriver: store_driver.NewMockStore(),
+			StoreDriver: store_driver.NewStoreDriver(),
 		}
 		logger := kKScheduleLog{}
 

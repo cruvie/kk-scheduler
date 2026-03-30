@@ -2,7 +2,7 @@ edition = "2023";
 package kk_scheduler;
 
 option go_package = "/kk_scheduler";
-
+import "google/protobuf/timestamp.proto";
 
 message PBRegisterJob {
   string Description = 1;
@@ -18,4 +18,17 @@ message PBRegisterService {
   string ServiceName = 2;
   // Authentication token for the service
   string AuthToken = 3;
+}
+
+
+message PBJob {
+  string Id = 1;
+  string ServiceName = 2;
+  string FuncName = 3;
+  int32 EntryID = 4;
+  bool Enabled = 5;
+  string Spec = 6;
+  string Description = 7;
+  google.protobuf.Timestamp Next = 8;
+  google.protobuf.Timestamp Prev = 9;
 }

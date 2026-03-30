@@ -5,6 +5,7 @@ import (
 	"slices"
 	"strings"
 
+	"gitee.com/cruvie/kk_go_kit/kk_id"
 	"github.com/cruvie/kk-scheduler/internal/store_driver"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"github.com/robfig/cron/v3"
@@ -38,7 +39,7 @@ func (x *Client) initJob() {
 		if !job.GetEnabled() {
 			continue
 		}
-		err := x.JobEnable(job.GetServiceName(), job.GetFuncName())
+		err := x.JobEnable(job.GetId())
 		if err != nil {
 			panic(err)
 		}
@@ -67,6 +68,7 @@ func (x *Client) JobPut(jobs ...*kk_scheduler.PBRegisterJob) error {
 		}
 
 		newEntry := &kk_scheduler.PBJob{}
+		newEntry.SetId(kk_id.GenUUID7())
 		newEntry.SetEntryID(0)
 		newEntry.SetEnabled(false)
 		newEntry.SetNext(nil)
@@ -76,12 +78,13 @@ func (x *Client) JobPut(jobs ...*kk_scheduler.PBRegisterJob) error {
 		newEntry.SetDescription(job.GetDescription())
 		newEntry.SetFuncName(job.GetFuncName())
 
-		entry, err := x.storer.JobGet(job.GetServiceName(), job.GetFuncName())
+		entry, err := x.storer.JobGetByServiceFuncName(job.GetServiceName(), job.GetFuncName())
 		if err != nil && !errors.Is(err, kk_scheduler.ErrJobNotFount) {
 			return err
 		}
 
 		if entry != nil {
+			newEntry.SetId(entry.GetId())
 			newEntry.SetEntryID(entry.GetEntryID())
 			newEntry.SetEnabled(entry.GetEnabled())
 			newEntry.SetNext(entry.GetNext())
@@ -139,8 +142,8 @@ func (x *Client) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
 	return pbJobs, nil
 }
 
-func (x *Client) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, error) {
-	entry, err := x.storer.JobGet(serviceName, funcName)
+func (x *Client) JobGet(jobId string) (*kk_scheduler.PBJob, error) {
+	entry, err := x.storer.JobGet(jobId)
 	if err != nil {
 		return nil, err
 	}
@@ -154,8 +157,8 @@ func (x *Client) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, erro
 	return entry, nil
 }
 
-func (x *Client) JobSetSpec(serviceName, funcName string, spec string) error {
-	job, err := x.storer.JobGet(serviceName, funcName)
+func (x *Client) JobSetSpec(jobId string, spec string) error {
+	job, err := x.storer.JobGet(jobId)
 	if err != nil {
 		return err
 	}
@@ -166,7 +169,7 @@ func (x *Client) JobSetSpec(serviceName, funcName string, spec string) error {
 
 	err = x.storer.JobPut(job)
 	if job.GetEnabled() {
-		err = x.JobEnable(serviceName, funcName)
+		err = x.JobEnable(jobId)
 		if err != nil {
 			return err
 		}
@@ -175,24 +178,24 @@ func (x *Client) JobSetSpec(serviceName, funcName string, spec string) error {
 	return err
 }
 
-func (x *Client) JobEnable(serviceName string, funcName string) error {
-	entry, err := x.storer.JobGet(serviceName, funcName)
+func (x *Client) JobEnable(jobId string) error {
+	entry, err := x.storer.JobGet(jobId)
 	if err != nil {
 		return err
 	}
 	if entry.GetSpec() == "" {
 		return kk_scheduler.ErrSpecIsEmpty
 	}
-	err = x.JobDisable(serviceName, funcName)
+	err = x.JobDisable(jobId)
 	if err != nil {
 		return err
 	}
-	service, err := x.storer.ServiceGet(serviceName)
+	service, err := x.storer.ServiceGet(entry.GetServiceName())
 	if err != nil {
 		return err
 	}
 
-	entryID, err := x.cron.AddFunc(entry.GetSpec(), triggerFunc(service, funcName))
+	entryID, err := x.cron.AddFunc(entry.GetSpec(), triggerFunc(service, entry.GetFuncName()))
 	if err != nil {
 		return err
 	}
@@ -204,8 +207,8 @@ func (x *Client) JobEnable(serviceName string, funcName string) error {
 	return err
 }
 
-func (x *Client) JobDisable(serviceName, funcName string) error {
-	entry, err := x.storer.JobGet(serviceName, funcName)
+func (x *Client) JobDisable(jobId string) error {
+	entry, err := x.storer.JobGet(jobId)
 	if err != nil {
 		return err
 	}
@@ -218,24 +221,28 @@ func (x *Client) JobDisable(serviceName, funcName string) error {
 	return err
 }
 
-func (x *Client) JobDelete(serviceName, funcName string) error {
+func (x *Client) JobDelete(jobId string) error {
 	// disable job
-	err := x.JobDisable(serviceName, funcName)
+	err := x.JobDisable(jobId)
 	if err != nil {
 		return err
 	}
-	return x.storer.JobDelete(serviceName, funcName)
+	return x.storer.JobDelete(jobId)
 }
 
 // JobTrigger triggers a job manually
-func (x *Client) JobTrigger(serviceName, funcName string) error {
-	service, err := x.storer.ServiceGet(serviceName)
+func (x *Client) JobTrigger(jobId string) error {
+	entry, err := x.storer.JobGet(jobId)
+	if err != nil {
+		return err
+	}
+	service, err := x.storer.ServiceGet(entry.GetServiceName())
 	if err != nil {
 		return err
 	}
 
 	// Trigger the job function directly
-	triggerFunc(service, funcName)()
+	triggerFunc(service, entry.GetFuncName())()
 	return nil
 }
 

@@ -4,18 +4,8 @@ package kk_scheduler;
 
 option go_package = "/kk_scheduler";
 
-import "kk_scheduler/JobList.proto";
-import "kk_scheduler/JobGet.proto";
-import "kk_scheduler/JobEnable.proto";
-import "kk_scheduler/JobDisable.proto";
-import "kk_scheduler/JobSetSpec.proto";
-import "kk_scheduler/JobPut.proto";
-import "kk_scheduler/ServiceList.proto";
-import "kk_scheduler/ServicePut.proto";
-import "kk_scheduler/ServiceGet.proto";
-import "kk_scheduler/ServiceDelete.proto";
-import "kk_scheduler/JobDelete.proto";
-import "kk_scheduler/JobTrigger.proto";
+import "kk_scheduler/Job.proto";
+import "kk_scheduler/Service.proto";
 import "kk_scheduler/TaskExecution.proto";
 
 service KKSchedule {
@@ -36,4 +26,17 @@ service KKSchedule {
   rpc TaskCreate(TaskCreate.Input) returns (TaskCreate.Output);
   rpc TaskUpdateStatus(TaskUpdateStatus.Input) returns (TaskUpdateStatus.Output);
   rpc TaskAppendLog(TaskAppendLog.Input) returns (TaskAppendLog.Output);
+}
+
+
+service KKScheduleTrigger {
+  rpc Trigger(Trigger.Input) returns (Trigger.Output);
+}
+
+message Trigger {
+  message Input {
+    string funcName = 1;
+  }
+  message Output {
+  }
 }

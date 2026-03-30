@@ -4,65 +4,377 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Timestamp } from "../google/protobuf/timestamp_pb";
 import { file_google_protobuf_timestamp } from "../google/protobuf/timestamp_pb";
+import { file_kk_scheduler_extend_field } from "./extend_field_pb";
+import type { PBJob, PBRegisterJob } from "./Base_pb";
+import { file_kk_scheduler_Base } from "./Base_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file kk_scheduler/Job.proto.
  */
 export const file_kk_scheduler_Job: GenFile = /*@__PURE__*/
-  fileDesc("ChZra19zY2hlZHVsZXIvSm9iLnByb3RvEgxra19zY2hlZHVsZXIixwEKBVBCSm9iEg8KB0VudHJ5SUQYASABKAUSDwoHRW5hYmxlZBgCIAEoCBIoCgROZXh0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIoCgRQcmV2GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIMCgRTcGVjGAUgASgJEhMKC0Rlc2NyaXB0aW9uGAYgASgJEhAKCEZ1bmNOYW1lGAcgASgJEhMKC1NlcnZpY2VOYW1lGAggASgJQg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH", [file_google_protobuf_timestamp]);
+  fileDesc("ChZra19zY2hlZHVsZXIvSm9iLnByb3RvEgxra19zY2hlZHVsZXIiMQoJSm9iRW5hYmxlGhoKBUlucHV0EhEKAklkGAEgASgJQgXKPgIBAhoICgZPdXRwdXQiMgoKSm9iRGlzYWJsZRoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaCAoGT3V0cHV0IjEKCUpvYkRlbGV0ZRoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaCAoGT3V0cHV0IlAKBkpvYkdldBoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaKgoGT3V0cHV0EiAKA0pvYhgBIAEoCzITLmtrX3NjaGVkdWxlci5QQkpvYiJXCgdKb2JMaXN0GhwKBUlucHV0EhMKC3NlcnZpY2VOYW1lGAEgASgJGi4KBk91dHB1dBIkCgdKb2JMaXN0GAEgAygLMhMua2tfc2NoZWR1bGVyLlBCSm9iIkUKBkpvYlB1dBoxCgVJbnB1dBIoCgNKb2IYASABKAsyGy5ra19zY2hlZHVsZXIuUEJSZWdpc3RlckpvYhoICgZPdXRwdXQiZgoKSm9iU2V0U3BlYxpOCgVJbnB1dBIZCgtzZXJ2aWNlTmFtZRgBIAEoCUIEyj4BARIWCghmdW5jTmFtZRgCIAEoCUIEyj4BARISCgRzcGVjGAMgASgJQgTKPgEBGggKBk91dHB1dCIyCgpKb2JUcmlnZ2VyGhoKBUlucHV0EhEKAklkGAEgASgJQgXKPgIBAhoICgZPdXRwdXRCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_google_protobuf_timestamp, file_kk_scheduler_extend_field, file_kk_scheduler_Base]);
 
 /**
- * @generated from message kk_scheduler.PBJob
+ * @generated from message kk_scheduler.JobEnable
  */
-export type PBJob = Message<"kk_scheduler.PBJob"> & {
-  /**
-   * @generated from field: int32 EntryID = 1;
-   */
-  EntryID: number;
-
-  /**
-   * @generated from field: bool Enabled = 2;
-   */
-  Enabled: boolean;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp Next = 3;
-   */
-  Next?: Timestamp;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp Prev = 4;
-   */
-  Prev?: Timestamp;
-
-  /**
-   * @generated from field: string Spec = 5;
-   */
-  Spec: string;
-
-  /**
-   * @generated from field: string Description = 6;
-   */
-  Description: string;
-
-  /**
-   * @generated from field: string FuncName = 7;
-   */
-  FuncName: string;
-
-  /**
-   * @generated from field: string ServiceName = 8;
-   */
-  ServiceName: string;
+export type JobEnable = Message<"kk_scheduler.JobEnable"> & {
 };
 
 /**
- * Describes the message kk_scheduler.PBJob.
- * Use `create(PBJobSchema)` to create a new message.
+ * Describes the message kk_scheduler.JobEnable.
+ * Use `create(JobEnableSchema)` to create a new message.
  */
-export const PBJobSchema: GenMessage<PBJob> = /*@__PURE__*/
+export const JobEnableSchema: GenMessage<JobEnable> = /*@__PURE__*/
   messageDesc(file_kk_scheduler_Job, 0);
+
+/**
+ * @generated from message kk_scheduler.JobEnable.Input
+ */
+export type JobEnable_Input = Message<"kk_scheduler.JobEnable.Input"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+};
+
+/**
+ * Describes the message kk_scheduler.JobEnable.Input.
+ * Use `create(JobEnable_InputSchema)` to create a new message.
+ */
+export const JobEnable_InputSchema: GenMessage<JobEnable_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 0, 0);
+
+/**
+ * @generated from message kk_scheduler.JobEnable.Output
+ */
+export type JobEnable_Output = Message<"kk_scheduler.JobEnable.Output"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobEnable.Output.
+ * Use `create(JobEnable_OutputSchema)` to create a new message.
+ */
+export const JobEnable_OutputSchema: GenMessage<JobEnable_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 0, 1);
+
+/**
+ * @generated from message kk_scheduler.JobDisable
+ */
+export type JobDisable = Message<"kk_scheduler.JobDisable"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobDisable.
+ * Use `create(JobDisableSchema)` to create a new message.
+ */
+export const JobDisableSchema: GenMessage<JobDisable> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 1);
+
+/**
+ * @generated from message kk_scheduler.JobDisable.Input
+ */
+export type JobDisable_Input = Message<"kk_scheduler.JobDisable.Input"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+};
+
+/**
+ * Describes the message kk_scheduler.JobDisable.Input.
+ * Use `create(JobDisable_InputSchema)` to create a new message.
+ */
+export const JobDisable_InputSchema: GenMessage<JobDisable_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 1, 0);
+
+/**
+ * @generated from message kk_scheduler.JobDisable.Output
+ */
+export type JobDisable_Output = Message<"kk_scheduler.JobDisable.Output"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobDisable.Output.
+ * Use `create(JobDisable_OutputSchema)` to create a new message.
+ */
+export const JobDisable_OutputSchema: GenMessage<JobDisable_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 1, 1);
+
+/**
+ * @generated from message kk_scheduler.JobDelete
+ */
+export type JobDelete = Message<"kk_scheduler.JobDelete"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobDelete.
+ * Use `create(JobDeleteSchema)` to create a new message.
+ */
+export const JobDeleteSchema: GenMessage<JobDelete> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 2);
+
+/**
+ * @generated from message kk_scheduler.JobDelete.Input
+ */
+export type JobDelete_Input = Message<"kk_scheduler.JobDelete.Input"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+};
+
+/**
+ * Describes the message kk_scheduler.JobDelete.Input.
+ * Use `create(JobDelete_InputSchema)` to create a new message.
+ */
+export const JobDelete_InputSchema: GenMessage<JobDelete_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 2, 0);
+
+/**
+ * @generated from message kk_scheduler.JobDelete.Output
+ */
+export type JobDelete_Output = Message<"kk_scheduler.JobDelete.Output"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobDelete.Output.
+ * Use `create(JobDelete_OutputSchema)` to create a new message.
+ */
+export const JobDelete_OutputSchema: GenMessage<JobDelete_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 2, 1);
+
+/**
+ * @generated from message kk_scheduler.JobGet
+ */
+export type JobGet = Message<"kk_scheduler.JobGet"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobGet.
+ * Use `create(JobGetSchema)` to create a new message.
+ */
+export const JobGetSchema: GenMessage<JobGet> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 3);
+
+/**
+ * @generated from message kk_scheduler.JobGet.Input
+ */
+export type JobGet_Input = Message<"kk_scheduler.JobGet.Input"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+};
+
+/**
+ * Describes the message kk_scheduler.JobGet.Input.
+ * Use `create(JobGet_InputSchema)` to create a new message.
+ */
+export const JobGet_InputSchema: GenMessage<JobGet_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 3, 0);
+
+/**
+ * @generated from message kk_scheduler.JobGet.Output
+ */
+export type JobGet_Output = Message<"kk_scheduler.JobGet.Output"> & {
+  /**
+   * @generated from field: kk_scheduler.PBJob Job = 1;
+   */
+  Job?: PBJob;
+};
+
+/**
+ * Describes the message kk_scheduler.JobGet.Output.
+ * Use `create(JobGet_OutputSchema)` to create a new message.
+ */
+export const JobGet_OutputSchema: GenMessage<JobGet_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 3, 1);
+
+/**
+ * @generated from message kk_scheduler.JobList
+ */
+export type JobList = Message<"kk_scheduler.JobList"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobList.
+ * Use `create(JobListSchema)` to create a new message.
+ */
+export const JobListSchema: GenMessage<JobList> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 4);
+
+/**
+ * @generated from message kk_scheduler.JobList.Input
+ */
+export type JobList_Input = Message<"kk_scheduler.JobList.Input"> & {
+  /**
+   * @generated from field: string serviceName = 1;
+   */
+  serviceName: string;
+};
+
+/**
+ * Describes the message kk_scheduler.JobList.Input.
+ * Use `create(JobList_InputSchema)` to create a new message.
+ */
+export const JobList_InputSchema: GenMessage<JobList_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 4, 0);
+
+/**
+ * @generated from message kk_scheduler.JobList.Output
+ */
+export type JobList_Output = Message<"kk_scheduler.JobList.Output"> & {
+  /**
+   * @generated from field: repeated kk_scheduler.PBJob JobList = 1;
+   */
+  JobList: PBJob[];
+};
+
+/**
+ * Describes the message kk_scheduler.JobList.Output.
+ * Use `create(JobList_OutputSchema)` to create a new message.
+ */
+export const JobList_OutputSchema: GenMessage<JobList_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 4, 1);
+
+/**
+ * @generated from message kk_scheduler.JobPut
+ */
+export type JobPut = Message<"kk_scheduler.JobPut"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobPut.
+ * Use `create(JobPutSchema)` to create a new message.
+ */
+export const JobPutSchema: GenMessage<JobPut> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 5);
+
+/**
+ * @generated from message kk_scheduler.JobPut.Input
+ */
+export type JobPut_Input = Message<"kk_scheduler.JobPut.Input"> & {
+  /**
+   * @generated from field: kk_scheduler.PBRegisterJob Job = 1;
+   */
+  Job?: PBRegisterJob;
+};
+
+/**
+ * Describes the message kk_scheduler.JobPut.Input.
+ * Use `create(JobPut_InputSchema)` to create a new message.
+ */
+export const JobPut_InputSchema: GenMessage<JobPut_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 5, 0);
+
+/**
+ * @generated from message kk_scheduler.JobPut.Output
+ */
+export type JobPut_Output = Message<"kk_scheduler.JobPut.Output"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobPut.Output.
+ * Use `create(JobPut_OutputSchema)` to create a new message.
+ */
+export const JobPut_OutputSchema: GenMessage<JobPut_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 5, 1);
+
+/**
+ * @generated from message kk_scheduler.JobSetSpec
+ */
+export type JobSetSpec = Message<"kk_scheduler.JobSetSpec"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobSetSpec.
+ * Use `create(JobSetSpecSchema)` to create a new message.
+ */
+export const JobSetSpecSchema: GenMessage<JobSetSpec> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 6);
+
+/**
+ * @generated from message kk_scheduler.JobSetSpec.Input
+ */
+export type JobSetSpec_Input = Message<"kk_scheduler.JobSetSpec.Input"> & {
+  /**
+   * @generated from field: string serviceName = 1;
+   */
+  serviceName: string;
+
+  /**
+   * @generated from field: string funcName = 2;
+   */
+  funcName: string;
+
+  /**
+   * @generated from field: string spec = 3;
+   */
+  spec: string;
+};
+
+/**
+ * Describes the message kk_scheduler.JobSetSpec.Input.
+ * Use `create(JobSetSpec_InputSchema)` to create a new message.
+ */
+export const JobSetSpec_InputSchema: GenMessage<JobSetSpec_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 6, 0);
+
+/**
+ * @generated from message kk_scheduler.JobSetSpec.Output
+ */
+export type JobSetSpec_Output = Message<"kk_scheduler.JobSetSpec.Output"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobSetSpec.Output.
+ * Use `create(JobSetSpec_OutputSchema)` to create a new message.
+ */
+export const JobSetSpec_OutputSchema: GenMessage<JobSetSpec_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 6, 1);
+
+/**
+ * @generated from message kk_scheduler.JobTrigger
+ */
+export type JobTrigger = Message<"kk_scheduler.JobTrigger"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobTrigger.
+ * Use `create(JobTriggerSchema)` to create a new message.
+ */
+export const JobTriggerSchema: GenMessage<JobTrigger> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 7);
+
+/**
+ * @generated from message kk_scheduler.JobTrigger.Input
+ */
+export type JobTrigger_Input = Message<"kk_scheduler.JobTrigger.Input"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+};
+
+/**
+ * Describes the message kk_scheduler.JobTrigger.Input.
+ * Use `create(JobTrigger_InputSchema)` to create a new message.
+ */
+export const JobTrigger_InputSchema: GenMessage<JobTrigger_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 7, 0);
+
+/**
+ * @generated from message kk_scheduler.JobTrigger.Output
+ */
+export type JobTrigger_Output = Message<"kk_scheduler.JobTrigger.Output"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.JobTrigger.Output.
+ * Use `create(JobTrigger_OutputSchema)` to create a new message.
+ */
+export const JobTrigger_OutputSchema: GenMessage<JobTrigger_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_Job, 7, 1);
 

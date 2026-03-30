@@ -9,7 +9,6 @@ import (
 	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/internal/models/query"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
-	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -23,6 +22,13 @@ func NewPostgresStore() *PostgresStore {
 
 // TaskCreate creates a new task execution record
 func (s *PostgresStore) TaskCreate(jobId string) error {
+	{
+		//check
+		_, err := s.JobGet(jobId)
+		if err != nil {
+			return err
+		}
+	}
 	execution := &models.TaskExecution{
 		Id:         kk_id.GenUUID7(),
 		JobId:      jobId,
@@ -85,9 +91,12 @@ func (s *PostgresStore) TaskAppendLog(id string, log string) error {
 
 // JobList returns all jobs for a service
 func (s *PostgresStore) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
-	jobs, err := query.Job.
-		Where(query.Job.ServiceName.Eq(serviceName)).
-		Find()
+	q := query.Job.Where()
+	if serviceName != "" {
+		q = query.Job.Where(query.Job.ServiceName.Eq(serviceName))
+	}
+
+	jobs, err := q.Find()
 	if err != nil {
 		slog.Error("failed to list jobs", "err", err, "serviceName", serviceName)
 		return nil, err
@@ -100,7 +109,21 @@ func (s *PostgresStore) JobList(serviceName string) ([]*kk_scheduler.PBJob, erro
 }
 
 // JobGet returns a specific job
-func (s *PostgresStore) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, error) {
+func (s *PostgresStore) JobGet(jobId string) (*kk_scheduler.PBJob, error) {
+	job, err := query.Job.
+		Where(query.Job.Id.Eq(jobId)).
+		First()
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		slog.Error("failed to get job", "err", err, "jobId", jobId)
+		return nil, err
+	}
+	return job.ToPB(), nil
+}
+
+func (s *PostgresStore) JobGetByServiceFuncName(serviceName, funcName string) (*kk_scheduler.PBJob, error) {
 	job, err := query.Job.
 		Where(query.Job.ServiceName.Eq(serviceName)).
 		Where(query.Job.FuncName.Eq(funcName)).
@@ -116,13 +139,12 @@ func (s *PostgresStore) JobGet(serviceName, funcName string) (*kk_scheduler.PBJo
 }
 
 // JobDelete deletes a job
-func (s *PostgresStore) JobDelete(serviceName, funcName string) error {
+func (s *PostgresStore) JobDelete(jobId string) error {
 	_, err := query.Job.
-		Where(query.Job.ServiceName.Eq(serviceName)).
-		Where(query.Job.FuncName.Eq(funcName)).
+		Where(query.Job.Id.Eq(jobId)).
 		Delete()
 	if err != nil {
-		slog.Error("failed to delete job", "err", err, "serviceName", serviceName, "funcName", funcName)
+		slog.Error("failed to delete job", "err", err, "jobId", jobId)
 		return err
 	}
 	return nil
@@ -131,6 +153,7 @@ func (s *PostgresStore) JobDelete(serviceName, funcName string) error {
 // JobPut creates or updates a job (upsert)
 func (s *PostgresStore) JobPut(entry *kk_scheduler.PBJob) error {
 	// Check if job exists
+	//todo use jobId
 	existing, err := query.Job.
 		Where(query.Job.ServiceName.Eq(entry.GetServiceName())).
 		Where(query.Job.FuncName.Eq(entry.GetFuncName())).
@@ -140,7 +163,7 @@ func (s *PostgresStore) JobPut(entry *kk_scheduler.PBJob) error {
 		// Create new job
 		job := &models.Job{}
 		job.FromPB(entry)
-		job.Id = uuid.New().String()
+		job.Id = kk_id.GenUUID7()
 		if err = query.Job.Create(job); err != nil {
 			slog.Error("failed to create job", "err", err)
 			return err

@@ -66,8 +66,8 @@ package store_driver
 //	return jobs, nil
 //}
 //
-//func (x *StoreEtcd) JobGet(serviceName, funcName string) (*kk_scheduler.PBJob, error) {
-//	key := fmt.Sprintf("%s/%s/%s", storeJobKey, serviceName, funcName)
+//func (x *StoreEtcd) JobGet(jobId string) (*kk_scheduler.PBJob, error) {
+//	key := fmt.Sprintf("%s/%s/%s", storeJobKey, jobId)
 //	resp, err := x.Client.Get(context.Background(), key)
 //	if err != nil {
 //		return nil, err
@@ -96,8 +96,8 @@ package store_driver
 //	return err
 //}
 //
-//func (x *StoreEtcd) JobDelete(serviceName, funcName string) error {
-//	key := fmt.Sprintf("%s/%s/%s", storeJobKey, serviceName, funcName)
+//func (x *StoreEtcd) JobDelete(jobId string) error {
+//	key := fmt.Sprintf("%s/%s/%s", storeJobKey, jobId)
 //	_, err := x.Client.Delete(context.Background(), key)
 //	return err
 //}
