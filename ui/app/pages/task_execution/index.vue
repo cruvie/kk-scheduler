@@ -9,15 +9,13 @@
 
     </UTable>
 
-    <UModal v-model:open="isLogModalOpen" title="Execution Log" :ui="{ footer: 'justify-end' }">
+    <USlideover v-model:open="isLogPanelOpen" title="Execution Log" side="right" :ui="{ content: 'w-2/3 max-w-none' }">
       <template #body>
-        <pre class="whitespace-pre-wrap text-sm bg-gray-100 dark:bg-gray-800 p-3 rounded max-h-96 overflow-auto">{{ selectedLog }}</pre>
+        <pre class="whitespace-pre-wrap text-sm bg-gray-100 dark:bg-gray-800 p-3 rounded h-full overflow-auto">{{
+            selectedLog
+          }}</pre>
       </template>
-
-      <template #footer>
-        <UButton color="neutral" @click="isLogModalOpen = false">Close</UButton>
-      </template>
-    </UModal>
+    </USlideover>
 
     <UModal v-model:open="isDeleteModalOpen" title="Warning" :ui="{ footer: 'justify-end' }">
       <template #body>
@@ -35,7 +33,11 @@
 <script setup lang="ts">
 import {h, ref, onMounted, resolveComponent} from 'vue';
 import {clientKKSchedule} from '~/utils/api/client';
-import {TaskExecutionList_InputSchema, TaskExecutionDelete_InputSchema, TaskExecutionGet_InputSchema} from '~~/gen/kk_scheduler/TaskExecution_pb';
+import {
+  TaskExecutionList_InputSchema,
+  TaskExecutionDelete_InputSchema,
+  TaskExecutionGet_InputSchema
+} from '~~/gen/kk_scheduler/TaskExecution_pb';
 import type {PBTaskExecution} from '~~/gen/kk_scheduler/TaskExecution_pb';
 import {TaskExecutionStatus} from '~~/gen/kk_scheduler/TaskExecution_pb';
 import {create} from "@bufbuild/protobuf";
@@ -48,7 +50,7 @@ const UBadge = resolveComponent('UBadge')
 const executions = ref<PBTaskExecution[]>([]);
 const toast = useToast();
 
-const isLogModalOpen = ref(false);
+const isLogPanelOpen = ref(false);
 const selectedLog = ref('');
 const isDeleteModalOpen = ref(false);
 let deleteTargetId: string | null = null;
@@ -116,7 +118,7 @@ const handleViewLog = async (execution: PBTaskExecution) => {
     const request = create(TaskExecutionGet_InputSchema, {Id: execution.Id});
     const out = await clientKKSchedule.taskExecutionGet(request);
     selectedLog.value = out.TaskExecution?.Log || '(empty)';
-    isLogModalOpen.value = true;
+    isLogPanelOpen.value = true;
   } catch (error) {
     toast.add({title: 'Error fetching task execution detail', description: String(error), color: 'error'});
   }

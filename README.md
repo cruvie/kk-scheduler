@@ -10,41 +10,43 @@ A job scheduling system based on cron and gRPC
 
 ![job-list](https://github.com/cruvie/kk-scheduler/blob/main/readme/job-list.png?raw=true)
 
-# System Design
+![task-list](https://github.com/cruvie/kk-scheduler/blob/main/readme/task-list.png?raw=true)
 
+![task-log](https://github.com/cruvie/kk-scheduler/blob/main/readme/task-log.png?raw=true)
+
+# System Design
 
 ```mermaid
 graph TB
-  U[SDK RPCClient]
-  W[Web UI]
+    U[SDK RPCClient]
+    W[Web UI]
 
-  subgraph kk-scheduler
-    C[API Handlers]
-    G[Global Client]
-    F[Cron Scheduler]
-    C -- Update Job --> F
-  end
+    subgraph kk-scheduler
+        C[API Handlers]
+        G[Global Client]
+        F[Cron Scheduler]
+        C -- Update Job --> F
+    end
 
-  subgraph App
-    A[kk-scheduler Client server]
-    A2[User Jobs]
-    A -- Trigger --> A2
-  end
+    subgraph App
+        A[kk-scheduler Client server]
+        A2[User Jobs]
+        A -- Trigger --> A2
+    end
 
-  subgraph Storage Layer
-    J[Store Interface]
-    I[Default Etcd Store]
-  end
+    subgraph Storage Layer
+        J[Store Interface]
+        I[Default Etcd Store]
+    end
 
-  U -- Get/Put/Enable/Trigger Job/Service --> C
-  W -- Get/Put/Enable/Trigger Job/Service --> C
-  C --> G
-  F --> G
-  G -- RPC Trigger --> A
-  G <-- Get/Put --> J
-  J --> I
+    U -- Get/Put/Enable/Trigger Job/Service --> C
+    W -- Get/Put/Enable/Trigger Job/Service --> C
+    C --> G
+    F --> G
+    G -- RPC Trigger --> A
+    G <-- Get/Put --> J
+    J --> I
 ```
-
 
 # Deploy
 
