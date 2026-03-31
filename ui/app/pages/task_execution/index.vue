@@ -5,8 +5,7 @@
       <UButton icon="i-heroicons-arrow-path" @click="fetchExecutions">Refresh</UButton>
     </div>
 
-    <UTable :data="executions" :columns="columns">
-
+    <UTable v-model:column-pinning="columnPinning" :data="executions" :columns="columns">
     </UTable>
 
     <USlideover v-model:open="isLogPanelOpen" title="Execution Log" side="right" :ui="{ content: 'w-2/3 max-w-none' }">
@@ -46,6 +45,10 @@ import type {TableColumn} from '@nuxt/ui';
 
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
+
+const columnPinning = ref({
+  right: ['actions']
+})
 
 const executions = ref<PBTaskExecution[]>([]);
 const toast = useToast();

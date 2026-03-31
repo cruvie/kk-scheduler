@@ -5,7 +5,7 @@
       <UButton icon="i-heroicons-plus" @click="handleCreateService">Create Service</UButton>
     </div>
 
-    <UTable :data="services" :columns="columns">
+    <UTable v-model:column-pinning="columnPinning" :data="services" :columns="columns">
     </UTable>
 
     <ServiceForm ref="serviceFormRef" @serviceUpdated="fetchServices"/>
@@ -34,6 +34,10 @@ import {useToast} from '#imports';
 import type {TableColumn} from '@nuxt/ui';
 
 const UButton = resolveComponent('UButton')
+
+const columnPinning = ref({
+  right: ['actions']
+})
 
 const services = ref<PBRegisterService[]>([]);
 const serviceFormRef = ref<InstanceType<typeof ServiceForm> | null>(null);

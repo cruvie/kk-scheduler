@@ -5,8 +5,7 @@
       <UButton icon="i-heroicons-plus" @click="handleCreateJob">Create Job</UButton>
     </div>
 
-    <UTable :data="jobs" :columns="columns">
-
+    <UTable v-model:column-pinning="columnPinning" :data="jobs" :columns="columns">
     </UTable>
 
     <JobForm ref="jobFormRef" @jobUpdated="fetchJobs"/>
@@ -38,6 +37,10 @@ import type {TableColumn} from '@nuxt/ui';
 
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
+
+const columnPinning = ref({
+  right: ['actions']
+})
 
 const jobs = ref<PBJob[]>([]);
 const toast = useToast();
