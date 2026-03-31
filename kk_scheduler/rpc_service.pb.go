@@ -66,6 +66,7 @@ func (b0 Trigger_builder) Build() *Trigger {
 type Trigger_Input struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_FuncName    *string                `protobuf:"bytes,1,opt,name=funcName"`
+	xxx_hidden_JobId       *string                `protobuf:"bytes,2,opt,name=jobId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -107,9 +108,24 @@ func (x *Trigger_Input) GetFuncName() string {
 	return ""
 }
 
+func (x *Trigger_Input) GetJobId() string {
+	if x != nil {
+		if x.xxx_hidden_JobId != nil {
+			return *x.xxx_hidden_JobId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Trigger_Input) SetFuncName(v string) {
 	x.xxx_hidden_FuncName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Trigger_Input) SetJobId(v string) {
+	x.xxx_hidden_JobId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *Trigger_Input) HasFuncName() bool {
@@ -119,15 +135,28 @@ func (x *Trigger_Input) HasFuncName() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Trigger_Input) HasJobId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *Trigger_Input) ClearFuncName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_FuncName = nil
+}
+
+func (x *Trigger_Input) ClearJobId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_JobId = nil
 }
 
 type Trigger_Input_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	FuncName *string
+	JobId    *string
 }
 
 func (b0 Trigger_Input_builder) Build() *Trigger_Input {
@@ -135,8 +164,12 @@ func (b0 Trigger_Input_builder) Build() *Trigger_Input {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.FuncName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_FuncName = b.FuncName
+	}
+	if b.JobId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_JobId = b.JobId
 	}
 	return m0
 }
@@ -188,10 +221,11 @@ var File_kk_scheduler_rpc_service_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_rpc_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1ekk_scheduler/rpc_service.proto\x12\fkk_scheduler\x1a\x16kk_scheduler/Job.proto\x1a\x1akk_scheduler/Service.proto\x1a kk_scheduler/TaskExecution.proto\"8\n" +
-	"\aTrigger\x1a#\n" +
+	"\x1ekk_scheduler/rpc_service.proto\x12\fkk_scheduler\x1a\x16kk_scheduler/Job.proto\x1a\x1akk_scheduler/Service.proto\x1a kk_scheduler/TaskExecution.proto\x1a\x1fkk_scheduler/extend_field.proto\"U\n" +
+	"\aTrigger\x1a@\n" +
 	"\x05Input\x12\x1a\n" +
-	"\bfuncName\x18\x01 \x01(\tR\bfuncName\x1a\b\n" +
+	"\bfuncName\x18\x01 \x01(\tR\bfuncName\x12\x1b\n" +
+	"\x05jobId\x18\x02 \x01(\tB\x05\xca>\x02\x01\x02R\x05jobId\x1a\b\n" +
 	"\x06Output2\xad\t\n" +
 	"\n" +
 	"KKSchedule\x12D\n" +
@@ -303,6 +337,7 @@ func file_kk_scheduler_rpc_service_proto_init() {
 	file_kk_scheduler_Job_proto_init()
 	file_kk_scheduler_Service_proto_init()
 	file_kk_scheduler_TaskExecution_proto_init()
+	file_kk_scheduler_extend_field_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

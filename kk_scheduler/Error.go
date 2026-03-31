@@ -17,3 +17,5 @@ var ErrServiceAuthTokenEmpty = errors.New("serviceAuthToken empty")
 var ErrFuncNameEmpty = errors.New("funcName empty")
 
 var ErrTargetEmpty = errors.New("target empty")
+
+var ErrStopTask = errors.New("stop task")

@@ -7,6 +7,7 @@ option go_package = "/kk_scheduler";
 import "kk_scheduler/Job.proto";
 import "kk_scheduler/Service.proto";
 import "kk_scheduler/TaskExecution.proto";
+import "kk_scheduler/extend_field.proto";
 
 service KKSchedule {
   rpc JobList(JobList.Input) returns (JobList.Output);
@@ -36,6 +37,7 @@ service KKScheduleTrigger {
 message Trigger {
   message Input {
     string funcName = 1;
+    string jobId = 2[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
   }
   message Output {
   }

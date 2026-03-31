@@ -24,25 +24,26 @@ func triggerClient(service *kk_scheduler.PBRegisterService) (conn *grpc.ClientCo
 	return conn, kk_scheduler.NewKKScheduleTriggerClient(conn), nil
 }
 
-func triggerFunc(service *kk_scheduler.PBRegisterService, funcName string) func() {
+func triggerFunc(service *kk_scheduler.PBRegisterService, pbJob *kk_scheduler.PBJob) func() {
 	return func() {
 		conn, client, err := triggerClient(service)
+		if err != nil {
+			slog.Error(err.Error())
+			return
+		}
 		defer func() {
 			err := conn.Close()
 			if err != nil {
 				slog.Error(err.Error())
 			}
 		}()
-		if err != nil {
-			slog.Error(err.Error())
-			return
-		}
 		stage := kk_stage.NewStage(context.Background(), "kk-scheduler")
 		ctx, cancelFunc := kk_grpc.NewCallGrpcCtx(stage)
 		defer cancelFunc()
 
 		input := &kk_scheduler.Trigger_Input{}
-		input.SetFuncName(funcName)
+		input.SetFuncName(pbJob.GetFuncName())
+		input.SetJobId(pbJob.GetId())
 		_, err = client.Trigger(ctx, input)
 		if err != nil {
 			slog.Error(err.Error())

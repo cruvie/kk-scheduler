@@ -196,7 +196,7 @@ func (x *Client) JobEnable(jobId string) error {
 		return err
 	}
 
-	entryID, err := x.cron.AddFunc(entry.GetSpec(), triggerFunc(service, entry.GetFuncName()))
+	entryID, err := x.cron.AddFunc(entry.GetSpec(), triggerFunc(service, entry))
 	if err != nil {
 		return err
 	}
@@ -243,7 +243,7 @@ func (x *Client) JobTrigger(jobId string) error {
 	}
 
 	// Trigger the job function directly
-	triggerFunc(service, entry.GetFuncName())()
+	triggerFunc(service, entry)()
 	return nil
 }
 
