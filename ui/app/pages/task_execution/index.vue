@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import {h, ref, onMounted, resolveComponent} from 'vue';
 import {clientKKSchedule} from '~/utils/api/client';
-import {TaskExecutionList_InputSchema, TaskExecutionDelete_InputSchema} from '~~/gen/kk_scheduler/TaskExecution_pb';
+import {TaskExecutionList_InputSchema, TaskExecutionDelete_InputSchema, TaskExecutionGet_InputSchema} from '~~/gen/kk_scheduler/TaskExecution_pb';
 import type {PBTaskExecution} from '~~/gen/kk_scheduler/TaskExecution_pb';
 import {TaskExecutionStatus} from '~~/gen/kk_scheduler/TaskExecution_pb';
 import {create} from "@bufbuild/protobuf";
@@ -111,9 +111,15 @@ onMounted(async () => {
   await fetchExecutions();
 });
 
-const handleViewLog = (execution: PBTaskExecution) => {
-  selectedLog.value = execution.Log || '(empty)';
-  isLogModalOpen.value = true;
+const handleViewLog = async (execution: PBTaskExecution) => {
+  try {
+    const request = create(TaskExecutionGet_InputSchema, {Id: execution.Id});
+    const out = await clientKKSchedule.taskExecutionGet(request);
+    selectedLog.value = out.TaskExecution?.Log || '(empty)';
+    isLogModalOpen.value = true;
+  } catch (error) {
+    toast.add({title: 'Error fetching task execution detail', description: String(error), color: 'error'});
+  }
 };
 
 const handleDeleteExecution = (execution: PBTaskExecution) => {
