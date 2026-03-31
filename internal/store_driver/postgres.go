@@ -2,6 +2,7 @@ package store_driver
 
 import (
 	"errors"
+	"fmt"
 	"log/slog"
 
 	"gitee.com/cruvie/kk_go_kit/kk_id"
@@ -21,18 +22,18 @@ func NewPostgresStore() *PostgresStore {
 }
 
 // TaskCreate creates a new task execution record
-func (s *PostgresStore) TaskCreate(jobId string) error {
+func (s *PostgresStore) TaskCreate(in *kk_scheduler.TaskCreate_Input) error {
 	{
 		//check
-		_, err := s.JobGet(jobId)
+		_, err := s.JobGet(in.GetJobId())
 		if err != nil {
 			return err
 		}
 	}
 	execution := &models.TaskExecution{
-		Id:         kk_id.GenUUID7(),
-		JobId:      jobId,
-		Status:     kk_scheduler.TaskExecutionStatus_TASK_EXECUTION_STATUS_RUNNING,
+		Id:         in.GetId(),
+		JobId:      in.GetJobId(),
+		Status:     kk_scheduler.TaskExecutionStatus_TASK_EXECUTION_STATUS_Init,
 		StartedAt:  kk_time.NowUTCTime(),
 		FinishedAt: kk_time.DefaultTime,
 		Log:        "",
@@ -79,7 +80,7 @@ func (s *PostgresStore) TaskAppendLog(id string, log string) error {
 
 		_, err = tx.TaskExecution.
 			Where(tx.TaskExecution.Id.Eq(id)).
-			UpdateSimple(tx.TaskExecution.Log.Value(execution.Log + log))
+			UpdateSimple(tx.TaskExecution.Log.Value(fmt.Sprintf("%s%s\n", execution.Log, log)))
 		if err != nil {
 			return err
 		}
@@ -112,7 +113,7 @@ func (s *PostgresStore) JobList(serviceName string) ([]*kk_scheduler.PBJob, erro
 func (s *PostgresStore) JobGet(jobId string) (*kk_scheduler.PBJob, error) {
 	job, err := query.Job.
 		Where(query.Job.Id.Eq(jobId)).
-		First()
+		Take()
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -127,7 +128,7 @@ func (s *PostgresStore) JobGetByServiceFuncName(serviceName, funcName string) (*
 	job, err := query.Job.
 		Where(query.Job.ServiceName.Eq(serviceName)).
 		Where(query.Job.FuncName.Eq(funcName)).
-		First()
+		Take()
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -153,11 +154,10 @@ func (s *PostgresStore) JobDelete(jobId string) error {
 // JobPut creates or updates a job (upsert)
 func (s *PostgresStore) JobPut(entry *kk_scheduler.PBJob) error {
 	// Check if job exists
-	//todo use jobId
 	existing, err := query.Job.
 		Where(query.Job.ServiceName.Eq(entry.GetServiceName())).
 		Where(query.Job.FuncName.Eq(entry.GetFuncName())).
-		First()
+		Take()
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		// Create new job
@@ -203,7 +203,7 @@ func (s *PostgresStore) ServiceList() ([]*kk_scheduler.PBRegisterService, error)
 func (s *PostgresStore) ServiceGet(serviceName string) (*kk_scheduler.PBRegisterService, error) {
 	service, err := query.Service.
 		Where(query.Service.ServiceName.Eq(serviceName)).
-		First()
+		Take()
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -218,7 +218,7 @@ func (s *PostgresStore) ServiceGet(serviceName string) (*kk_scheduler.PBRegister
 func (s *PostgresStore) ServicePut(service *kk_scheduler.PBRegisterService) error {
 	existing, err := query.Service.
 		Where(query.Service.ServiceName.Eq(service.GetServiceName())).
-		First()
+		Take()
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		svc := &models.Service{}

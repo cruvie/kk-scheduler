@@ -28,9 +28,8 @@ import {h, ref, onMounted, resolveComponent} from 'vue';
 import {clientKKSchedule} from '~/utils/api/client';
 import ServiceForm from '~/components/ServiceForm.vue';
 import type {PBRegisterService} from '~~/gen/kk_scheduler/Base_pb';
-import {ServiceList_InputSchema} from '~~/gen/kk_scheduler/ServiceList_pb';
+import {ServiceList_InputSchema, ServiceDelete_InputSchema} from '~~/gen/kk_scheduler/Service_pb';
 import {create} from '@bufbuild/protobuf';
-import {ServiceDelete_InputSchema} from '~~/gen/kk_scheduler/ServiceDelete_pb';
 import {useToast} from '#imports';
 import type {TableColumn} from '@nuxt/ui';
 

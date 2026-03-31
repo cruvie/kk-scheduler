@@ -9,7 +9,7 @@ func (x *ApiTaskCreate) Service(stage *kk_stage.Stage) error {
 	span := stage.StartTrace("Service")
 	defer span.End()
 
-	return schedule.GClient.TaskCreate(x.In.GetJobId())
+	return schedule.GClient.TaskCreate(x.In)
 }
 
 func (x *ApiTaskUpdateStatus) Service(stage *kk_stage.Stage) error {

@@ -11,7 +11,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file kk_scheduler/TaskExecution.proto.
  */
 export const file_kk_scheduler_TaskExecution: GenFile = /*@__PURE__*/
-  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIjUKClRhc2tDcmVhdGUaHQoFSW5wdXQSFAoFam9iSWQYASABKAlCBco+AgECGggKBk91dHB1dCJxChBUYXNrVXBkYXRlU3RhdHVzGlMKBUlucHV0EhEKAmlkGAEgASgJQgXKPgIBAhI3CgZzdGF0dXMYAiABKA4yIS5ra19zY2hlZHVsZXIuVGFza0V4ZWN1dGlvblN0YXR1c0IEyj4BARoICgZPdXRwdXQiSAoNVGFza0FwcGVuZExvZxotCgVJbnB1dBIRCgJpZBgBIAEoCUIFyj4CAQISEQoDbG9nGAIgASgJQgTKPgEBGggKBk91dHB1dCqmAQoTVGFza0V4ZWN1dGlvblN0YXR1cxIlCiFUQVNLX0VYRUNVVElPTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIhCh1UQVNLX0VYRUNVVElPTl9TVEFUVVNfUlVOTklORxABEiMKH1RBU0tfRVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQAhIgChxUQVNLX0VYRUNVVElPTl9TVEFUVVNfRkFJTEVEEANCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
+  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIkgKClRhc2tDcmVhdGUaMAoFSW5wdXQSEQoCaWQYASABKAlCBco+AgECEhQKBWpvYklkGAIgASgJQgXKPgIBAhoICgZPdXRwdXQicQoQVGFza1VwZGF0ZVN0YXR1cxpTCgVJbnB1dBIRCgJpZBgBIAEoCUIFyj4CAQISNwoGc3RhdHVzGAIgASgOMiEua2tfc2NoZWR1bGVyLlRhc2tFeGVjdXRpb25TdGF0dXNCBMo+AQEaCAoGT3V0cHV0IkgKDVRhc2tBcHBlbmRMb2caLQoFSW5wdXQSEQoCaWQYASABKAlCBco+AgECEhEKA2xvZxgCIAEoCUIEyj4BARoICgZPdXRwdXQqxgEKE1Rhc2tFeGVjdXRpb25TdGF0dXMSJQohVEFTS19FWEVDVVRJT05fU1RBVFVTX1VOU1BFQ0lGSUVEEAASHgoaVEFTS19FWEVDVVRJT05fU1RBVFVTX0luaXQQARIhCh1UQVNLX0VYRUNVVElPTl9TVEFUVVNfUlVOTklORxACEiMKH1RBU0tfRVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQAxIgChxUQVNLX0VYRUNVVElPTl9TVEFUVVNfRkFJTEVEEARCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
 
 /**
  * @generated from message kk_scheduler.TaskCreate
@@ -31,7 +31,12 @@ export const TaskCreateSchema: GenMessage<TaskCreate> = /*@__PURE__*/
  */
 export type TaskCreate_Input = Message<"kk_scheduler.TaskCreate.Input"> & {
   /**
-   * @generated from field: string jobId = 1;
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string jobId = 2;
    */
   jobId: string;
 };
@@ -162,19 +167,24 @@ export enum TaskExecutionStatus {
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: TASK_EXECUTION_STATUS_RUNNING = 1;
+   * @generated from enum value: TASK_EXECUTION_STATUS_Init = 1;
    */
-  RUNNING = 1,
+  Init = 1,
 
   /**
-   * @generated from enum value: TASK_EXECUTION_STATUS_COMPLETED = 2;
+   * @generated from enum value: TASK_EXECUTION_STATUS_RUNNING = 2;
    */
-  COMPLETED = 2,
+  RUNNING = 2,
 
   /**
-   * @generated from enum value: TASK_EXECUTION_STATUS_FAILED = 3;
+   * @generated from enum value: TASK_EXECUTION_STATUS_COMPLETED = 3;
    */
-  FAILED = 3,
+  COMPLETED = 3,
+
+  /**
+   * @generated from enum value: TASK_EXECUTION_STATUS_FAILED = 4;
+   */
+  FAILED = 4,
 }
 
 /**

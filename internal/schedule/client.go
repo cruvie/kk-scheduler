@@ -101,34 +101,35 @@ func (x *Client) JobPut(jobs ...*kk_scheduler.PBRegisterJob) error {
 
 func (x *Client) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
 	entries := x.cron.Entries()
-	entryList, err := x.storer.JobList(serviceName)
+	pbJobList, err := x.storer.JobList(serviceName)
 	if err != nil {
 		return nil, err
 	}
 	var hasSpecEntryList []int32
 	var pbJobs []*kk_scheduler.PBJob
 	for _, entry := range entries {
-		find, b := lo.Find(entryList, func(item *kk_scheduler.PBJob) bool {
+		dbPBJob, b := lo.Find(pbJobList, func(item *kk_scheduler.PBJob) bool {
 			return item.GetEntryID() == int32(entry.ID)
 		})
 		if !b {
 			continue
 		} else {
-			hasSpecEntryList = append(hasSpecEntryList, find.GetEntryID())
+			hasSpecEntryList = append(hasSpecEntryList, dbPBJob.GetEntryID())
 		}
 		job := &kk_scheduler.PBJob{}
-		job.SetEntryID(find.GetEntryID())
-		job.SetEnabled(find.GetEnabled())
-		job.SetNext(find.GetNext())
-		job.SetPrev(find.GetPrev())
-		job.SetSpec(find.GetSpec())
-		job.SetDescription(find.GetDescription())
-		job.SetFuncName(find.GetFuncName())
-		job.SetServiceName(find.GetServiceName())
+		job.SetId(dbPBJob.GetId())
+		job.SetEntryID(dbPBJob.GetEntryID())
+		job.SetEnabled(dbPBJob.GetEnabled())
+		job.SetNext(timestamppb.New(entry.Prev))
+		job.SetPrev(timestamppb.New(entry.Next))
+		job.SetSpec(dbPBJob.GetSpec())
+		job.SetDescription(dbPBJob.GetDescription())
+		job.SetFuncName(dbPBJob.GetFuncName())
+		job.SetServiceName(dbPBJob.GetServiceName())
 		pbJobs = append(pbJobs, job)
 	}
 
-	noSpecJobList := lo.Filter(entryList, func(item *kk_scheduler.PBJob, index int) bool {
+	noSpecJobList := lo.Filter(pbJobList, func(item *kk_scheduler.PBJob, index int) bool {
 		_, b := lo.Find(hasSpecEntryList, func(id int32) bool {
 			return id == item.GetEntryID()
 		})
@@ -271,8 +272,8 @@ func (x *Client) ServiceDelete(serviceName string) error {
 }
 
 // TaskCreate creates a new task execution record
-func (x *Client) TaskCreate(jobId string) error {
-	return x.storer.TaskCreate(jobId)
+func (x *Client) TaskCreate(in *kk_scheduler.TaskCreate_Input) error {
+	return x.storer.TaskCreate(in)
 }
 
 // TaskUpdateStatus updates the task execution status

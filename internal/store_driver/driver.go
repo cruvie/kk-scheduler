@@ -18,7 +18,7 @@ type StoreDriver interface {
 	ServiceDelete(serviceName string) error
 
 	// TaskCreate creates a new task execution record
-	TaskCreate(jobId string) error
+	TaskCreate(in *kk_scheduler.TaskCreate_Input) error
 	// TaskUpdateStatus updates the status
 	TaskUpdateStatus(id string, status kk_scheduler.TaskExecutionStatus) error
 	// TaskAppendLog append log to the execution record

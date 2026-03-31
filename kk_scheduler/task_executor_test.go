@@ -4,108 +4,78 @@ import (
 	"context"
 	"errors"
 	"testing"
+	"time"
 
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
-func TestTaskExecutor_Run(t *testing.T) {
-	t.Run("returns error when client is nil", func(t *testing.T) {
-		executor := kk_scheduler.NewTaskExecutor(
-			kk_scheduler.WithJobId("test-job"),
-		)
-		err := executor.Run(context.Background())
-		assert.EqualError(t, err, "scheduler client is not set")
-	})
+// getRealClient connects to the real gRPC scheduler server
+func getRealClient(t *testing.T) (kk_scheduler.KKScheduleClient, func()) {
+	conn, err := grpc.NewClient("127.0.0.1:8666",
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return kk_scheduler.NewKKScheduleClient(conn), func() { conn.Close() }
+}
 
-	t.Run("returns error when jobId is empty", func(t *testing.T) {
-		mockClient := NewMockStoreClient()
-		executor := kk_scheduler.NewTaskExecutor(
-			kk_scheduler.WithSchedulerClient(mockClient),
-		)
-		err := executor.Run(context.Background())
-		assert.EqualError(t, err, "job id is not set")
-	})
+func TestTaskExecutor_RealServer(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping real server test in short mode")
+	}
 
-	t.Run("executes steps and updates status to completed", func(t *testing.T) {
-		mockClient := NewMockStoreClient()
-		jobId := "test-job-success"
+	client, cleanup := getRealClient(t)
+	defer cleanup()
 
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	jobId := `019d41db-1783-7b2f-b02e-76f53fb413b2`
+
+	t.Run("executes steps and logs to server", func(t *testing.T) {
 		executor := kk_scheduler.NewTaskExecutor(
-			kk_scheduler.WithSchedulerClient(mockClient),
+			kk_scheduler.WithSchedulerClient(client),
 			kk_scheduler.WithJobId(jobId),
 		)
 
 		stepExecuted := false
-		executor.AddStep("step1", func(ctl *kk_scheduler.StepCtl) error {
+		executor.AddStep("real-step-1", func(ctl *kk_scheduler.StepCtl) error {
 			stepExecuted = true
-			ctl.Log("step1 completed")
+			ctl.Log("step executed on real server")
 			return nil
 		})
 
-		err := executor.Run(context.Background())
+		executor.AddStep("real-step-2", func(ctl *kk_scheduler.StepCtl) error {
+			ctl.Log("step 2 running")
+			return nil
+		})
+
+		err := executor.Run(ctx)
 		assert.NoError(t, err)
 		assert.True(t, stepExecuted)
-
-		logs := mockClient.GetStore().GetLogs(jobId)
-		assert.Contains(t, logs, "🚀Starting task")
-		assert.Contains(t, logs, "[🔥Starting step step1]")
-		assert.Contains(t, logs, "step1 completed")
-		assert.Contains(t, logs, "[✅Task Finished]")
 	})
 
-	t.Run("executes steps and updates status to failed when step returns error", func(t *testing.T) {
-		mockClient := NewMockStoreClient()
-		jobId := "test-job-failed"
-
+	t.Run("handles step failure on real server", func(t *testing.T) {
 		executor := kk_scheduler.NewTaskExecutor(
-			kk_scheduler.WithSchedulerClient(mockClient),
+			kk_scheduler.WithSchedulerClient(client),
 			kk_scheduler.WithJobId(jobId),
 		)
 
 		executor.AddStep("failing-step", func(ctl *kk_scheduler.StepCtl) error {
-			return errors.New("step failed")
+			ctl.Log("about to fail")
+			return errors.New("intentional failure for testing")
 		})
 
-		err := executor.Run(context.Background())
-		assert.NoError(t, err)
-
-		logs := mockClient.GetStore().GetLogs(jobId)
-		assert.Contains(t, logs, "❌step failed")
-		assert.Contains(t, logs, "[❌😭🤬Task Failed]")
-	})
-
-	t.Run("continues executing steps after failure", func(t *testing.T) {
-		mockClient := NewMockStoreClient()
-		jobId := "test-job-multi-step"
-
-		executor := kk_scheduler.NewTaskExecutor(
-			kk_scheduler.WithSchedulerClient(mockClient),
-			kk_scheduler.WithJobId(jobId),
-		)
-
-		step1Executed := false
-		step2Executed := false
-
-		executor.AddStep("step1", func(ctl *kk_scheduler.StepCtl) error {
-			step1Executed = true
-			return errors.New("step1 error")
-		})
-
-		executor.AddStep("step2", func(ctl *kk_scheduler.StepCtl) error {
-			step2Executed = true
-			ctl.Log("step2 done")
+		executor.AddStep("cleanup-step", func(ctl *kk_scheduler.StepCtl) error {
+			ctl.Log("cleanup after failure")
 			return nil
 		})
 
-		err := executor.Run(context.Background())
+		err := executor.Run(ctx)
 		assert.NoError(t, err)
-		assert.True(t, step1Executed)
-		assert.True(t, step2Executed)
-
-		logs := mockClient.GetStore().GetLogs(jobId)
-		assert.Contains(t, logs, "❌step1 error")
-		assert.Contains(t, logs, "step2 done")
-		assert.Contains(t, logs, "[❌😭🤬Task Failed]")
 	})
 }

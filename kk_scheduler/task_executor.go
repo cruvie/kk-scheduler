@@ -20,8 +20,9 @@ func (c *StepCtl) Log(message string) {
 
 // Step represents a single execution step
 type Step struct {
-	name    string
-	handler func(ctl *StepCtl) error
+	name     string
+	handler  func(ctl *StepCtl) error
+	fallback func(ctl *StepCtl) error
 }
 
 // TaskExecutor manages task lifecycle and step execution
@@ -46,10 +47,15 @@ func NewTaskExecutor(opts ...TaskExecutorOption) *TaskExecutor {
 }
 
 // AddStep adds a step to the task
-func (t *TaskExecutor) AddStep(name string, handler func(ctl *StepCtl) error) {
+func (t *TaskExecutor) AddStep(
+	name string,
+	handler func(ctl *StepCtl) error,
+	fallback func(ctl *StepCtl) error,
+) {
 	t.steps = append(t.steps, &Step{
-		name:    name,
-		handler: handler,
+		name:     name,
+		handler:  handler,
+		fallback: fallback,
 	})
 }
 
@@ -66,6 +72,7 @@ func (t *TaskExecutor) Run(ctx context.Context) error {
 	{
 		// Create execution record
 		input := &TaskCreate_Input{}
+		input.SetId(t.id)
 		input.SetJobId(t.jobId)
 		_, err := t.client.TaskCreate(ctx, input)
 		if err != nil {
@@ -85,21 +92,29 @@ func (t *TaskExecutor) Run(ctx context.Context) error {
 			}
 		},
 	}
-	ctl.Log("🚀Starting task")
+	ctl.Log("[🚀Task Start]")
 	// Execute steps
 	for _, step := range t.steps {
-		ctl.Log(fmt.Sprintf("[🔥Starting step %s]", step.name))
+		ctl.Log(fmt.Sprintf("[🧩Step Begin %s]", step.name))
 		err := step.handler(ctl)
 		if err != nil {
 			ctl.Log(fmt.Sprintf("❌%s", err.Error()))
 			ctl.hasError = true
+			if step.fallback != nil {
+				ctl.Log(fmt.Sprintf("[🧯Step Fallback %s]", step.name))
+				err := step.fallback(ctl)
+				if err != nil {
+					ctl.Log(fmt.Sprintf("❌%s", err.Error()))
+				}
+			}
+			break
 		}
 	}
 
 	in := &TaskUpdateStatus_Input{}
 	in.SetId(t.id)
 	if ctl.hasError {
-		ctl.Log("[❌😭🤬Task Failed]")
+		ctl.Log("[😭Task Failed]")
 		in.SetStatus(TaskExecutionStatus_TASK_EXECUTION_STATUS_FAILED)
 	} else {
 		ctl.Log("[✅Task Finished]")

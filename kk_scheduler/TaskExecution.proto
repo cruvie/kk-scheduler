@@ -7,14 +7,16 @@ import "kk_scheduler/extend_field.proto";
 
 enum TaskExecutionStatus {
   TASK_EXECUTION_STATUS_UNSPECIFIED = 0;
-  TASK_EXECUTION_STATUS_RUNNING = 1;
-  TASK_EXECUTION_STATUS_COMPLETED = 2;
-  TASK_EXECUTION_STATUS_FAILED = 3;
+  TASK_EXECUTION_STATUS_Init = 1;
+  TASK_EXECUTION_STATUS_RUNNING = 2;
+  TASK_EXECUTION_STATUS_COMPLETED = 3;
+  TASK_EXECUTION_STATUS_FAILED = 4;
 }
 
 message TaskCreate {
   message Input {
-    string jobId = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+    string id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+    string jobId = 2[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
   }
   message Output {}
 }

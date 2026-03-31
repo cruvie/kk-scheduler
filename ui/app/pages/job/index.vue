@@ -28,13 +28,9 @@
 <script setup lang="ts">
 import {h, ref, onMounted, resolveComponent} from 'vue';
 import {clientKKSchedule} from '~/utils/api/client';
-import {JobList_InputSchema} from '~~/gen/kk_scheduler/JobList_pb';
-import type {PBJob} from '~~/gen/kk_scheduler/Job_pb';
+import {JobList_InputSchema, JobEnable_InputSchema, JobDisable_InputSchema, JobDelete_InputSchema, JobTrigger_InputSchema} from '~~/gen/kk_scheduler/Job_pb';
+import type {PBJob} from '~~/gen/kk_scheduler/Base_pb';
 import {create} from "@bufbuild/protobuf";
-import {JobEnable_InputSchema} from "~~/gen/kk_scheduler/JobEnable_pb";
-import {JobDisable_InputSchema} from "~~/gen/kk_scheduler/JobDisable_pb";
-import {JobDelete_InputSchema} from "~~/gen/kk_scheduler/JobDelete_pb";
-import {JobTrigger_InputSchema} from "~~/gen/kk_scheduler/JobTrigger_pb";
 import JobForm from '~/components/JobForm.vue';
 import JobSetSpecForm from '~/components/JobSetSpecForm.vue';
 import {useToast} from '#imports';
@@ -54,6 +50,7 @@ const modalConfirmButtonColor = ref('primary');
 let modalConfirmAction: (() => Promise<void>) | null = null;
 
 const columns: TableColumn<PBJob>[] = [
+  {accessorKey: 'Id', header: 'Id'},
   {accessorKey: 'EntryID', header: 'Entry ID'},
   {accessorKey: 'Description', header: 'Description'},
   {accessorKey: 'FuncName', header: 'Function Name'},
@@ -113,7 +110,7 @@ onMounted(async () => {
 
 const handleDisableJob = async (job: PBJob) => {
   try {
-    const request = create(JobDisable_InputSchema, {serviceName: job.ServiceName, funcName: job.FuncName});
+    const request = create(JobDisable_InputSchema, {Id: job.Id});
     await clientKKSchedule.jobDisable(request);
     await fetchJobs();
     toast.add({title: 'Job disabled successfully', color: 'success'});
@@ -129,7 +126,7 @@ const handleDeleteJob = async (job: PBJob) => {
   modalConfirmButtonColor.value = 'error';
   modalConfirmAction = async () => {
     try {
-      const request = create(JobDelete_InputSchema, {serviceName: job.ServiceName, funcName: job.FuncName});
+      const request = create(JobDelete_InputSchema, {Id: job.Id});
       await clientKKSchedule.jobDelete(request);
       await fetchJobs();
       toast.add({title: 'Job deleted successfully', color: 'success'});
@@ -142,7 +139,7 @@ const handleDeleteJob = async (job: PBJob) => {
 
 const handleEnableJob = async (job: PBJob) => {
   try {
-    const request = create(JobEnable_InputSchema, {serviceName: job.ServiceName, funcName: job.FuncName});
+    const request = create(JobEnable_InputSchema, {Id: job.Id});
     await clientKKSchedule.jobEnable(request);
     await fetchJobs();
     toast.add({title: 'Job enabled successfully', color: 'success'});
@@ -167,7 +164,7 @@ const handleSetSpecJob = (job: PBJob) => {
 const handleTriggerJob = async (job: PBJob) => {
   try {
     toast.add({title: 'Triggering job...', color: 'info'});
-    const request = create(JobTrigger_InputSchema, {serviceName: job.ServiceName, funcName: job.FuncName});
+    const request = create(JobTrigger_InputSchema, {Id: job.Id});
     await clientKKSchedule.jobTrigger(request);
     toast.add({title: `Job "${job.FuncName}" triggered successfully`, color: 'success'});
   } catch (error) {

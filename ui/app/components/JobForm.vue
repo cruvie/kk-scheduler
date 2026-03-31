@@ -27,11 +27,11 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { clientKKSchedule } from '~/utils/api/client';
-import { JobPut_InputSchema } from '~~/gen/kk_scheduler/JobPut_pb';
-import {type PBJob} from '~~/gen/kk_scheduler/Job_pb';
+import { JobPut_InputSchema } from '~~/gen/kk_scheduler/Job_pb';
+import {type PBJob} from '~~/gen/kk_scheduler/Base_pb';
 import {create} from "@bufbuild/protobuf";
 import { PBRegisterJobSchema, type PBRegisterJob } from '~~/gen/kk_scheduler/Base_pb';
-import { ServiceList_InputSchema } from '~~/gen/kk_scheduler/ServiceList_pb';
+import { ServiceList_InputSchema } from '~~/gen/kk_scheduler/Service_pb';
 import { useToast } from '#imports';
 
 const dialogVisible = ref(false);

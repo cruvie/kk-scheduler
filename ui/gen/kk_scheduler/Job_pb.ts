@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file kk_scheduler/Job.proto.
  */
 export const file_kk_scheduler_Job: GenFile = /*@__PURE__*/
-  fileDesc("ChZra19zY2hlZHVsZXIvSm9iLnByb3RvEgxra19zY2hlZHVsZXIiMQoJSm9iRW5hYmxlGhoKBUlucHV0EhEKAklkGAEgASgJQgXKPgIBAhoICgZPdXRwdXQiMgoKSm9iRGlzYWJsZRoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaCAoGT3V0cHV0IjEKCUpvYkRlbGV0ZRoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaCAoGT3V0cHV0IlAKBkpvYkdldBoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaKgoGT3V0cHV0EiAKA0pvYhgBIAEoCzITLmtrX3NjaGVkdWxlci5QQkpvYiJXCgdKb2JMaXN0GhwKBUlucHV0EhMKC3NlcnZpY2VOYW1lGAEgASgJGi4KBk91dHB1dBIkCgdKb2JMaXN0GAEgAygLMhMua2tfc2NoZWR1bGVyLlBCSm9iIkUKBkpvYlB1dBoxCgVJbnB1dBIoCgNKb2IYASABKAsyGy5ra19zY2hlZHVsZXIuUEJSZWdpc3RlckpvYhoICgZPdXRwdXQiZgoKSm9iU2V0U3BlYxpOCgVJbnB1dBIZCgtzZXJ2aWNlTmFtZRgBIAEoCUIEyj4BARIWCghmdW5jTmFtZRgCIAEoCUIEyj4BARISCgRzcGVjGAMgASgJQgTKPgEBGggKBk91dHB1dCIyCgpKb2JUcmlnZ2VyGhoKBUlucHV0EhEKAklkGAEgASgJQgXKPgIBAhoICgZPdXRwdXRCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_google_protobuf_timestamp, file_kk_scheduler_extend_field, file_kk_scheduler_Base]);
+  fileDesc("ChZra19zY2hlZHVsZXIvSm9iLnByb3RvEgxra19zY2hlZHVsZXIiMQoJSm9iRW5hYmxlGhoKBUlucHV0EhEKAklkGAEgASgJQgXKPgIBAhoICgZPdXRwdXQiMgoKSm9iRGlzYWJsZRoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaCAoGT3V0cHV0IjEKCUpvYkRlbGV0ZRoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaCAoGT3V0cHV0IlAKBkpvYkdldBoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaKgoGT3V0cHV0EiAKA0pvYhgBIAEoCzITLmtrX3NjaGVkdWxlci5QQkpvYiJXCgdKb2JMaXN0GhwKBUlucHV0EhMKC3NlcnZpY2VOYW1lGAEgASgJGi4KBk91dHB1dBIkCgdKb2JMaXN0GAEgAygLMhMua2tfc2NoZWR1bGVyLlBCSm9iIkUKBkpvYlB1dBoxCgVJbnB1dBIoCgNKb2IYASABKAsyGy5ra19zY2hlZHVsZXIuUEJSZWdpc3RlckpvYhoICgZPdXRwdXQiRgoKSm9iU2V0U3BlYxouCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQISEgoEc3BlYxgCIAEoCUIEyj4BARoICgZPdXRwdXQiMgoKSm9iVHJpZ2dlchoaCgVJbnB1dBIRCgJJZBgBIAEoCUIFyj4CAQIaCAoGT3V0cHV0Qg9aDS9ra19zY2hlZHVsZXJiCGVkaXRpb25zcOgH", [file_google_protobuf_timestamp, file_kk_scheduler_extend_field, file_kk_scheduler_Base]);
 
 /**
  * @generated from message kk_scheduler.JobEnable
@@ -300,17 +300,12 @@ export const JobSetSpecSchema: GenMessage<JobSetSpec> = /*@__PURE__*/
  */
 export type JobSetSpec_Input = Message<"kk_scheduler.JobSetSpec.Input"> & {
   /**
-   * @generated from field: string serviceName = 1;
+   * @generated from field: string Id = 1;
    */
-  serviceName: string;
+  Id: string;
 
   /**
-   * @generated from field: string funcName = 2;
-   */
-  funcName: string;
-
-  /**
-   * @generated from field: string spec = 3;
+   * @generated from field: string spec = 2;
    */
   spec: string;
 };

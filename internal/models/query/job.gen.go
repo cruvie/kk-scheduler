@@ -35,8 +35,6 @@ func newJob(db *gorm.DB, opts ...gen.DOOption) job {
 	_job.Enabled = field.NewBool(tableName, "enabled")
 	_job.Spec = field.NewString(tableName, "spec")
 	_job.Description = field.NewString(tableName, "description")
-	_job.Next = field.NewTime(tableName, "next")
-	_job.Prev = field.NewTime(tableName, "prev")
 
 	_job.fillFieldMap()
 
@@ -54,8 +52,6 @@ type job struct {
 	Enabled     field.Bool
 	Spec        field.String
 	Description field.String
-	Next        field.Time
-	Prev        field.Time
 
 	fieldMap map[string]field.Expr
 }
@@ -79,8 +75,6 @@ func (j *job) updateTableName(table string) *job {
 	j.Enabled = field.NewBool(table, "enabled")
 	j.Spec = field.NewString(table, "spec")
 	j.Description = field.NewString(table, "description")
-	j.Next = field.NewTime(table, "next")
-	j.Prev = field.NewTime(table, "prev")
 
 	j.fillFieldMap()
 
@@ -97,7 +91,7 @@ func (j *job) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (j *job) fillFieldMap() {
-	j.fieldMap = make(map[string]field.Expr, 9)
+	j.fieldMap = make(map[string]field.Expr, 7)
 	j.fieldMap["id"] = j.Id
 	j.fieldMap["service_name"] = j.ServiceName
 	j.fieldMap["func_name"] = j.FuncName
@@ -105,8 +99,6 @@ func (j *job) fillFieldMap() {
 	j.fieldMap["enabled"] = j.Enabled
 	j.fieldMap["spec"] = j.Spec
 	j.fieldMap["description"] = j.Description
-	j.fieldMap["next"] = j.Next
-	j.fieldMap["prev"] = j.Prev
 }
 
 func (j job) clone(db *gorm.DB) job {

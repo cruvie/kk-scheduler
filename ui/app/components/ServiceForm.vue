@@ -26,7 +26,7 @@
 import { ref, reactive } from 'vue';
 import { create } from "@bufbuild/protobuf";
 import { clientKKSchedule } from '~/utils/api/client';
-import { ServicePut_InputSchema } from '~~/gen/kk_scheduler/ServicePut_pb';
+import { ServicePut_InputSchema } from '~~/gen/kk_scheduler/Service_pb';
 import type { PBRegisterService } from '~~/gen/kk_scheduler/Base_pb';
 import { PBRegisterServiceSchema } from '~~/gen/kk_scheduler/Base_pb';
 import { useToast } from '#imports';

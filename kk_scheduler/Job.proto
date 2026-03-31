@@ -68,9 +68,8 @@ message JobPut {
 }
 message JobSetSpec {
   message Input {
-    string serviceName = 1[(field_behavior) = REQUIRED];
-    string funcName = 2[(field_behavior) = REQUIRED];
-    string spec = 3[(field_behavior) = REQUIRED];
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+    string spec = 2[(field_behavior) = REQUIRED];
   }
 
   message Output {

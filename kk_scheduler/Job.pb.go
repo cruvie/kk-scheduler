@@ -1124,9 +1124,8 @@ func (b0 JobPut_Output_builder) Build() *JobPut_Output {
 
 type JobSetSpec_Input struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_ServiceName *string                `protobuf:"bytes,1,opt,name=serviceName"`
-	xxx_hidden_FuncName    *string                `protobuf:"bytes,2,opt,name=funcName"`
-	xxx_hidden_Spec        *string                `protobuf:"bytes,3,opt,name=spec"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	xxx_hidden_Spec        *string                `protobuf:"bytes,2,opt,name=spec"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1158,20 +1157,10 @@ func (x *JobSetSpec_Input) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *JobSetSpec_Input) GetServiceName() string {
+func (x *JobSetSpec_Input) GetId() string {
 	if x != nil {
-		if x.xxx_hidden_ServiceName != nil {
-			return *x.xxx_hidden_ServiceName
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *JobSetSpec_Input) GetFuncName() string {
-	if x != nil {
-		if x.xxx_hidden_FuncName != nil {
-			return *x.xxx_hidden_FuncName
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
 		}
 		return ""
 	}
@@ -1188,79 +1177,57 @@ func (x *JobSetSpec_Input) GetSpec() string {
 	return ""
 }
 
-func (x *JobSetSpec_Input) SetServiceName(v string) {
-	x.xxx_hidden_ServiceName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
-}
-
-func (x *JobSetSpec_Input) SetFuncName(v string) {
-	x.xxx_hidden_FuncName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+func (x *JobSetSpec_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
 func (x *JobSetSpec_Input) SetSpec(v string) {
 	x.xxx_hidden_Spec = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *JobSetSpec_Input) HasServiceName() bool {
+func (x *JobSetSpec_Input) HasId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *JobSetSpec_Input) HasFuncName() bool {
+func (x *JobSetSpec_Input) HasSpec() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *JobSetSpec_Input) HasSpec() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
-func (x *JobSetSpec_Input) ClearServiceName() {
+func (x *JobSetSpec_Input) ClearId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_ServiceName = nil
-}
-
-func (x *JobSetSpec_Input) ClearFuncName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_FuncName = nil
+	x.xxx_hidden_Id = nil
 }
 
 func (x *JobSetSpec_Input) ClearSpec() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Spec = nil
 }
 
 type JobSetSpec_Input_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ServiceName *string
-	FuncName    *string
-	Spec        *string
+	Id   *string
+	Spec *string
 }
 
 func (b0 JobSetSpec_Input_builder) Build() *JobSetSpec_Input {
 	m0 := &JobSetSpec_Input{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.ServiceName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
-		x.xxx_hidden_ServiceName = b.ServiceName
-	}
-	if b.FuncName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_FuncName = b.FuncName
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Id = b.Id
 	}
 	if b.Spec != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
 		x.xxx_hidden_Spec = b.Spec
 	}
 	return m0
@@ -1461,13 +1428,12 @@ const file_kk_scheduler_Job_proto_rawDesc = "" +
 	"\x06JobPut\x1a6\n" +
 	"\x05Input\x12-\n" +
 	"\x03Job\x18\x01 \x01(\v2\x1b.kk_scheduler.PBRegisterJobR\x03Job\x1a\b\n" +
-	"\x06Output\"\x83\x01\n" +
+	"\x06Output\"P\n" +
 	"\n" +
-	"JobSetSpec\x1ak\n" +
-	"\x05Input\x12&\n" +
-	"\vserviceName\x18\x01 \x01(\tB\x04\xca>\x01\x01R\vserviceName\x12 \n" +
-	"\bfuncName\x18\x02 \x01(\tB\x04\xca>\x01\x01R\bfuncName\x12\x18\n" +
-	"\x04spec\x18\x03 \x01(\tB\x04\xca>\x01\x01R\x04spec\x1a\b\n" +
+	"JobSetSpec\x1a8\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x12\x18\n" +
+	"\x04spec\x18\x02 \x01(\tB\x04\xca>\x01\x01R\x04spec\x1a\b\n" +
 	"\x06Output\"6\n" +
 	"\n" +
 	"JobTrigger\x1a\x1e\n" +

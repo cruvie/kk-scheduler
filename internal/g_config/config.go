@@ -31,7 +31,7 @@ type config struct {
 }
 
 func InitConfig() *kk_stage.Stage {
-	data, err := os.ReadFile("/Users/cruvie/Documents/cruvie-space/code-hub/my-project/kk-scheduler/config.toml")
+	data, err := os.ReadFile("/Users/cruvie/Documents/cruvie/kk-scheduler/config.toml")
 	if err != nil {
 		slog.Error("unable to read config.toml", "err", err)
 		panic(err)
