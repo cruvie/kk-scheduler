@@ -53,8 +53,7 @@ func TestForREADME(t *testing.T) {
 	{
 		// set job spec
 		input := &kk_scheduler.JobSetSpec_Input{}
-		input.SetServiceName(testJob.GetServiceName())
-		input.SetFuncName(testJob.GetFuncName())
+		input.SetId(jobId)
 		input.SetSpec("* * * * *")
 		resp, err := client.JobSetSpec(t.Context(), input)
 		assert.NoError(t, err)
@@ -63,8 +62,7 @@ func TestForREADME(t *testing.T) {
 	{
 		// enable job to be triggered with the spec
 		input := &kk_scheduler.JobEnable_Input{}
-		input.SetServiceName(testJob.GetServiceName())
-		input.SetFuncName(testJob.GetFuncName())
+		input.SetId(jobId)
 		resp, err := client.JobEnable(t.Context(), input)
 		assert.NoError(t, err)
 		t.Log(resp)

@@ -24,7 +24,7 @@ func NewPostgresStore() *PostgresStore {
 // TaskCreate creates a new task execution record
 func (s *PostgresStore) TaskCreate(in *kk_scheduler.TaskCreate_Input) error {
 	{
-		//check
+		// check
 		_, err := s.JobGet(in.GetJobId())
 		if err != nil {
 			return err

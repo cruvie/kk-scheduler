@@ -36,6 +36,8 @@ var testJob = func() *kk_scheduler.PBRegisterJob {
 	return j
 }()
 
+var jobId = "029d4317-039b-7b89-88b1-689d1e0f24c0"
+
 var testService = func() *kk_scheduler.PBRegisterService {
 	s := &kk_scheduler.PBRegisterService{}
 	s.SetServiceName("test-service")
@@ -58,8 +60,7 @@ func TestJobList(t *testing.T) {
 func TestJobGet(t *testing.T) {
 	defer down()
 	input := &kk_scheduler.JobGet_Input{}
-	input.SetServiceName(testJob.GetServiceName())
-	input.SetFuncName(testJob.GetFuncName())
+	input.SetId(jobId)
 	job, err := getClient(t).JobGet(t.Context(), input)
 	assert.NoError(t, err)
 	t.Log(job.GetJob())
@@ -69,8 +70,7 @@ func TestJobGet(t *testing.T) {
 func TestJobSetSpec(t *testing.T) {
 	defer down()
 	input := &kk_scheduler.JobSetSpec_Input{}
-	input.SetServiceName(testJob.GetServiceName())
-	input.SetFuncName(testJob.GetFuncName())
+	input.SetId(jobId)
 	input.SetSpec("* * * * *")
 	resp, err := getClient(t).JobSetSpec(t.Context(), input)
 	assert.NoError(t, err)
@@ -80,8 +80,7 @@ func TestJobSetSpec(t *testing.T) {
 func TestJobEnable(t *testing.T) {
 	defer down()
 	input := &kk_scheduler.JobEnable_Input{}
-	input.SetServiceName(testJob.GetServiceName())
-	input.SetFuncName(testJob.GetFuncName())
+	input.SetId(jobId)
 	resp, err := getClient(t).JobEnable(t.Context(), input)
 	assert.NoError(t, err)
 	t.Log(resp)
@@ -90,8 +89,7 @@ func TestJobEnable(t *testing.T) {
 func TestJobDisable(t *testing.T) {
 	defer down()
 	input := &kk_scheduler.JobDisable_Input{}
-	input.SetServiceName(testJob.GetServiceName())
-	input.SetFuncName(testJob.GetFuncName())
+	input.SetId(jobId)
 	resp, err := getClient(t).JobDisable(t.Context(), input)
 	assert.NoError(t, err)
 	t.Log(resp)

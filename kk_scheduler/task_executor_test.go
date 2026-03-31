@@ -20,7 +20,9 @@ func getRealClient(t *testing.T) (kk_scheduler.KKScheduleClient, func()) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	return kk_scheduler.NewKKScheduleClient(conn), func() { conn.Close() }
+	return kk_scheduler.NewKKScheduleClient(conn), func() {
+		conn.Close() //nolint
+	}
 }
 
 func TestTaskExecutor_RealServer(t *testing.T) {
