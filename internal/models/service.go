@@ -11,7 +11,7 @@ type Service struct {
 	AuthToken   string `gorm:"column:auth_token;type:text"`
 }
 
-func (Service) TableName() string {
+func (*Service) TableName() string {
 	return "service"
 }
 

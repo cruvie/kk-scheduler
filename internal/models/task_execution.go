@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // TaskExecution 任务执行记录
@@ -16,6 +17,19 @@ type TaskExecution struct {
 	Log        string                           `gorm:"column:log;type:text;not null"`
 }
 
-func (TaskExecution) TableName() string {
+func (*TaskExecution) TableName() string {
 	return "task_executions"
+}
+
+func (x *TaskExecution) ToPB() *kk_scheduler.PBTaskExecution {
+	pb := &kk_scheduler.PBTaskExecution{}
+	pb.SetId(x.Id)
+	pb.SetJobId(x.JobId)
+	pb.SetStatus(x.Status)
+	pb.SetStartedAt(timestamppb.New(x.StartedAt))
+	if !x.FinishedAt.IsZero() {
+		pb.SetFinishedAt(timestamppb.New(x.FinishedAt))
+	}
+	pb.SetLog(x.Log)
+	return pb
 }

@@ -6,6 +6,7 @@ import (
 	"log/slog"
 
 	"gitee.com/cruvie/kk_go_kit/kk_id"
+	"gitee.com/cruvie/kk_go_kit/kk_protobuf"
 	"gitee.com/cruvie/kk_go_kit/kk_time"
 	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/internal/models/query"
@@ -90,6 +91,51 @@ func (s *PostgresStore) TaskAppendLog(id string, log string) error {
 	return err
 }
 
+// TaskExecutionList lists task execution records
+func (s *PostgresStore) TaskExecutionList(jobId string) ([]*kk_scheduler.PBTaskExecution, error) {
+	q := query.TaskExecution.
+		Omit(query.TaskExecution.Log).
+		Where()
+	if jobId != "" {
+		q = query.TaskExecution.Where(query.TaskExecution.JobId.Eq(jobId))
+	}
+
+	executions, err := q.Order(query.TaskExecution.StartedAt.Desc()).Find()
+	if err != nil {
+		slog.Error("failed to list task executions", "err", err, "jobId", jobId)
+		return nil, err
+	}
+	list := kk_protobuf.ToPBList(executions)
+	return list, nil
+}
+
+// TaskExecutionGet returns a specific task execution record
+func (s *PostgresStore) TaskExecutionGet(id string) (*kk_scheduler.PBTaskExecution, error) {
+	execution, err := query.TaskExecution.
+		Where(query.TaskExecution.Id.Eq(id)).
+		Take()
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		slog.Error("failed to get task execution", "err", err, "id", id)
+		return nil, err
+	}
+	return execution.ToPB(), nil
+}
+
+// TaskExecutionDelete deletes a task execution record
+func (s *PostgresStore) TaskExecutionDelete(id string) error {
+	_, err := query.TaskExecution.
+		Where(query.TaskExecution.Id.Eq(id)).
+		Delete()
+	if err != nil {
+		slog.Error("failed to delete task execution", "err", err, "id", id)
+		return err
+	}
+	return nil
+}
+
 // JobList returns all jobs for a service
 func (s *PostgresStore) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
 	q := query.Job.Where()
@@ -102,11 +148,7 @@ func (s *PostgresStore) JobList(serviceName string) ([]*kk_scheduler.PBJob, erro
 		slog.Error("failed to list jobs", "err", err, "serviceName", serviceName)
 		return nil, err
 	}
-	result := make([]*kk_scheduler.PBJob, len(jobs))
-	for i, job := range jobs {
-		result[i] = job.ToPB()
-	}
-	return result, nil
+	return kk_protobuf.ToPBList(jobs), nil
 }
 
 // JobGet returns a specific job
@@ -192,11 +234,8 @@ func (s *PostgresStore) ServiceList() ([]*kk_scheduler.PBRegisterService, error)
 		slog.Error("failed to list services", "err", err)
 		return nil, err
 	}
-	result := make([]*kk_scheduler.PBRegisterService, len(services))
-	for i, svc := range services {
-		result[i] = svc.ToPB()
-	}
-	return result, nil
+
+	return kk_protobuf.ToPBList(services), nil
 }
 
 // ServiceGet returns a specific service

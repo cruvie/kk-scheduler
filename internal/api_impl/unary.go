@@ -129,3 +129,27 @@ func (x *server) TaskAppendLog(ctx context.Context, input *kk_scheduler.TaskAppe
 		task_execution.NewApiTaskAppendLog,
 	)
 }
+
+func (x *server) TaskExecutionList(ctx context.Context, input *kk_scheduler.TaskExecutionList_Input) (*kk_scheduler.TaskExecutionList_Output, error) {
+	return kk_grpc.GrpcHandler(
+		ctx,
+		input,
+		task_execution.NewApiTaskExecutionList,
+	)
+}
+
+func (x *server) TaskExecutionGet(ctx context.Context, input *kk_scheduler.TaskExecutionGet_Input) (*kk_scheduler.TaskExecutionGet_Output, error) {
+	return kk_grpc.GrpcHandler(
+		ctx,
+		input,
+		task_execution.NewApiTaskExecutionGet,
+	)
+}
+
+func (x *server) TaskExecutionDelete(ctx context.Context, input *kk_scheduler.TaskExecutionDelete_Input) (*kk_scheduler.TaskExecutionDelete_Output, error) {
+	return kk_grpc.GrpcHandler(
+		ctx,
+		input,
+		task_execution.NewApiTaskExecutionDelete,
+	)
+}

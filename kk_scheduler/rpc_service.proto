@@ -27,6 +27,9 @@ service KKSchedule {
   rpc TaskCreate(TaskCreate.Input) returns (TaskCreate.Output);
   rpc TaskUpdateStatus(TaskUpdateStatus.Input) returns (TaskUpdateStatus.Output);
   rpc TaskAppendLog(TaskAppendLog.Input) returns (TaskAppendLog.Output);
+  rpc TaskExecutionList(TaskExecutionList.Input) returns (TaskExecutionList.Output);
+  rpc TaskExecutionGet(TaskExecutionGet.Input) returns (TaskExecutionGet.Output);
+  rpc TaskExecutionDelete(TaskExecutionDelete.Input) returns (TaskExecutionDelete.Output);
 }
 
 

@@ -285,3 +285,18 @@ func (x *Client) TaskUpdateStatus(id string, status kk_scheduler.TaskExecutionSt
 func (x *Client) TaskAppendLog(id string, log string) error {
 	return x.storer.TaskAppendLog(id, log)
 }
+
+// TaskExecutionList lists task execution records
+func (x *Client) TaskExecutionList(jobId string) ([]*kk_scheduler.PBTaskExecution, error) {
+	return x.storer.TaskExecutionList(jobId)
+}
+
+// TaskExecutionGet returns a specific task execution record
+func (x *Client) TaskExecutionGet(id string) (*kk_scheduler.PBTaskExecution, error) {
+	return x.storer.TaskExecutionGet(id)
+}
+
+// TaskExecutionDelete deletes a task execution record
+func (x *Client) TaskExecutionDelete(id string) error {
+	return x.storer.TaskExecutionDelete(id)
+}

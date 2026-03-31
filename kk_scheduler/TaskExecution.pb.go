@@ -9,6 +9,7 @@ package kk_scheduler
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -70,6 +71,232 @@ func (x TaskExecutionStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
+type PBTaskExecution struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	xxx_hidden_JobId       *string                `protobuf:"bytes,2,opt,name=JobId"`
+	xxx_hidden_Status      TaskExecutionStatus    `protobuf:"varint,3,opt,name=Status,enum=kk_scheduler.TaskExecutionStatus"`
+	xxx_hidden_StartedAt   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=StartedAt"`
+	xxx_hidden_FinishedAt  *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=FinishedAt"`
+	xxx_hidden_Log         *string                `protobuf:"bytes,6,opt,name=Log"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *PBTaskExecution) Reset() {
+	*x = PBTaskExecution{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PBTaskExecution) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PBTaskExecution) ProtoMessage() {}
+
+func (x *PBTaskExecution) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *PBTaskExecution) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBTaskExecution) GetJobId() string {
+	if x != nil {
+		if x.xxx_hidden_JobId != nil {
+			return *x.xxx_hidden_JobId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBTaskExecution) GetStatus() TaskExecutionStatus {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 2) {
+			return x.xxx_hidden_Status
+		}
+	}
+	return TaskExecutionStatus_TASK_EXECUTION_STATUS_UNSPECIFIED
+}
+
+func (x *PBTaskExecution) GetStartedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_StartedAt
+	}
+	return nil
+}
+
+func (x *PBTaskExecution) GetFinishedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_FinishedAt
+	}
+	return nil
+}
+
+func (x *PBTaskExecution) GetLog() string {
+	if x != nil {
+		if x.xxx_hidden_Log != nil {
+			return *x.xxx_hidden_Log
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PBTaskExecution) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+}
+
+func (x *PBTaskExecution) SetJobId(v string) {
+	x.xxx_hidden_JobId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+}
+
+func (x *PBTaskExecution) SetStatus(v TaskExecutionStatus) {
+	x.xxx_hidden_Status = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+}
+
+func (x *PBTaskExecution) SetStartedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartedAt = v
+}
+
+func (x *PBTaskExecution) SetFinishedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_FinishedAt = v
+}
+
+func (x *PBTaskExecution) SetLog(v string) {
+	x.xxx_hidden_Log = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+}
+
+func (x *PBTaskExecution) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *PBTaskExecution) HasJobId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *PBTaskExecution) HasStatus() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *PBTaskExecution) HasStartedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartedAt != nil
+}
+
+func (x *PBTaskExecution) HasFinishedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_FinishedAt != nil
+}
+
+func (x *PBTaskExecution) HasLog() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *PBTaskExecution) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *PBTaskExecution) ClearJobId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_JobId = nil
+}
+
+func (x *PBTaskExecution) ClearStatus() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Status = TaskExecutionStatus_TASK_EXECUTION_STATUS_UNSPECIFIED
+}
+
+func (x *PBTaskExecution) ClearStartedAt() {
+	x.xxx_hidden_StartedAt = nil
+}
+
+func (x *PBTaskExecution) ClearFinishedAt() {
+	x.xxx_hidden_FinishedAt = nil
+}
+
+func (x *PBTaskExecution) ClearLog() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_Log = nil
+}
+
+type PBTaskExecution_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id         *string
+	JobId      *string
+	Status     *TaskExecutionStatus
+	StartedAt  *timestamppb.Timestamp
+	FinishedAt *timestamppb.Timestamp
+	Log        *string
+}
+
+func (b0 PBTaskExecution_builder) Build() *PBTaskExecution {
+	m0 := &PBTaskExecution{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.JobId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		x.xxx_hidden_JobId = b.JobId
+	}
+	if b.Status != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		x.xxx_hidden_Status = *b.Status
+	}
+	x.xxx_hidden_StartedAt = b.StartedAt
+	x.xxx_hidden_FinishedAt = b.FinishedAt
+	if b.Log != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		x.xxx_hidden_Log = b.Log
+	}
+	return m0
+}
+
 type TaskCreate struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -78,7 +305,7 @@ type TaskCreate struct {
 
 func (x *TaskCreate) Reset() {
 	*x = TaskCreate{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[0]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -90,7 +317,7 @@ func (x *TaskCreate) String() string {
 func (*TaskCreate) ProtoMessage() {}
 
 func (x *TaskCreate) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[0]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -121,7 +348,7 @@ type TaskUpdateStatus struct {
 
 func (x *TaskUpdateStatus) Reset() {
 	*x = TaskUpdateStatus{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[1]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -133,7 +360,7 @@ func (x *TaskUpdateStatus) String() string {
 func (*TaskUpdateStatus) ProtoMessage() {}
 
 func (x *TaskUpdateStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[1]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -164,7 +391,7 @@ type TaskAppendLog struct {
 
 func (x *TaskAppendLog) Reset() {
 	*x = TaskAppendLog{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[2]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +403,7 @@ func (x *TaskAppendLog) String() string {
 func (*TaskAppendLog) ProtoMessage() {}
 
 func (x *TaskAppendLog) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[2]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -199,6 +426,135 @@ func (b0 TaskAppendLog_builder) Build() *TaskAppendLog {
 	return m0
 }
 
+type TaskExecutionList struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TaskExecutionList) Reset() {
+	*x = TaskExecutionList{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionList) ProtoMessage() {}
+
+func (x *TaskExecutionList) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type TaskExecutionList_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 TaskExecutionList_builder) Build() *TaskExecutionList {
+	m0 := &TaskExecutionList{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type TaskExecutionGet struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TaskExecutionGet) Reset() {
+	*x = TaskExecutionGet{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionGet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionGet) ProtoMessage() {}
+
+func (x *TaskExecutionGet) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type TaskExecutionGet_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 TaskExecutionGet_builder) Build() *TaskExecutionGet {
+	m0 := &TaskExecutionGet{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type TaskExecutionDelete struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TaskExecutionDelete) Reset() {
+	*x = TaskExecutionDelete{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionDelete) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionDelete) ProtoMessage() {}
+
+func (x *TaskExecutionDelete) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type TaskExecutionDelete_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 TaskExecutionDelete_builder) Build() *TaskExecutionDelete {
+	m0 := &TaskExecutionDelete{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 type TaskCreate_Input struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
@@ -211,7 +567,7 @@ type TaskCreate_Input struct {
 
 func (x *TaskCreate_Input) Reset() {
 	*x = TaskCreate_Input{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[3]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -223,7 +579,7 @@ func (x *TaskCreate_Input) String() string {
 func (*TaskCreate_Input) ProtoMessage() {}
 
 func (x *TaskCreate_Input) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[3]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -318,7 +674,7 @@ type TaskCreate_Output struct {
 
 func (x *TaskCreate_Output) Reset() {
 	*x = TaskCreate_Output{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[4]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -330,7 +686,7 @@ func (x *TaskCreate_Output) String() string {
 func (*TaskCreate_Output) ProtoMessage() {}
 
 func (x *TaskCreate_Output) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[4]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -365,7 +721,7 @@ type TaskUpdateStatus_Input struct {
 
 func (x *TaskUpdateStatus_Input) Reset() {
 	*x = TaskUpdateStatus_Input{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[5]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -377,7 +733,7 @@ func (x *TaskUpdateStatus_Input) String() string {
 func (*TaskUpdateStatus_Input) ProtoMessage() {}
 
 func (x *TaskUpdateStatus_Input) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[5]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -471,7 +827,7 @@ type TaskUpdateStatus_Output struct {
 
 func (x *TaskUpdateStatus_Output) Reset() {
 	*x = TaskUpdateStatus_Output{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[6]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -483,7 +839,7 @@ func (x *TaskUpdateStatus_Output) String() string {
 func (*TaskUpdateStatus_Output) ProtoMessage() {}
 
 func (x *TaskUpdateStatus_Output) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[6]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -518,7 +874,7 @@ type TaskAppendLog_Input struct {
 
 func (x *TaskAppendLog_Input) Reset() {
 	*x = TaskAppendLog_Input{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[7]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -530,7 +886,7 @@ func (x *TaskAppendLog_Input) String() string {
 func (*TaskAppendLog_Input) ProtoMessage() {}
 
 func (x *TaskAppendLog_Input) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[7]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -625,7 +981,7 @@ type TaskAppendLog_Output struct {
 
 func (x *TaskAppendLog_Output) Reset() {
 	*x = TaskAppendLog_Output{}
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[8]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -637,7 +993,7 @@ func (x *TaskAppendLog_Output) String() string {
 func (*TaskAppendLog_Output) ProtoMessage() {}
 
 func (x *TaskAppendLog_Output) ProtoReflect() protoreflect.Message {
-	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[8]
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -660,11 +1016,424 @@ func (b0 TaskAppendLog_Output_builder) Build() *TaskAppendLog_Output {
 	return m0
 }
 
+type TaskExecutionList_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_JobId       *string                `protobuf:"bytes,1,opt,name=jobId"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *TaskExecutionList_Input) Reset() {
+	*x = TaskExecutionList_Input{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionList_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionList_Input) ProtoMessage() {}
+
+func (x *TaskExecutionList_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *TaskExecutionList_Input) GetJobId() string {
+	if x != nil {
+		if x.xxx_hidden_JobId != nil {
+			return *x.xxx_hidden_JobId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *TaskExecutionList_Input) SetJobId(v string) {
+	x.xxx_hidden_JobId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *TaskExecutionList_Input) HasJobId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *TaskExecutionList_Input) ClearJobId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_JobId = nil
+}
+
+type TaskExecutionList_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	JobId *string
+}
+
+func (b0 TaskExecutionList_Input_builder) Build() *TaskExecutionList_Input {
+	m0 := &TaskExecutionList_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.JobId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_JobId = b.JobId
+	}
+	return m0
+}
+
+type TaskExecutionList_Output struct {
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskExecutionList *[]*PBTaskExecution    `protobuf:"bytes,1,rep,name=TaskExecutionList"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *TaskExecutionList_Output) Reset() {
+	*x = TaskExecutionList_Output{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionList_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionList_Output) ProtoMessage() {}
+
+func (x *TaskExecutionList_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *TaskExecutionList_Output) GetTaskExecutionList() []*PBTaskExecution {
+	if x != nil {
+		if x.xxx_hidden_TaskExecutionList != nil {
+			return *x.xxx_hidden_TaskExecutionList
+		}
+	}
+	return nil
+}
+
+func (x *TaskExecutionList_Output) SetTaskExecutionList(v []*PBTaskExecution) {
+	x.xxx_hidden_TaskExecutionList = &v
+}
+
+type TaskExecutionList_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TaskExecutionList []*PBTaskExecution
+}
+
+func (b0 TaskExecutionList_Output_builder) Build() *TaskExecutionList_Output {
+	m0 := &TaskExecutionList_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TaskExecutionList = &b.TaskExecutionList
+	return m0
+}
+
+type TaskExecutionGet_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *TaskExecutionGet_Input) Reset() {
+	*x = TaskExecutionGet_Input{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionGet_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionGet_Input) ProtoMessage() {}
+
+func (x *TaskExecutionGet_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *TaskExecutionGet_Input) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *TaskExecutionGet_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *TaskExecutionGet_Input) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *TaskExecutionGet_Input) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+type TaskExecutionGet_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id *string
+}
+
+func (b0 TaskExecutionGet_Input_builder) Build() *TaskExecutionGet_Input {
+	m0 := &TaskExecutionGet_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Id = b.Id
+	}
+	return m0
+}
+
+type TaskExecutionGet_Output struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskExecution *PBTaskExecution       `protobuf:"bytes,1,opt,name=TaskExecution"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *TaskExecutionGet_Output) Reset() {
+	*x = TaskExecutionGet_Output{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionGet_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionGet_Output) ProtoMessage() {}
+
+func (x *TaskExecutionGet_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *TaskExecutionGet_Output) GetTaskExecution() *PBTaskExecution {
+	if x != nil {
+		return x.xxx_hidden_TaskExecution
+	}
+	return nil
+}
+
+func (x *TaskExecutionGet_Output) SetTaskExecution(v *PBTaskExecution) {
+	x.xxx_hidden_TaskExecution = v
+}
+
+func (x *TaskExecutionGet_Output) HasTaskExecution() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TaskExecution != nil
+}
+
+func (x *TaskExecutionGet_Output) ClearTaskExecution() {
+	x.xxx_hidden_TaskExecution = nil
+}
+
+type TaskExecutionGet_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TaskExecution *PBTaskExecution
+}
+
+func (b0 TaskExecutionGet_Output_builder) Build() *TaskExecutionGet_Output {
+	m0 := &TaskExecutionGet_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TaskExecution = b.TaskExecution
+	return m0
+}
+
+type TaskExecutionDelete_Input struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=Id"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *TaskExecutionDelete_Input) Reset() {
+	*x = TaskExecutionDelete_Input{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionDelete_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionDelete_Input) ProtoMessage() {}
+
+func (x *TaskExecutionDelete_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *TaskExecutionDelete_Input) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *TaskExecutionDelete_Input) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *TaskExecutionDelete_Input) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *TaskExecutionDelete_Input) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+type TaskExecutionDelete_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id *string
+}
+
+func (b0 TaskExecutionDelete_Input_builder) Build() *TaskExecutionDelete_Input {
+	m0 := &TaskExecutionDelete_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Id = b.Id
+	}
+	return m0
+}
+
+type TaskExecutionDelete_Output struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TaskExecutionDelete_Output) Reset() {
+	*x = TaskExecutionDelete_Output{}
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskExecutionDelete_Output) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskExecutionDelete_Output) ProtoMessage() {}
+
+func (x *TaskExecutionDelete_Output) ProtoReflect() protoreflect.Message {
+	mi := &file_kk_scheduler_TaskExecution_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type TaskExecutionDelete_Output_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 TaskExecutionDelete_Output_builder) Build() *TaskExecutionDelete_Output {
+	m0 := &TaskExecutionDelete_Output{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 var File_kk_scheduler_TaskExecution_proto protoreflect.FileDescriptor
 
 const file_kk_scheduler_TaskExecution_proto_rawDesc = "" +
 	"\n" +
-	" kk_scheduler/TaskExecution.proto\x12\fkk_scheduler\x1a\x1fkk_scheduler/extend_field.proto\"S\n" +
+	" kk_scheduler/TaskExecution.proto\x12\fkk_scheduler\x1a\x1fkk_scheduler/extend_field.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfa\x01\n" +
+	"\x0fPBTaskExecution\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\tR\x02Id\x12\x14\n" +
+	"\x05JobId\x18\x02 \x01(\tR\x05JobId\x129\n" +
+	"\x06Status\x18\x03 \x01(\x0e2!.kk_scheduler.TaskExecutionStatusR\x06Status\x128\n" +
+	"\tStartedAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tStartedAt\x12:\n" +
+	"\n" +
+	"FinishedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"FinishedAt\x12\x10\n" +
+	"\x03Log\x18\x06 \x01(\tR\x03Log\"S\n" +
 	"\n" +
 	"TaskCreate\x1a;\n" +
 	"\x05Input\x12\x15\n" +
@@ -680,6 +1449,20 @@ const file_kk_scheduler_TaskExecution_proto_rawDesc = "" +
 	"\x05Input\x12\x15\n" +
 	"\x02id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02id\x12\x16\n" +
 	"\x03log\x18\x02 \x01(\tB\x04\xca>\x01\x01R\x03log\x1a\b\n" +
+	"\x06Output\"\x8f\x01\n" +
+	"\x11TaskExecutionList\x1a#\n" +
+	"\x05Input\x12\x1a\n" +
+	"\x05jobId\x18\x01 \x01(\tB\x04\xca>\x01\x02R\x05jobId\x1aU\n" +
+	"\x06Output\x12K\n" +
+	"\x11TaskExecutionList\x18\x01 \x03(\v2\x1d.kk_scheduler.PBTaskExecutionR\x11TaskExecutionList\"\x81\x01\n" +
+	"\x10TaskExecutionGet\x1a\x1e\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x1aM\n" +
+	"\x06Output\x12C\n" +
+	"\rTaskExecution\x18\x01 \x01(\v2\x1d.kk_scheduler.PBTaskExecutionR\rTaskExecution\"?\n" +
+	"\x13TaskExecutionDelete\x1a\x1e\n" +
+	"\x05Input\x12\x15\n" +
+	"\x02Id\x18\x01 \x01(\tB\x05\xca>\x02\x01\x02R\x02Id\x1a\b\n" +
 	"\x06Output*\xc6\x01\n" +
 	"\x13TaskExecutionStatus\x12%\n" +
 	"!TASK_EXECUTION_STATUS_UNSPECIFIED\x10\x00\x12\x1e\n" +
@@ -689,26 +1472,42 @@ const file_kk_scheduler_TaskExecution_proto_rawDesc = "" +
 	"\x1cTASK_EXECUTION_STATUS_FAILED\x10\x04B\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
 var file_kk_scheduler_TaskExecution_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_kk_scheduler_TaskExecution_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_kk_scheduler_TaskExecution_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_kk_scheduler_TaskExecution_proto_goTypes = []any{
-	(TaskExecutionStatus)(0),        // 0: kk_scheduler.TaskExecutionStatus
-	(*TaskCreate)(nil),              // 1: kk_scheduler.TaskCreate
-	(*TaskUpdateStatus)(nil),        // 2: kk_scheduler.TaskUpdateStatus
-	(*TaskAppendLog)(nil),           // 3: kk_scheduler.TaskAppendLog
-	(*TaskCreate_Input)(nil),        // 4: kk_scheduler.TaskCreate.Input
-	(*TaskCreate_Output)(nil),       // 5: kk_scheduler.TaskCreate.Output
-	(*TaskUpdateStatus_Input)(nil),  // 6: kk_scheduler.TaskUpdateStatus.Input
-	(*TaskUpdateStatus_Output)(nil), // 7: kk_scheduler.TaskUpdateStatus.Output
-	(*TaskAppendLog_Input)(nil),     // 8: kk_scheduler.TaskAppendLog.Input
-	(*TaskAppendLog_Output)(nil),    // 9: kk_scheduler.TaskAppendLog.Output
+	(TaskExecutionStatus)(0),           // 0: kk_scheduler.TaskExecutionStatus
+	(*PBTaskExecution)(nil),            // 1: kk_scheduler.PBTaskExecution
+	(*TaskCreate)(nil),                 // 2: kk_scheduler.TaskCreate
+	(*TaskUpdateStatus)(nil),           // 3: kk_scheduler.TaskUpdateStatus
+	(*TaskAppendLog)(nil),              // 4: kk_scheduler.TaskAppendLog
+	(*TaskExecutionList)(nil),          // 5: kk_scheduler.TaskExecutionList
+	(*TaskExecutionGet)(nil),           // 6: kk_scheduler.TaskExecutionGet
+	(*TaskExecutionDelete)(nil),        // 7: kk_scheduler.TaskExecutionDelete
+	(*TaskCreate_Input)(nil),           // 8: kk_scheduler.TaskCreate.Input
+	(*TaskCreate_Output)(nil),          // 9: kk_scheduler.TaskCreate.Output
+	(*TaskUpdateStatus_Input)(nil),     // 10: kk_scheduler.TaskUpdateStatus.Input
+	(*TaskUpdateStatus_Output)(nil),    // 11: kk_scheduler.TaskUpdateStatus.Output
+	(*TaskAppendLog_Input)(nil),        // 12: kk_scheduler.TaskAppendLog.Input
+	(*TaskAppendLog_Output)(nil),       // 13: kk_scheduler.TaskAppendLog.Output
+	(*TaskExecutionList_Input)(nil),    // 14: kk_scheduler.TaskExecutionList.Input
+	(*TaskExecutionList_Output)(nil),   // 15: kk_scheduler.TaskExecutionList.Output
+	(*TaskExecutionGet_Input)(nil),     // 16: kk_scheduler.TaskExecutionGet.Input
+	(*TaskExecutionGet_Output)(nil),    // 17: kk_scheduler.TaskExecutionGet.Output
+	(*TaskExecutionDelete_Input)(nil),  // 18: kk_scheduler.TaskExecutionDelete.Input
+	(*TaskExecutionDelete_Output)(nil), // 19: kk_scheduler.TaskExecutionDelete.Output
+	(*timestamppb.Timestamp)(nil),      // 20: google.protobuf.Timestamp
 }
 var file_kk_scheduler_TaskExecution_proto_depIdxs = []int32{
-	0, // 0: kk_scheduler.TaskUpdateStatus.Input.status:type_name -> kk_scheduler.TaskExecutionStatus
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0,  // 0: kk_scheduler.PBTaskExecution.Status:type_name -> kk_scheduler.TaskExecutionStatus
+	20, // 1: kk_scheduler.PBTaskExecution.StartedAt:type_name -> google.protobuf.Timestamp
+	20, // 2: kk_scheduler.PBTaskExecution.FinishedAt:type_name -> google.protobuf.Timestamp
+	0,  // 3: kk_scheduler.TaskUpdateStatus.Input.status:type_name -> kk_scheduler.TaskExecutionStatus
+	1,  // 4: kk_scheduler.TaskExecutionList.Output.TaskExecutionList:type_name -> kk_scheduler.PBTaskExecution
+	1,  // 5: kk_scheduler.TaskExecutionGet.Output.TaskExecution:type_name -> kk_scheduler.PBTaskExecution
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_kk_scheduler_TaskExecution_proto_init() }
@@ -723,7 +1522,7 @@ func file_kk_scheduler_TaskExecution_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_kk_scheduler_TaskExecution_proto_rawDesc), len(file_kk_scheduler_TaskExecution_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   9,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

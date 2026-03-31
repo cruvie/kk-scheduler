@@ -226,7 +226,7 @@ const file_kk_scheduler_rpc_service_proto_rawDesc = "" +
 	"\x05Input\x12\x1a\n" +
 	"\bfuncName\x18\x01 \x01(\tR\bfuncName\x12\x1b\n" +
 	"\x05jobId\x18\x02 \x01(\tB\x05\xca>\x02\x01\x02R\x05jobId\x1a\b\n" +
-	"\x06Output2\xad\t\n" +
+	"\x06Output2\xdc\v\n" +
 	"\n" +
 	"KKSchedule\x12D\n" +
 	"\aJobList\x12\x1b.kk_scheduler.JobList.Input\x1a\x1c.kk_scheduler.JobList.Output\x12A\n" +
@@ -249,45 +249,54 @@ const file_kk_scheduler_rpc_service_proto_rawDesc = "" +
 	"\n" +
 	"TaskCreate\x12\x1e.kk_scheduler.TaskCreate.Input\x1a\x1f.kk_scheduler.TaskCreate.Output\x12_\n" +
 	"\x10TaskUpdateStatus\x12$.kk_scheduler.TaskUpdateStatus.Input\x1a%.kk_scheduler.TaskUpdateStatus.Output\x12V\n" +
-	"\rTaskAppendLog\x12!.kk_scheduler.TaskAppendLog.Input\x1a\".kk_scheduler.TaskAppendLog.Output2Y\n" +
+	"\rTaskAppendLog\x12!.kk_scheduler.TaskAppendLog.Input\x1a\".kk_scheduler.TaskAppendLog.Output\x12b\n" +
+	"\x11TaskExecutionList\x12%.kk_scheduler.TaskExecutionList.Input\x1a&.kk_scheduler.TaskExecutionList.Output\x12_\n" +
+	"\x10TaskExecutionGet\x12$.kk_scheduler.TaskExecutionGet.Input\x1a%.kk_scheduler.TaskExecutionGet.Output\x12h\n" +
+	"\x13TaskExecutionDelete\x12'.kk_scheduler.TaskExecutionDelete.Input\x1a(.kk_scheduler.TaskExecutionDelete.Output2Y\n" +
 	"\x11KKScheduleTrigger\x12D\n" +
 	"\aTrigger\x12\x1b.kk_scheduler.Trigger.Input\x1a\x1c.kk_scheduler.Trigger.OutputB\x0fZ\r/kk_schedulerb\beditionsp\xe8\a"
 
 var file_kk_scheduler_rpc_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_kk_scheduler_rpc_service_proto_goTypes = []any{
-	(*Trigger)(nil),                 // 0: kk_scheduler.Trigger
-	(*Trigger_Input)(nil),           // 1: kk_scheduler.Trigger.Input
-	(*Trigger_Output)(nil),          // 2: kk_scheduler.Trigger.Output
-	(*JobList_Input)(nil),           // 3: kk_scheduler.JobList.Input
-	(*JobGet_Input)(nil),            // 4: kk_scheduler.JobGet.Input
-	(*JobSetSpec_Input)(nil),        // 5: kk_scheduler.JobSetSpec.Input
-	(*JobEnable_Input)(nil),         // 6: kk_scheduler.JobEnable.Input
-	(*JobDisable_Input)(nil),        // 7: kk_scheduler.JobDisable.Input
-	(*JobPut_Input)(nil),            // 8: kk_scheduler.JobPut.Input
-	(*JobDelete_Input)(nil),         // 9: kk_scheduler.JobDelete.Input
-	(*JobTrigger_Input)(nil),        // 10: kk_scheduler.JobTrigger.Input
-	(*ServiceList_Input)(nil),       // 11: kk_scheduler.ServiceList.Input
-	(*ServicePut_Input)(nil),        // 12: kk_scheduler.ServicePut.Input
-	(*ServiceGet_Input)(nil),        // 13: kk_scheduler.ServiceGet.Input
-	(*ServiceDelete_Input)(nil),     // 14: kk_scheduler.ServiceDelete.Input
-	(*TaskCreate_Input)(nil),        // 15: kk_scheduler.TaskCreate.Input
-	(*TaskUpdateStatus_Input)(nil),  // 16: kk_scheduler.TaskUpdateStatus.Input
-	(*TaskAppendLog_Input)(nil),     // 17: kk_scheduler.TaskAppendLog.Input
-	(*JobList_Output)(nil),          // 18: kk_scheduler.JobList.Output
-	(*JobGet_Output)(nil),           // 19: kk_scheduler.JobGet.Output
-	(*JobSetSpec_Output)(nil),       // 20: kk_scheduler.JobSetSpec.Output
-	(*JobEnable_Output)(nil),        // 21: kk_scheduler.JobEnable.Output
-	(*JobDisable_Output)(nil),       // 22: kk_scheduler.JobDisable.Output
-	(*JobPut_Output)(nil),           // 23: kk_scheduler.JobPut.Output
-	(*JobDelete_Output)(nil),        // 24: kk_scheduler.JobDelete.Output
-	(*JobTrigger_Output)(nil),       // 25: kk_scheduler.JobTrigger.Output
-	(*ServiceList_Output)(nil),      // 26: kk_scheduler.ServiceList.Output
-	(*ServicePut_Output)(nil),       // 27: kk_scheduler.ServicePut.Output
-	(*ServiceGet_Output)(nil),       // 28: kk_scheduler.ServiceGet.Output
-	(*ServiceDelete_Output)(nil),    // 29: kk_scheduler.ServiceDelete.Output
-	(*TaskCreate_Output)(nil),       // 30: kk_scheduler.TaskCreate.Output
-	(*TaskUpdateStatus_Output)(nil), // 31: kk_scheduler.TaskUpdateStatus.Output
-	(*TaskAppendLog_Output)(nil),    // 32: kk_scheduler.TaskAppendLog.Output
+	(*Trigger)(nil),                    // 0: kk_scheduler.Trigger
+	(*Trigger_Input)(nil),              // 1: kk_scheduler.Trigger.Input
+	(*Trigger_Output)(nil),             // 2: kk_scheduler.Trigger.Output
+	(*JobList_Input)(nil),              // 3: kk_scheduler.JobList.Input
+	(*JobGet_Input)(nil),               // 4: kk_scheduler.JobGet.Input
+	(*JobSetSpec_Input)(nil),           // 5: kk_scheduler.JobSetSpec.Input
+	(*JobEnable_Input)(nil),            // 6: kk_scheduler.JobEnable.Input
+	(*JobDisable_Input)(nil),           // 7: kk_scheduler.JobDisable.Input
+	(*JobPut_Input)(nil),               // 8: kk_scheduler.JobPut.Input
+	(*JobDelete_Input)(nil),            // 9: kk_scheduler.JobDelete.Input
+	(*JobTrigger_Input)(nil),           // 10: kk_scheduler.JobTrigger.Input
+	(*ServiceList_Input)(nil),          // 11: kk_scheduler.ServiceList.Input
+	(*ServicePut_Input)(nil),           // 12: kk_scheduler.ServicePut.Input
+	(*ServiceGet_Input)(nil),           // 13: kk_scheduler.ServiceGet.Input
+	(*ServiceDelete_Input)(nil),        // 14: kk_scheduler.ServiceDelete.Input
+	(*TaskCreate_Input)(nil),           // 15: kk_scheduler.TaskCreate.Input
+	(*TaskUpdateStatus_Input)(nil),     // 16: kk_scheduler.TaskUpdateStatus.Input
+	(*TaskAppendLog_Input)(nil),        // 17: kk_scheduler.TaskAppendLog.Input
+	(*TaskExecutionList_Input)(nil),    // 18: kk_scheduler.TaskExecutionList.Input
+	(*TaskExecutionGet_Input)(nil),     // 19: kk_scheduler.TaskExecutionGet.Input
+	(*TaskExecutionDelete_Input)(nil),  // 20: kk_scheduler.TaskExecutionDelete.Input
+	(*JobList_Output)(nil),             // 21: kk_scheduler.JobList.Output
+	(*JobGet_Output)(nil),              // 22: kk_scheduler.JobGet.Output
+	(*JobSetSpec_Output)(nil),          // 23: kk_scheduler.JobSetSpec.Output
+	(*JobEnable_Output)(nil),           // 24: kk_scheduler.JobEnable.Output
+	(*JobDisable_Output)(nil),          // 25: kk_scheduler.JobDisable.Output
+	(*JobPut_Output)(nil),              // 26: kk_scheduler.JobPut.Output
+	(*JobDelete_Output)(nil),           // 27: kk_scheduler.JobDelete.Output
+	(*JobTrigger_Output)(nil),          // 28: kk_scheduler.JobTrigger.Output
+	(*ServiceList_Output)(nil),         // 29: kk_scheduler.ServiceList.Output
+	(*ServicePut_Output)(nil),          // 30: kk_scheduler.ServicePut.Output
+	(*ServiceGet_Output)(nil),          // 31: kk_scheduler.ServiceGet.Output
+	(*ServiceDelete_Output)(nil),       // 32: kk_scheduler.ServiceDelete.Output
+	(*TaskCreate_Output)(nil),          // 33: kk_scheduler.TaskCreate.Output
+	(*TaskUpdateStatus_Output)(nil),    // 34: kk_scheduler.TaskUpdateStatus.Output
+	(*TaskAppendLog_Output)(nil),       // 35: kk_scheduler.TaskAppendLog.Output
+	(*TaskExecutionList_Output)(nil),   // 36: kk_scheduler.TaskExecutionList.Output
+	(*TaskExecutionGet_Output)(nil),    // 37: kk_scheduler.TaskExecutionGet.Output
+	(*TaskExecutionDelete_Output)(nil), // 38: kk_scheduler.TaskExecutionDelete.Output
 }
 var file_kk_scheduler_rpc_service_proto_depIdxs = []int32{
 	3,  // 0: kk_scheduler.KKSchedule.JobList:input_type -> kk_scheduler.JobList.Input
@@ -305,25 +314,31 @@ var file_kk_scheduler_rpc_service_proto_depIdxs = []int32{
 	15, // 12: kk_scheduler.KKSchedule.TaskCreate:input_type -> kk_scheduler.TaskCreate.Input
 	16, // 13: kk_scheduler.KKSchedule.TaskUpdateStatus:input_type -> kk_scheduler.TaskUpdateStatus.Input
 	17, // 14: kk_scheduler.KKSchedule.TaskAppendLog:input_type -> kk_scheduler.TaskAppendLog.Input
-	1,  // 15: kk_scheduler.KKScheduleTrigger.Trigger:input_type -> kk_scheduler.Trigger.Input
-	18, // 16: kk_scheduler.KKSchedule.JobList:output_type -> kk_scheduler.JobList.Output
-	19, // 17: kk_scheduler.KKSchedule.JobGet:output_type -> kk_scheduler.JobGet.Output
-	20, // 18: kk_scheduler.KKSchedule.JobSetSpec:output_type -> kk_scheduler.JobSetSpec.Output
-	21, // 19: kk_scheduler.KKSchedule.JobEnable:output_type -> kk_scheduler.JobEnable.Output
-	22, // 20: kk_scheduler.KKSchedule.JobDisable:output_type -> kk_scheduler.JobDisable.Output
-	23, // 21: kk_scheduler.KKSchedule.JobPut:output_type -> kk_scheduler.JobPut.Output
-	24, // 22: kk_scheduler.KKSchedule.JobDelete:output_type -> kk_scheduler.JobDelete.Output
-	25, // 23: kk_scheduler.KKSchedule.JobTrigger:output_type -> kk_scheduler.JobTrigger.Output
-	26, // 24: kk_scheduler.KKSchedule.ServiceList:output_type -> kk_scheduler.ServiceList.Output
-	27, // 25: kk_scheduler.KKSchedule.ServicePut:output_type -> kk_scheduler.ServicePut.Output
-	28, // 26: kk_scheduler.KKSchedule.ServiceGet:output_type -> kk_scheduler.ServiceGet.Output
-	29, // 27: kk_scheduler.KKSchedule.ServiceDelete:output_type -> kk_scheduler.ServiceDelete.Output
-	30, // 28: kk_scheduler.KKSchedule.TaskCreate:output_type -> kk_scheduler.TaskCreate.Output
-	31, // 29: kk_scheduler.KKSchedule.TaskUpdateStatus:output_type -> kk_scheduler.TaskUpdateStatus.Output
-	32, // 30: kk_scheduler.KKSchedule.TaskAppendLog:output_type -> kk_scheduler.TaskAppendLog.Output
-	2,  // 31: kk_scheduler.KKScheduleTrigger.Trigger:output_type -> kk_scheduler.Trigger.Output
-	16, // [16:32] is the sub-list for method output_type
-	0,  // [0:16] is the sub-list for method input_type
+	18, // 15: kk_scheduler.KKSchedule.TaskExecutionList:input_type -> kk_scheduler.TaskExecutionList.Input
+	19, // 16: kk_scheduler.KKSchedule.TaskExecutionGet:input_type -> kk_scheduler.TaskExecutionGet.Input
+	20, // 17: kk_scheduler.KKSchedule.TaskExecutionDelete:input_type -> kk_scheduler.TaskExecutionDelete.Input
+	1,  // 18: kk_scheduler.KKScheduleTrigger.Trigger:input_type -> kk_scheduler.Trigger.Input
+	21, // 19: kk_scheduler.KKSchedule.JobList:output_type -> kk_scheduler.JobList.Output
+	22, // 20: kk_scheduler.KKSchedule.JobGet:output_type -> kk_scheduler.JobGet.Output
+	23, // 21: kk_scheduler.KKSchedule.JobSetSpec:output_type -> kk_scheduler.JobSetSpec.Output
+	24, // 22: kk_scheduler.KKSchedule.JobEnable:output_type -> kk_scheduler.JobEnable.Output
+	25, // 23: kk_scheduler.KKSchedule.JobDisable:output_type -> kk_scheduler.JobDisable.Output
+	26, // 24: kk_scheduler.KKSchedule.JobPut:output_type -> kk_scheduler.JobPut.Output
+	27, // 25: kk_scheduler.KKSchedule.JobDelete:output_type -> kk_scheduler.JobDelete.Output
+	28, // 26: kk_scheduler.KKSchedule.JobTrigger:output_type -> kk_scheduler.JobTrigger.Output
+	29, // 27: kk_scheduler.KKSchedule.ServiceList:output_type -> kk_scheduler.ServiceList.Output
+	30, // 28: kk_scheduler.KKSchedule.ServicePut:output_type -> kk_scheduler.ServicePut.Output
+	31, // 29: kk_scheduler.KKSchedule.ServiceGet:output_type -> kk_scheduler.ServiceGet.Output
+	32, // 30: kk_scheduler.KKSchedule.ServiceDelete:output_type -> kk_scheduler.ServiceDelete.Output
+	33, // 31: kk_scheduler.KKSchedule.TaskCreate:output_type -> kk_scheduler.TaskCreate.Output
+	34, // 32: kk_scheduler.KKSchedule.TaskUpdateStatus:output_type -> kk_scheduler.TaskUpdateStatus.Output
+	35, // 33: kk_scheduler.KKSchedule.TaskAppendLog:output_type -> kk_scheduler.TaskAppendLog.Output
+	36, // 34: kk_scheduler.KKSchedule.TaskExecutionList:output_type -> kk_scheduler.TaskExecutionList.Output
+	37, // 35: kk_scheduler.KKSchedule.TaskExecutionGet:output_type -> kk_scheduler.TaskExecutionGet.Output
+	38, // 36: kk_scheduler.KKSchedule.TaskExecutionDelete:output_type -> kk_scheduler.TaskExecutionDelete.Output
+	2,  // 37: kk_scheduler.KKScheduleTrigger.Trigger:output_type -> kk_scheduler.Trigger.Output
+	19, // [19:38] is the sub-list for method output_type
+	0,  // [0:19] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

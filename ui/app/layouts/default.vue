@@ -13,6 +13,10 @@ const items: NavigationMenuItem[] = [{
   label: 'Service List',
   icon: 'i-heroicons-server-stack',
   to: '/service'
+}, {
+  label: 'Task Execution',
+  icon: 'i-heroicons-clipboard-document-list',
+  to: '/task_execution'
 }]
 </script>
 
@@ -20,7 +24,7 @@ const items: NavigationMenuItem[] = [{
   <UDashboardGroup>
     <UDashboardSidebar>
       <template #header>
-        <h1 class="font-bold text-lg">KK Schedule</h1>
+        <h1 class="font-bold text-lg">KK Scheduler</h1>
       </template>
 
       <UNavigationMenu

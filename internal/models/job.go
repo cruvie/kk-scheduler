@@ -14,7 +14,7 @@ type Job struct {
 	Description string `gorm:"column:description;type:text"`
 }
 
-func (Job) TableName() string {
+func (*Job) TableName() string {
 	return "job"
 }
 

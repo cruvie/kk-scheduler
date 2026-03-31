@@ -23,6 +23,12 @@ type StoreDriver interface {
 	TaskUpdateStatus(id string, status kk_scheduler.TaskExecutionStatus) error
 	// TaskAppendLog append log to the execution record
 	TaskAppendLog(id string, log string) error
+	// TaskExecutionList lists task execution records, optionally filtered by jobId
+	TaskExecutionList(jobId string) ([]*kk_scheduler.PBTaskExecution, error)
+	// TaskExecutionGet returns a specific task execution record
+	TaskExecutionGet(id string) (*kk_scheduler.PBTaskExecution, error)
+	// TaskExecutionDelete deletes a task execution record
+	TaskExecutionDelete(id string) error
 }
 
 func NewStoreDriver() StoreDriver {

@@ -5,13 +5,57 @@
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_kk_scheduler_extend_field } from "./extend_field_pb";
+import type { Timestamp } from "../google/protobuf/timestamp_pb";
+import { file_google_protobuf_timestamp } from "../google/protobuf/timestamp_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file kk_scheduler/TaskExecution.proto.
  */
 export const file_kk_scheduler_TaskExecution: GenFile = /*@__PURE__*/
-  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIkgKClRhc2tDcmVhdGUaMAoFSW5wdXQSEQoCaWQYASABKAlCBco+AgECEhQKBWpvYklkGAIgASgJQgXKPgIBAhoICgZPdXRwdXQicQoQVGFza1VwZGF0ZVN0YXR1cxpTCgVJbnB1dBIRCgJpZBgBIAEoCUIFyj4CAQISNwoGc3RhdHVzGAIgASgOMiEua2tfc2NoZWR1bGVyLlRhc2tFeGVjdXRpb25TdGF0dXNCBMo+AQEaCAoGT3V0cHV0IkgKDVRhc2tBcHBlbmRMb2caLQoFSW5wdXQSEQoCaWQYASABKAlCBco+AgECEhEKA2xvZxgCIAEoCUIEyj4BARoICgZPdXRwdXQqxgEKE1Rhc2tFeGVjdXRpb25TdGF0dXMSJQohVEFTS19FWEVDVVRJT05fU1RBVFVTX1VOU1BFQ0lGSUVEEAASHgoaVEFTS19FWEVDVVRJT05fU1RBVFVTX0luaXQQARIhCh1UQVNLX0VYRUNVVElPTl9TVEFUVVNfUlVOTklORxACEiMKH1RBU0tfRVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQAxIgChxUQVNLX0VYRUNVVElPTl9TVEFUVVNfRkFJTEVEEARCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field]);
+  fileDesc("CiBra19zY2hlZHVsZXIvVGFza0V4ZWN1dGlvbi5wcm90bxIMa2tfc2NoZWR1bGVyIssBCg9QQlRhc2tFeGVjdXRpb24SCgoCSWQYASABKAkSDQoFSm9iSWQYAiABKAkSMQoGU3RhdHVzGAMgASgOMiEua2tfc2NoZWR1bGVyLlRhc2tFeGVjdXRpb25TdGF0dXMSLQoJU3RhcnRlZEF0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgpGaW5pc2hlZEF0GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBILCgNMb2cYBiABKAkiSAoKVGFza0NyZWF0ZRowCgVJbnB1dBIRCgJpZBgBIAEoCUIFyj4CAQISFAoFam9iSWQYAiABKAlCBco+AgECGggKBk91dHB1dCJxChBUYXNrVXBkYXRlU3RhdHVzGlMKBUlucHV0EhEKAmlkGAEgASgJQgXKPgIBAhI3CgZzdGF0dXMYAiABKA4yIS5ra19zY2hlZHVsZXIuVGFza0V4ZWN1dGlvblN0YXR1c0IEyj4BARoICgZPdXRwdXQiSAoNVGFza0FwcGVuZExvZxotCgVJbnB1dBIRCgJpZBgBIAEoCUIFyj4CAQISEQoDbG9nGAIgASgJQgTKPgEBGggKBk91dHB1dCJ1ChFUYXNrRXhlY3V0aW9uTGlzdBocCgVJbnB1dBITCgVqb2JJZBgBIAEoCUIEyj4BAhpCCgZPdXRwdXQSOAoRVGFza0V4ZWN1dGlvbkxpc3QYASADKAsyHS5ra19zY2hlZHVsZXIuUEJUYXNrRXhlY3V0aW9uIm4KEFRhc2tFeGVjdXRpb25HZXQaGgoFSW5wdXQSEQoCSWQYASABKAlCBco+AgECGj4KBk91dHB1dBI0Cg1UYXNrRXhlY3V0aW9uGAEgASgLMh0ua2tfc2NoZWR1bGVyLlBCVGFza0V4ZWN1dGlvbiI7ChNUYXNrRXhlY3V0aW9uRGVsZXRlGhoKBUlucHV0EhEKAklkGAEgASgJQgXKPgIBAhoICgZPdXRwdXQqxgEKE1Rhc2tFeGVjdXRpb25TdGF0dXMSJQohVEFTS19FWEVDVVRJT05fU1RBVFVTX1VOU1BFQ0lGSUVEEAASHgoaVEFTS19FWEVDVVRJT05fU1RBVFVTX0luaXQQARIhCh1UQVNLX0VYRUNVVElPTl9TVEFUVVNfUlVOTklORxACEiMKH1RBU0tfRVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQAxIgChxUQVNLX0VYRUNVVElPTl9TVEFUVVNfRkFJTEVEEARCD1oNL2trX3NjaGVkdWxlcmIIZWRpdGlvbnNw6Ac", [file_kk_scheduler_extend_field, file_google_protobuf_timestamp]);
+
+/**
+ * @generated from message kk_scheduler.PBTaskExecution
+ */
+export type PBTaskExecution = Message<"kk_scheduler.PBTaskExecution"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+
+  /**
+   * @generated from field: string JobId = 2;
+   */
+  JobId: string;
+
+  /**
+   * @generated from field: kk_scheduler.TaskExecutionStatus Status = 3;
+   */
+  Status: TaskExecutionStatus;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp StartedAt = 4;
+   */
+  StartedAt?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp FinishedAt = 5;
+   */
+  FinishedAt?: Timestamp;
+
+  /**
+   * @generated from field: string Log = 6;
+   */
+  Log: string;
+};
+
+/**
+ * Describes the message kk_scheduler.PBTaskExecution.
+ * Use `create(PBTaskExecutionSchema)` to create a new message.
+ */
+export const PBTaskExecutionSchema: GenMessage<PBTaskExecution> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 0);
 
 /**
  * @generated from message kk_scheduler.TaskCreate
@@ -24,7 +68,7 @@ export type TaskCreate = Message<"kk_scheduler.TaskCreate"> & {
  * Use `create(TaskCreateSchema)` to create a new message.
  */
 export const TaskCreateSchema: GenMessage<TaskCreate> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 0);
+  messageDesc(file_kk_scheduler_TaskExecution, 1);
 
 /**
  * @generated from message kk_scheduler.TaskCreate.Input
@@ -46,7 +90,7 @@ export type TaskCreate_Input = Message<"kk_scheduler.TaskCreate.Input"> & {
  * Use `create(TaskCreate_InputSchema)` to create a new message.
  */
 export const TaskCreate_InputSchema: GenMessage<TaskCreate_Input> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 0, 0);
+  messageDesc(file_kk_scheduler_TaskExecution, 1, 0);
 
 /**
  * @generated from message kk_scheduler.TaskCreate.Output
@@ -59,7 +103,7 @@ export type TaskCreate_Output = Message<"kk_scheduler.TaskCreate.Output"> & {
  * Use `create(TaskCreate_OutputSchema)` to create a new message.
  */
 export const TaskCreate_OutputSchema: GenMessage<TaskCreate_Output> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 0, 1);
+  messageDesc(file_kk_scheduler_TaskExecution, 1, 1);
 
 /**
  * @generated from message kk_scheduler.TaskUpdateStatus
@@ -72,7 +116,7 @@ export type TaskUpdateStatus = Message<"kk_scheduler.TaskUpdateStatus"> & {
  * Use `create(TaskUpdateStatusSchema)` to create a new message.
  */
 export const TaskUpdateStatusSchema: GenMessage<TaskUpdateStatus> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 1);
+  messageDesc(file_kk_scheduler_TaskExecution, 2);
 
 /**
  * @generated from message kk_scheduler.TaskUpdateStatus.Input
@@ -94,7 +138,7 @@ export type TaskUpdateStatus_Input = Message<"kk_scheduler.TaskUpdateStatus.Inpu
  * Use `create(TaskUpdateStatus_InputSchema)` to create a new message.
  */
 export const TaskUpdateStatus_InputSchema: GenMessage<TaskUpdateStatus_Input> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 1, 0);
+  messageDesc(file_kk_scheduler_TaskExecution, 2, 0);
 
 /**
  * @generated from message kk_scheduler.TaskUpdateStatus.Output
@@ -107,7 +151,7 @@ export type TaskUpdateStatus_Output = Message<"kk_scheduler.TaskUpdateStatus.Out
  * Use `create(TaskUpdateStatus_OutputSchema)` to create a new message.
  */
 export const TaskUpdateStatus_OutputSchema: GenMessage<TaskUpdateStatus_Output> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 1, 1);
+  messageDesc(file_kk_scheduler_TaskExecution, 2, 1);
 
 /**
  * @generated from message kk_scheduler.TaskAppendLog
@@ -120,7 +164,7 @@ export type TaskAppendLog = Message<"kk_scheduler.TaskAppendLog"> & {
  * Use `create(TaskAppendLogSchema)` to create a new message.
  */
 export const TaskAppendLogSchema: GenMessage<TaskAppendLog> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 2);
+  messageDesc(file_kk_scheduler_TaskExecution, 3);
 
 /**
  * @generated from message kk_scheduler.TaskAppendLog.Input
@@ -142,7 +186,7 @@ export type TaskAppendLog_Input = Message<"kk_scheduler.TaskAppendLog.Input"> & 
  * Use `create(TaskAppendLog_InputSchema)` to create a new message.
  */
 export const TaskAppendLog_InputSchema: GenMessage<TaskAppendLog_Input> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 2, 0);
+  messageDesc(file_kk_scheduler_TaskExecution, 3, 0);
 
 /**
  * @generated from message kk_scheduler.TaskAppendLog.Output
@@ -155,7 +199,144 @@ export type TaskAppendLog_Output = Message<"kk_scheduler.TaskAppendLog.Output"> 
  * Use `create(TaskAppendLog_OutputSchema)` to create a new message.
  */
 export const TaskAppendLog_OutputSchema: GenMessage<TaskAppendLog_Output> = /*@__PURE__*/
-  messageDesc(file_kk_scheduler_TaskExecution, 2, 1);
+  messageDesc(file_kk_scheduler_TaskExecution, 3, 1);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionList
+ */
+export type TaskExecutionList = Message<"kk_scheduler.TaskExecutionList"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionList.
+ * Use `create(TaskExecutionListSchema)` to create a new message.
+ */
+export const TaskExecutionListSchema: GenMessage<TaskExecutionList> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 4);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionList.Input
+ */
+export type TaskExecutionList_Input = Message<"kk_scheduler.TaskExecutionList.Input"> & {
+  /**
+   * @generated from field: string jobId = 1;
+   */
+  jobId: string;
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionList.Input.
+ * Use `create(TaskExecutionList_InputSchema)` to create a new message.
+ */
+export const TaskExecutionList_InputSchema: GenMessage<TaskExecutionList_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 4, 0);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionList.Output
+ */
+export type TaskExecutionList_Output = Message<"kk_scheduler.TaskExecutionList.Output"> & {
+  /**
+   * @generated from field: repeated kk_scheduler.PBTaskExecution TaskExecutionList = 1;
+   */
+  TaskExecutionList: PBTaskExecution[];
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionList.Output.
+ * Use `create(TaskExecutionList_OutputSchema)` to create a new message.
+ */
+export const TaskExecutionList_OutputSchema: GenMessage<TaskExecutionList_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 4, 1);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionGet
+ */
+export type TaskExecutionGet = Message<"kk_scheduler.TaskExecutionGet"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionGet.
+ * Use `create(TaskExecutionGetSchema)` to create a new message.
+ */
+export const TaskExecutionGetSchema: GenMessage<TaskExecutionGet> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 5);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionGet.Input
+ */
+export type TaskExecutionGet_Input = Message<"kk_scheduler.TaskExecutionGet.Input"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionGet.Input.
+ * Use `create(TaskExecutionGet_InputSchema)` to create a new message.
+ */
+export const TaskExecutionGet_InputSchema: GenMessage<TaskExecutionGet_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 5, 0);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionGet.Output
+ */
+export type TaskExecutionGet_Output = Message<"kk_scheduler.TaskExecutionGet.Output"> & {
+  /**
+   * @generated from field: kk_scheduler.PBTaskExecution TaskExecution = 1;
+   */
+  TaskExecution?: PBTaskExecution;
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionGet.Output.
+ * Use `create(TaskExecutionGet_OutputSchema)` to create a new message.
+ */
+export const TaskExecutionGet_OutputSchema: GenMessage<TaskExecutionGet_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 5, 1);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionDelete
+ */
+export type TaskExecutionDelete = Message<"kk_scheduler.TaskExecutionDelete"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionDelete.
+ * Use `create(TaskExecutionDeleteSchema)` to create a new message.
+ */
+export const TaskExecutionDeleteSchema: GenMessage<TaskExecutionDelete> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 6);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionDelete.Input
+ */
+export type TaskExecutionDelete_Input = Message<"kk_scheduler.TaskExecutionDelete.Input"> & {
+  /**
+   * @generated from field: string Id = 1;
+   */
+  Id: string;
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionDelete.Input.
+ * Use `create(TaskExecutionDelete_InputSchema)` to create a new message.
+ */
+export const TaskExecutionDelete_InputSchema: GenMessage<TaskExecutionDelete_Input> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 6, 0);
+
+/**
+ * @generated from message kk_scheduler.TaskExecutionDelete.Output
+ */
+export type TaskExecutionDelete_Output = Message<"kk_scheduler.TaskExecutionDelete.Output"> & {
+};
+
+/**
+ * Describes the message kk_scheduler.TaskExecutionDelete.Output.
+ * Use `create(TaskExecutionDelete_OutputSchema)` to create a new message.
+ */
+export const TaskExecutionDelete_OutputSchema: GenMessage<TaskExecutionDelete_Output> = /*@__PURE__*/
+  messageDesc(file_kk_scheduler_TaskExecution, 6, 1);
 
 /**
  * @generated from enum kk_scheduler.TaskExecutionStatus

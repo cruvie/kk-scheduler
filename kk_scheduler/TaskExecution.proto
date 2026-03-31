@@ -4,6 +4,7 @@ package kk_scheduler;
 
 option go_package = "/kk_scheduler";
 import "kk_scheduler/extend_field.proto";
+import "google/protobuf/timestamp.proto";
 
 enum TaskExecutionStatus {
   TASK_EXECUTION_STATUS_UNSPECIFIED = 0;
@@ -11,6 +12,15 @@ enum TaskExecutionStatus {
   TASK_EXECUTION_STATUS_RUNNING = 2;
   TASK_EXECUTION_STATUS_COMPLETED = 3;
   TASK_EXECUTION_STATUS_FAILED = 4;
+}
+
+message PBTaskExecution {
+  string Id = 1;
+  string JobId = 2;
+  TaskExecutionStatus Status = 3;
+  google.protobuf.Timestamp StartedAt = 4;
+  google.protobuf.Timestamp FinishedAt = 5;
+  string Log = 6;
 }
 
 message TaskCreate {
@@ -33,6 +43,31 @@ message TaskAppendLog {
   message Input {
     string id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
     string log = 2[(field_behavior) = REQUIRED];
+  }
+  message Output {}
+}
+
+message TaskExecutionList {
+  message Input {
+    string jobId = 1[(field_behavior) = UUID7];
+  }
+  message Output {
+    repeated PBTaskExecution TaskExecutionList = 1;
+  }
+}
+
+message TaskExecutionGet {
+  message Input {
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
+  }
+  message Output {
+    PBTaskExecution TaskExecution = 1;
+  }
+}
+
+message TaskExecutionDelete {
+  message Input {
+    string Id = 1[(field_behavior) = REQUIRED, (field_behavior) = UUID7];
   }
   message Output {}
 }
