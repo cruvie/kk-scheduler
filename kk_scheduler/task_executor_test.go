@@ -47,12 +47,12 @@ func TestTaskExecutor_RealServer(t *testing.T) {
 			stepExecuted = true
 			ctl.Log("step executed on real server")
 			return nil
-		})
+		}, nil)
 
 		executor.AddStep("real-step-2", func(ctl *kk_scheduler.StepCtl) error {
 			ctl.Log("step 2 running")
 			return nil
-		})
+		}, nil)
 
 		err := executor.Run(ctx)
 		assert.NoError(t, err)
@@ -68,12 +68,15 @@ func TestTaskExecutor_RealServer(t *testing.T) {
 		executor.AddStep("failing-step", func(ctl *kk_scheduler.StepCtl) error {
 			ctl.Log("about to fail")
 			return errors.New("intentional failure for testing")
+		}, func(ctl *kk_scheduler.StepCtl) error {
+			ctl.Log("fallback executed after failure")
+			return nil
 		})
 
 		executor.AddStep("cleanup-step", func(ctl *kk_scheduler.StepCtl) error {
 			ctl.Log("cleanup after failure")
 			return nil
-		})
+		}, nil)
 
 		err := executor.Run(ctx)
 		assert.NoError(t, err)
