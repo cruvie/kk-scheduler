@@ -76,11 +76,11 @@ Any test case PR is welcome
 ## Support more storage engines
 
 kk-scheduler uses Etcd as default storage engine, but any storage engine
-that implements [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store.go)
+that implements [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/scheduler/store.go)
 can be used
 
 Step1 create a `store_xxxx.go`
-like [store_etcd.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule/store_etcd.go)
+like [store_etcd.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/scheduler/store_etcd.go)
 
 Step2 test it
 

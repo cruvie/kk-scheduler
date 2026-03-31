@@ -40,7 +40,7 @@ npm run build    # Production build
 
 ### Directory Structure
 - `internal/main/` - Entry point, gRPC/HTTP server setup
-- `internal/schedule/` - Core scheduling logic: `Client` manages cron jobs, `StoreDriver` interface for persistence
+- `internal/scheduler/` - Core scheduling logic: `Client` manages cron jobs, `StoreDriver` interface for persistence
 - `internal/api_handlers/` - Handler implementations per RPC method (job/, service/)
 - `internal/api_impl/` - gRPC server registration and method routing
 - `internal/g_config/` - YAML config loading (ports, etcd settings)
@@ -56,7 +56,7 @@ type ApiJobEnable struct {
 ```
 Handlers implement `CheckInput()`, `Service()`, and `Handler()` methods. The `kk_grpc.GrpcHandler` function orchestrates the call flow.
 
-**Global Client**: `schedule.GClient` is the singleton managing the cron scheduler and storage. All job/service operations go through this client.
+**Global Client**: `scheduler.GClient` is the singleton managing the cron scheduler and storage. All job/service operations go through this client.
 
 **Store Interface**: `StoreDriver` interface allows pluggable storage backends. Default is Etcd (`store_etcd.go`). To add a new store, implement the interface and update config.
 

@@ -2,7 +2,7 @@ package service
 
 import (
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
-	"github.com/cruvie/kk-scheduler/internal/schedule"
+	"github.com/cruvie/kk-scheduler/internal/scheduler"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 )
 
@@ -10,14 +10,14 @@ func (x *ApiServiceDelete) Service(stage *kk_stage.Stage) error {
 	span := stage.StartTrace("Service")
 	defer span.End()
 
-	return schedule.GClient.ServiceDelete(x.In.GetServiceName())
+	return scheduler.GClient.ServiceDelete(x.In.GetServiceName())
 }
 
 func (x *ApiServiceGet) Service(stage *kk_stage.Stage) (*kk_scheduler.PBRegisterService, error) {
 	span := stage.StartTrace("Service")
 	defer span.End()
 
-	service, err := schedule.GClient.ServiceGet(x.In.GetServiceName())
+	service, err := scheduler.GClient.ServiceGet(x.In.GetServiceName())
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func (x *ApiServiceList) Service(stage *kk_stage.Stage) ([]*kk_scheduler.PBRegis
 	span := stage.StartTrace("Service")
 	defer span.End()
 
-	service, err := schedule.GClient.ServiceList()
+	service, err := scheduler.GClient.ServiceList()
 	return service, err
 }
 
@@ -37,5 +37,5 @@ func (x *ApiServicePut) Service(stage *kk_stage.Stage) error {
 	span := stage.StartTrace("Service")
 	defer span.End()
 
-	return schedule.GClient.ServicePut(x.In.GetService())
+	return scheduler.GClient.ServicePut(x.In.GetService())
 }
