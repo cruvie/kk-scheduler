@@ -42,6 +42,7 @@ import {TaskExecutionStatus} from '~~/gen/kk_scheduler/TaskExecution_pb';
 import {create} from "@bufbuild/protobuf";
 import {useToast} from '#imports';
 import type {TableColumn} from '@nuxt/ui';
+import {displayTime} from '~/utils/time';
 
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
@@ -70,11 +71,6 @@ const statusBadge = (status: TaskExecutionStatus) => {
   return h(UBadge, {color}, () => text);
 };
 
-const formatTimestamp = (ts?: { seconds: bigint }) => {
-  if (!ts?.seconds) return '';
-  return new Date(Number(ts.seconds) * 1000).toLocaleString();
-};
-
 const columns: TableColumn<PBTaskExecution>[] = [
   {accessorKey: 'Id', header: 'Id'},
   {accessorKey: 'JobId', header: 'Job ID'},
@@ -86,12 +82,12 @@ const columns: TableColumn<PBTaskExecution>[] = [
   {
     accessorKey: 'StartedAt',
     header: 'Started At',
-    cell: ({row}) => formatTimestamp(row.original.StartedAt),
+    cell: ({row}) => displayTime(row.original.StartedAt),
   },
   {
     accessorKey: 'FinishedAt',
     header: 'Finished At',
-    cell: ({row}) => formatTimestamp(row.original.FinishedAt),
+    cell: ({row}) => displayTime(row.original.FinishedAt),
   },
   {
     accessorKey: 'actions', header: 'Actions',

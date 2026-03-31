@@ -1,5 +1,5 @@
 <template>
-  <UModal v-model:open="dialogVisible" :title="isEdit ? 'Edit Service' : 'Create Service'">
+  <UModal v-model:open="dialogVisible" :title="isEdit ? 'Edit Service' : 'Create Service'" :ui="{ footer: 'justify-end' }">
     <template #body>
       <UForm :state="form" class="space-y-4">
         <UFormField label="Service Name" name="ServiceName">
@@ -14,10 +14,8 @@
       </UForm>
     </template>
     <template #footer>
-      <div class="flex justify-end gap-2">
-        <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
-        <UButton type="submit" @click="submitForm">Confirm</UButton>
-      </div>
+      <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
+      <UButton type="submit" @click="submitForm">Confirm</UButton>
     </template>
   </UModal>
 </template>

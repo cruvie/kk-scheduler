@@ -34,6 +34,7 @@ import JobForm from '~/components/JobForm.vue';
 import JobSetSpecForm from '~/components/JobSetSpecForm.vue';
 import {useToast} from '#imports';
 import type {TableColumn} from '@nuxt/ui';
+import {displayTime} from '~/utils/time';
 
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
@@ -62,14 +63,12 @@ const columns: TableColumn<PBJob>[] = [
   {
     accessorKey: 'Next',
     header: 'Next',
-    cell: ({row}) =>
-        row.original.Next?.seconds ? new Date(Number(row.original.Next.seconds) * 1000).toLocaleString() : ''
+    cell: ({row}) => displayTime(row.original.Next)
   },
   {
     accessorKey: 'Prev',
     header: 'Prev',
-    cell: ({row}) =>
-        row.original.Prev?.seconds ? new Date(Number(row.original.Prev.seconds) * 1000).toLocaleString() : ''
+    cell: ({row}) => displayTime(row.original.Prev)
   },
   {
     accessorKey: 'Enabled',

@@ -1,5 +1,5 @@
 <template>
-  <UModal v-model:open="dialogVisible" title="Set Job Spec">
+  <UModal v-model:open="dialogVisible" title="Set Job Spec" :ui="{ footer: 'justify-end' }">
     <template #body>
       <UForm :state="form" class="space-y-4">
         <UFormField label="Job Id" name="Id">
@@ -12,10 +12,8 @@
       </UForm>
     </template>
     <template #footer>
-      <div class="flex justify-end gap-2">
-        <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
-        <UButton type="submit" @click="handleSave">Confirm</UButton>
-      </div>
+      <UButton color="neutral" @click="dialogVisible = false">Cancel</UButton>
+      <UButton type="submit" @click="handleSave">Confirm</UButton>
     </template>
   </UModal>
 </template>

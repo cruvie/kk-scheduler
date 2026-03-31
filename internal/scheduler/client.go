@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"gitee.com/cruvie/kk_go_kit/kk_id"
+	"gitee.com/cruvie/kk_go_kit/kk_time"
 	"github.com/cruvie/kk-scheduler/internal/store_driver"
 	"github.com/cruvie/kk-scheduler/kk_scheduler"
 	"github.com/robfig/cron/v3"
@@ -120,8 +121,11 @@ func (x *Client) JobList(serviceName string) ([]*kk_scheduler.PBJob, error) {
 		job.SetId(dbPBJob.GetId())
 		job.SetEntryID(dbPBJob.GetEntryID())
 		job.SetEnabled(dbPBJob.GetEnabled())
-		job.SetNext(timestamppb.New(entry.Prev))
-		job.SetPrev(timestamppb.New(entry.Next))
+		job.SetNext(timestamppb.New(entry.Next))
+		if entry.Prev.IsZero() {
+			entry.Prev = kk_time.DefaultTime
+		}
+		job.SetPrev(timestamppb.New(entry.Prev))
 		job.SetSpec(dbPBJob.GetSpec())
 		job.SetDescription(dbPBJob.GetDescription())
 		job.SetFuncName(dbPBJob.GetFuncName())
