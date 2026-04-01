@@ -10,7 +10,7 @@ Users register services (gRPC servers), add jobs with cron specs, and the schedu
 
 - Cron-based job scheduling with gRPC triggers
 - Web UI for managing services, jobs, tasks, and logs
-- Pluggable storage backend (default: Etcd)
+- Pluggable storage backend
 - gRPC + HTTP API for programmatic access
 
 ## Screenshots
