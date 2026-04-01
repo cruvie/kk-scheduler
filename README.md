@@ -1,20 +1,32 @@
 # kk-scheduler
 
-A job scheduling system based on cron and gRPC
+A job scheduling system based on cron and gRPC.
+
+Users register services (gRPC servers), add jobs with cron specs, and the scheduler triggers jobs at scheduled times via gRPC calls.
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cruvie/kk-scheduler)
 
-# Screenshot
+## Features
 
-![service-list](https://github.com/cruvie/kk-scheduler/blob/main/readme/service-list.png?raw=true)
+- Cron-based job scheduling with gRPC triggers
+- Web UI for managing services, jobs, tasks, and logs
+- Pluggable storage backend (default: Etcd)
+- gRPC + HTTP API for programmatic access
 
-![job-list](https://github.com/cruvie/kk-scheduler/blob/main/readme/job-list.png?raw=true)
+## Screenshots
 
-![task-list](https://github.com/cruvie/kk-scheduler/blob/main/readme/task-list.png?raw=true)
+<table>
+  <tr>
+    <td><img src="https://github.com/cruvie/kk-scheduler/blob/main/readme/service-list.png?raw=true" alt="service-list"/></td>
+    <td><img src="https://github.com/cruvie/kk-scheduler/blob/main/readme/job-list.png?raw=true" alt="job-list"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/cruvie/kk-scheduler/blob/main/readme/task-list.png?raw=true" alt="task-list"/></td>
+    <td><img src="https://github.com/cruvie/kk-scheduler/blob/main/readme/task-log.png?raw=true" alt="task-log"/></td>
+  </tr>
+</table>
 
-![task-log](https://github.com/cruvie/kk-scheduler/blob/main/readme/task-log.png?raw=true)
-
-# System Design
+## System Design
 
 ```mermaid
 graph TB
@@ -48,48 +60,52 @@ graph TB
     J --> I
 ```
 
-# Deploy
+## Deploy
 
-## Docker
+### Docker
 
 [docker-compose](https://github.com/cruvie/kk-scheduler/tree/main/deploy-docker)
 
-visit http://localhost:8668
+```shell
+docker compose up -d
+```
 
-# Usage
+Visit http://localhost:8668
 
-- Install
+## Usage
+
+### 1. Install
 
 ```shell
 go get github.com/cruvie/kk-scheduler@latest
 ```
 
-- Run a gRPC server that implements `kk_scheduler.UnimplementedKKScheduleTriggerServer`
-  see [client_server_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/client_server_test.go)
-- Put a service and job into kk-scheduler and enable the job
-  see [readme_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/readme_test.go)
+### 2. Implement trigger server
 
-# Contribute
+Run a gRPC server that implements `kk_scheduler.UnimplementedKKScheduleTriggerServer`
 
-## Provide more test cases
+See [client_server_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/client_server_test.go)
 
-Any test case PR is welcome
+### 3. Register service and job
 
-## Support more storage engines
+Put a service and job into kk-scheduler, then enable the job.
 
-kk-scheduler uses Etcd as default storage engine, but any storage engine
-that implements [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/scheduler/store.go)
-can be used
+See [readme_test.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/schedule_test/readme_test.go)
 
-Step1 create a `store_xxxx.go`
-like [store_etcd.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/scheduler/store_etcd.go)
+## Contribute
 
-Step2 test it
+### Provide more test cases
 
-Step3 add config field
-in [config.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/g_config/config.go)
-and [config.toml](https://github.com/cruvie/kk-scheduler/blob/main/config.toml)
+Any test case PR is welcome.
 
-## Improve readme doc and code comments
+### Support more storage engines
 
-## Web UI improvements
+kk-scheduler uses Postgres as default storage engine, but any storage engine that implements [StoreDriver](https://github.com/cruvie/kk-scheduler/blob/main/internal/store_driver/driver.go) can be used.
+
+1. Create a `store_xxxx.go` in `internal/store_driver/` like [postgres.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/store_driver/postgres.go)
+2. Register it in `NewStoreDriver()` in [driver.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/store_driver/driver.go)
+3. Add config field in [config.go](https://github.com/cruvie/kk-scheduler/blob/main/internal/g_config/config.go) and [config.toml](https://github.com/cruvie/kk-scheduler/blob/main/config.toml)
+
+### Improve readme doc and code comments
+
+### Web UI improvements
