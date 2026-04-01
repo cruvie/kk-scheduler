@@ -17,7 +17,7 @@ tool (
 )
 
 require (
-	gitee.com/cruvie/kk_go_kit v0.1.3-0.20260330040519-9bd9312cb403
+	gitee.com/cruvie/kk_go_kit v0.1.3-0.20260401035507-7a2c42b04529
 	github.com/BurntSushi/toml v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.3
 	github.com/improbable-eng/grpc-web v0.15.0
@@ -265,8 +265,8 @@ require (
 	golang.org/x/text v0.35.0 // indirect
 	golang.org/x/tools v0.43.0 // indirect
 	golang.org/x/vuln v1.1.4 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20260330182312-d5a96adf58d8 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260330182312-d5a96adf58d8 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260401024825-9d38bb4040a9 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260401023136-1fecd4de7ae9 // indirect
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.6.1 // indirect
 	gopkg.in/ini.v1 v1.67.1 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect

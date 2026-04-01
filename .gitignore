@@ -10,3 +10,4 @@ logs/
 **/logs/
 vendor
 /kk_go_kit/
+deploy-docker/postgres

@@ -56,14 +56,12 @@ func InitConfig() *kk_stage.Stage {
 	{
 		switch Config.Store.Choose {
 		case "PG":
+			models.InitDB(stage, Config.Store.PG)
 			Config.Store.PG.Init(stage)
 			query.SetDefault(kk_pg.GormClient)
 		default:
 			panic("store choose error")
 		}
-	}
-	{
-		models.InitDB()
 	}
 	return stage
 }

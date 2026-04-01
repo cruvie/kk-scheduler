@@ -5,7 +5,7 @@ WebPort = 8668
 [Store]
 Choose="PG"
 [Store.PG.DSN]
-Host = "127.0.0.1"
+Host = "test-postgres"
 Port = 5432
 User = "postgres"
 Password = "testpg"
