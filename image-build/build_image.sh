@@ -18,7 +18,7 @@ cd ..
 
 export GOVERSION=1.26.0
 
-export TAG=0.2.0
+export TAG=0.2.3
 
 
 # local build test
