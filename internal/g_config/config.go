@@ -10,6 +10,7 @@ import (
 	"gitee.com/cruvie/kk_go_kit/kk_stage"
 	"gitee.com/cruvie/kk_go_kit/kk_time"
 	"github.com/BurntSushi/toml"
+	"github.com/cruvie/kk-scheduler/internal/models"
 	"github.com/cruvie/kk-scheduler/internal/models/query"
 )
 
@@ -31,8 +32,7 @@ type config struct {
 }
 
 func InitConfig() *kk_stage.Stage {
-	data, err := os.ReadFile("/Users/cruvie/Documents/cruvie-space/code-hub/my-project/kk-scheduler/config.toml")
-	//data, err := os.ReadFile("/Users/cruvie/Documents/cruvie/kk-scheduler/config.toml")
+	data, err := os.ReadFile("config.toml")
 	if err != nil {
 		slog.Error("unable to read config.toml", "err", err)
 		panic(err)
@@ -61,6 +61,9 @@ func InitConfig() *kk_stage.Stage {
 		default:
 			panic("store choose error")
 		}
+	}
+	{
+		models.InitDB()
 	}
 	return stage
 }

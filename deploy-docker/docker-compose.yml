@@ -7,7 +7,7 @@ services:
     environment:
       KK_Schedule: "prod"
     depends_on:
-      - test-etcd
+      - test-postgres
     ports:
       - "8666:8666"
       - "8667:8667"
@@ -16,23 +16,14 @@ services:
       - ./config.toml:/kk-scheduler/config.toml
       - ./logs:/kk-scheduler/logs
 
-  test-etcd:
-    image: quay.io/coreos/etcd:v3.6.9
-    container_name: test-etcd
-    command:
-      [
-        "/usr/local/bin/etcd",
-        "--data-dir=/etcd-data",
-        "--name=node1",
-        "--initial-advertise-peer-urls=http://test-etcd:2380",
-        "--listen-peer-urls=http://0.0.0.0:2380",
-        "--advertise-client-urls=http://test-etcd:2379",
-        "--listen-client-urls=http://0.0.0.0:2379",
-        "--initial-cluster=node1=http://test-etcd:2380"
-      ]
+  test-postgres:
+    image: postgres:latest
+    container_name: test-postgres
     restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: testpg
     ports:
-      - "2379:2379"
-      - "2380:2380"
+      - "5432:5432"
     volumes:
-      - ./etcd/data:/etcd-data
+      - ./postgres/data:/var/lib/postgresql
